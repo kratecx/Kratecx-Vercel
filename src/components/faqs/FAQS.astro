@@ -1,191 +1,210 @@
 ---
 const categories = [
   {
-    name: "Operational Timeline",
+    name: "Delivery & timelines",
     id: "time",
     faqs: [
       {
-        question: "How long does a typical project take?",
-        answer: "Most high-fidelity digital solutions are delivered within 6 to 12 weeks. This includes the full Strategic Discovery and Agile Development cycles."
-      }
-    ]
+        question: "What is a typical project duration?",
+        answer:
+          "Most engagements run between six and twelve weeks end to end, including discovery, build, and acceptance. Duration depends on scope, integrations, and approval cycles; a detailed schedule is agreed before work begins.",
+      },
+    ],
   },
   {
-    name: "Strategic Process",
+    name: "Process & integrations",
     id: "process",
     faqs: [
       {
-        question: "Can we integrate with our existing CRM?",
-        answer: "Yes. Our architecture is built to be 'Modular First,' allowing seamless API integrations with platforms like Salesforce, HubSpot, and custom tools."
+        question: "Can you connect to our existing CRM or data systems?",
+        answer:
+          "Yes. We design for integration where required—commonly via REST or vendor APIs—with platforms such as Salesforce, HubSpot, and internal tools. Technical constraints and security requirements are reviewed during discovery.",
       },
       {
-        question: "Do you provide post-launch support?",
-        answer: "Absolutely. We offer dedicated maintenance tiers to ensure your systems stay updated, secure, and optimized for new market conditions."
-      }
-    ]
+        question: "Is ongoing support available after launch?",
+        answer:
+          "Yes. Maintenance and support can be provided under a defined service level, covering updates, monitoring, and incident response according to the arrangement you select.",
+      },
+    ],
   },
   {
-    name: "Legal & IP",
+    name: "Legal & intellectual property",
     id: "legal",
     faqs: [
       {
-        question: "Who owns the final intellectual property?",
-        answer: "You do. Upon project completion and final payment, 100% of the code, design assets, and IP are transferred to your organization."
-      }
-    ]
-  }
+        question: "Who owns deliverables and intellectual property?",
+        answer:
+          "Upon completion of the engagement and settlement of fees as contractually specified, ownership of agreed deliverables—including applicable source materials and assets—is assigned to your organization as set out in your statement of work or agreement.",
+      },
+    ],
+  },
 ];
 ---
 
-
-<section class="bg-white py-22 px-6 font-sans text-slate-900 relative">
-  <div class="max-w-4xl mx-auto relative z-10">
-    
-<div class="text-center mb-24">
-  <div class="flex items-center justify-center gap-3 mb-6">
-    <span class="h-[1px] w-8 bg-orange-500/40"></span>
-    <span class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500">Information Desk</span>
-    <span class="h-[1px] w-8 bg-orange-500/40"></span>
-  </div>
-
-  <h2 class="text-7xl md:text-[140px] font-black tracking-tighter uppercase leading-[0.8] text-black">
-    FA<span class="text-orange-500">Q<sub class="text-[35px] md:text-[45px] lowercase italic font-light tracking-tighter -ml-2">s</sub></span>
-  </h2>
-
-  <div class="mt-10 relative inline-block">
-    <h3 class="text-xl md:text-2xl font-bold text-slate-900 uppercase tracking-tight">
-      Frequently Asked <span class="text-orange-500 ">Questions</span>
-    </h3>
-    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-black rounded-full"></div>
-  </div>
-</div>
-
-    <div class="flex flex-wrap justify-center gap-4 mb-20">
-      {categories.map((cat) => (
-        <a 
-          href={`#${cat.id}`} 
-          class="px-8 py-4 border- rounded-2xl bg-orange-500 border-black text-[12px] text-white uppercase tracking-widest hover:bg-orange-600 transition-all"
-        >
-          {cat.name}
-        </a>
+<section
+  id="faqs-root"
+  class="relative bg-white px-4 pb-20 pt-12 font-sans text-neutral-900 antialiased sm:px-6 sm:pb-24 sm:pt-16 md:px-10 md:pb-28 lg:px-12"
+>
+  <div class="relative z-10 mx-auto max-w-3xl">
+    <nav
+      class="flex flex-col gap-3 rounded-2xl border border-neutral-200/90 bg-white/80 px-4 py-4 shadow-sm backdrop-blur-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-2 sm:px-5"
+      aria-label="FAQ sections"
+    >
+      <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500 sm:mr-2">Jump to</span>
+      {categories.map((cat, i) => (
+        <>
+          {i > 0 && (
+            <span class="hidden text-neutral-300 sm:inline" aria-hidden="true">
+              ·
+            </span>
+          )}
+          <a
+            href={`#${cat.id}`}
+            class="text-[13px] font-medium text-neutral-600 transition-colors hover:text-orange-600 sm:text-sm"
+          >
+            {cat.name}
+          </a>
+        </>
       ))}
-    </div>
+    </nav>
 
-    <div class="space-y-24">
+    <div class="mt-12 space-y-14 sm:mt-14 sm:space-y-16 md:space-y-20">
       {categories.map((cat) => (
-        <div id={cat.id} class="category-group">
-          <div class="flex items-center gap-4 mb-10">
-            <div class="h-[2px] w-8 bg-orange-500"></div>
-            <h4 class="text-xs font-black uppercase tracking-[0.4em] text-slate-400">{cat.name}</h4>
-          </div>
+        <section id={cat.id} class="faq-category scroll-mt-28 sm:scroll-mt-32">
+          <h2
+            class="mb-6 flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-neutral-500 sm:mb-8 sm:text-sm"
+          >
+            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" aria-hidden="true"></span>
+            {cat.name}
+          </h2>
 
-          <div class="space-y-4">
+          <ul class="space-y-3" role="list">
             {cat.faqs.map((faq, index) => (
-              <div class="faq-card group bg-[#0A0A0A] border border-orange-500/20 rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-orange-500 cursor-pointer">
-                
-                <div class="px-8 py-8 md:px-12 flex items-center justify-between pointer-events-none">
-                  <div class="flex items-center gap-6">
-                    <span class="text-orange-500 font-mono text-xl font-bold opacity-50 group-hover:opacity-100 transition-opacity">
-                      {cat.id.toUpperCase()}-0{index + 1}
+              <li>
+                <div
+                  class="faq-card group cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-md transition-all duration-200 hover:border-orange-400/25"
+                  role="button"
+                  tabindex="0"
+                  aria-expanded="false"
+                >
+                  <div class="faq-question-row flex items-start gap-4 bg-black px-4 py-5 sm:gap-5 sm:px-6 sm:py-5">
+                    <span
+                      class="faq-index shrink-0 pt-0.5 font-mono text-[11px] font-semibold tabular-nums text-orange-400 sm:text-xs"
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 class="text-xl md:text-2xl font-bold tracking-tight text-white group-hover:text-orange-100 transition-colors">
-                      {faq.question}
-                    </h3>
+                    <div class="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+                      <h3
+                        class="text-left text-[15px] font-semibold leading-snug text-white sm:text-base"
+                      >
+                        {faq.question}
+                      </h3>
+                      <div
+                        class="faq-chevron relative mt-1 flex h-5 w-5 shrink-0 items-center justify-center text-orange-400 sm:mt-0.5"
+                        aria-hidden="true"
+                      >
+                        <span class="absolute h-[1.5px] w-3 bg-current"></span>
+                        <span
+                          class="faq-chevron-v absolute h-3 w-[1.5px] bg-current transition-transform duration-200"
+                        ></span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="relative w-6 h-6 flex items-center justify-center">
-                    <div class="absolute w-full h-[2px] bg-orange-500"></div>
-                    <div class="absolute w-[2px] h-full bg-orange-500 transform origin-center rotate-icon transition-transform duration-500"></div>
-                  </div>
-                </div>
-
-                <div class="faq-content grid grid-rows-[0fr] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] bg-white">
-                  <div class="overflow-hidden">
-                    <div class="px-8 py-12 md:px-12 md:ml-[68px]">
-                      <div class="h-[3px] w-12 bg-orange-500 mb-8"></div>
-                      <p class="text-slate-700 text-xl leading-relaxed font-semibold max-w-2xl">
-                        {faq.answer}
-                      </p>
-                      
-                      <div class="mt-10 flex items-center gap-4">
-                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Protocol Secure</span>
-                        <div class="flex-1 h-[1px] bg-slate-100"></div>
+                  <div
+                    class="faq-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out"
+                  >
+                    <div class="overflow-hidden">
+                      <div
+                        class="border-t border-white/10 bg-neutral-950 px-4 py-5 pl-[3.25rem] sm:px-6 sm:py-6 sm:pl-[3.75rem]"
+                      >
+                        <p
+                          class="max-w-2xl text-[14px] leading-[1.75] text-zinc-400 sm:text-[15px]"
+                        >
+                          {faq.answer}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </section>
       ))}
     </div>
   </div>
 </section>
 
-
 <style>
-  .faq-card.is-active .rotate-icon { transform: rotate(90deg); }
-  .faq-card.is-active .faq-content { grid-template-rows: 1fr; }
-  .faq-card.is-active {
-    border-color: #f97316;
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
-    transform: scale(1.02);
-  }
-  .faq-card.is-active h3 { color: #f18316; }
-  
-  /* Smooth scroll for the category anchors */
-  html { scroll-behavior: smooth; }
-  
-  .category-group {
-    scroll-margin-top: 100px;
-  }
-</style>
-
-
-
-<script>
-  // Function to handle the accordion logic
-  const initInversionFAQ = () => {
-    const cards = document.querySelectorAll('.faq-card');
-
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const isActive = card.classList.contains('is-active');
-        
-        // 1. Close all other cards
-        cards.forEach(c => c.classList.remove('is-active'));
-        
-        // 2. If the clicked card wasn't active, open it
-        if (!isActive) {
-          card.classList.add('is-active');
-        }
-      });
-    });
-  };
-
-  // Run on initial load
-  initInversionFAQ();
-
-  // Run every time the page swaps (Astro specific)
-  document.addEventListener('astro:after-swap', initInversionFAQ);
-  document.addEventListener('astro:page-load', initInversionFAQ);
-</script>
-
-<style>
-  /* Ensure the content is hidden by default and expands smoothly */
   .faq-content {
-    grid-template-rows: 0fr;
     display: grid;
-    transition: grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    grid-template-rows: 0fr;
   }
 
   .faq-card.is-active .faq-content {
     grid-template-rows: 1fr;
   }
 
-  /* Prevent icon from blocking clicks */
-  .rotate-icon, .relative.w-6.h-6 {
-    pointer-events: none;
+  .faq-card.is-active {
+    border-color: rgba(251, 146, 60, 0.45);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 12px 32px -12px rgba(251, 146, 60, 0.25);
+  }
+
+  .faq-card.is-active .faq-chevron-v {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  .faq-card.is-active h3 {
+    color: rgb(255 255 255);
+  }
+
+  .faq-card.is-active .faq-question-row {
+    background-color: rgb(0 0 0);
+  }
+
+  .faq-card:focus-visible {
+    outline: 2px solid rgb(251 146 60);
+    outline-offset: 3px;
   }
 </style>
+
+<script>
+  (function () {
+    const g = globalThis as typeof globalThis & { __kratecsFaqAccordion?: boolean };
+    if (g.__kratecsFaqAccordion) return;
+    g.__kratecsFaqAccordion = true;
+
+    document.addEventListener("click", (e) => {
+      const el = e.target;
+      if (!(el instanceof Element)) return;
+      const card = el.closest(".faq-card");
+      if (!card) return;
+      const root = document.getElementById("faqs-root");
+      if (!root || !root.contains(card)) return;
+
+      const wasActive = card.classList.contains("is-active");
+      root.querySelectorAll(".faq-card").forEach((c) => {
+        c.classList.remove("is-active");
+        c.setAttribute("aria-expanded", "false");
+      });
+      if (!wasActive) {
+        card.classList.add("is-active");
+        card.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLElement) || !t.classList.contains("faq-card")) return;
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        t.click();
+      }
+    });
+  })();
+</script>

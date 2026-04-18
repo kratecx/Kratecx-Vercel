@@ -1,0 +1,138 @@
+---
+/**
+ * FORENSIC STACK: Fully Dynamic
+ * No local mock data. All content is fed from the parent via Astro.props.
+ */
+interface Problem {
+  title: string;
+  description: string;
+  priority: string;
+}
+
+interface Props {
+  reportDate?: string;
+  sectionTitle?: string;
+  subheading?: string;
+  stickyTitle?: string;
+  problems?: Problem[];
+}
+---
+
+<section class="relative w-full bg-[#000000] py-24 lg:py-32 select-text overflow-visible">
+  
+  <div class="max-w-[1400px] mx-auto px-8 mb-24 lg:mb-40 text-center">
+    <div class="flex items-center justify-center gap-4 mb-10">
+      <div class="w-12 h-[2px] bg-orange-400"></div>
+      <span class="text-orange-400 font-mono text-[11px] font-bold tracking-[0.5em] uppercase whitespace-nowrap">
+        {Astro.props.reportDate}
+      </span>
+      <div class="w-12 h-[2px] bg-orange-400"></div>
+    </div>
+    
+    <h2 class="text-7xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] inline-block">
+      <span class="block text-white">{(Astro.props.sectionTitle || "").split(' ')[0]}</span>
+      <span class="block text-orange-400">{(Astro.props.sectionTitle || "").split(' ').slice(1).join(' ')}</span>
+    </h2>
+
+    <p class="mt-6 text-gray-500 text-xl font-medium tracking-wide">
+      {Astro.props.subheading}
+    </p>
+  </div>
+
+  <div class="max-w-[1400px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-0 items-start">
+    
+    <div class="lg:col-span-5 lg:sticky lg:top-40 h-fit">
+      <div class="relative flex flex-col items-center p-12 md:p-20 border-l border-orange-400/30 bg-black/40 group overflow-hidden">
+        <div class="relative mb-12 flex items-center justify-center">
+          <div class="absolute -inset-6 border border-orange-400/10 rotate-45"></div>
+          
+          <svg 
+            width="160" 
+            height="160" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="0.6" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="text-orange-400"
+          >
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="14" />
+            <rect x="11.5" y="16.5" width="1" height="1" fill="currentColor" stroke="none" rx="0.5"/>
+          </svg>
+        </div>
+
+        <div class="relative space-y-4 text-center pt-8">
+          <h3 class="text-orange-400 font-mono text-2xl font-black uppercase tracking-tight">
+            {Astro.props.stickyTitle}
+          </h3>
+          <div class="w-16 h-[1px] bg-orange-400/30 mx-auto mt-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6 lg:col-start-7 space-y-48 pb-16">
+      {Astro.props.problems?.map((item, index) => (
+        <div 
+          class="group relative js-problem-card opacity-25 transition-opacity duration-700" 
+          data-focused="false"
+        >
+          <span class="absolute -left-16 -top-16 text-[200px] font-black text-orange-400/[0.03] select-none pointer-events-none group-data-[focused=true]:text-orange-400/[0.12] transition-colors duration-700">
+            0{index + 1}
+          </span>
+
+          <div class="relative space-y-10">
+            <div class="flex items-center gap-6">
+              <span class="text-orange-400 font-mono text-xs font-black tracking-tighter bg-orange-400/10 px-2 py-1 rounded-sm">
+                {item.priority}
+              </span>
+              <div class="h-[1px] flex-grow bg-zinc-900 group-hover:bg-orange-400/30 group-data-[focused=true]:bg-orange-400/30 transition-all duration-700"></div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="text-4xl md:text-6xl font-extrabold text-white uppercase tracking-tight leading-none group-hover:translate-x-3 group-data-[focused=true]:translate-x-3 transition-transform duration-700">
+                {item.title}
+              </h3>
+              <p class="text-zinc-400 text-lg md:text-xl leading-relaxed font-light max-w-lg">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const options = {
+    root: null,
+    rootMargin: '-30% 0px -30% 0px',
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.setAttribute('data-focused', 'true');
+      } else {
+        entry.target.setAttribute('data-focused', 'false');
+      }
+    });
+  }, options);
+
+  document.querySelectorAll('.js-problem-card').forEach(card => {
+    observer.observe(card);
+  });
+</script>
+
+<style>
+  .js-problem-card[data-focused="true"] {
+    opacity: 1 !important;
+  }
+  .js-problem-card:hover {
+    opacity: 1 !important;
+  }
+</

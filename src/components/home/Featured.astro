@@ -1,11 +1,13 @@
 ---
-// ApplePremiumCarousel.astro
+// Case studies — md+: hover carousel (original desktop); smaller screens: snap swipe row
+import { Image } from 'astro:assets';
+
 const projects = [
   {
     tag: "FinTech Architecture",
     title: "Apex Ledger",
     desc: "Engineered a high-frequency banking dashboard for sub-100ms latency and real-time asset tracking.",
-    image: "https://images.unsplash.com/photo-1551288049-bbda4833effb?q=80&w=1200",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
     link: "#"
   },
   {
@@ -25,62 +27,166 @@ const projects = [
 ];
 ---
 
-<section class="py-24 bg-white overflow-hidden relative" id="apple-hover-carousel">
-  <div id="zone-left" class="absolute left-0 top-0 w-[15%] h-full z-30 cursor-west-resize"></div>
-  <div id="zone-right" class="absolute right-0 top-0 w-[15%] h-full z-30 cursor-east-resize"></div>
+<section class="relative overflow-hidden bg-white py-16 sm:py-20 md:py-24" id="apple-hover-carousel">
+  <div id="zone-left" class="absolute left-0 top-0 z-30 hidden h-full w-[12%] cursor-w-resize sm:w-[15%] md:block"></div>
+  <div id="zone-right" class="absolute right-0 top-0 z-30 hidden h-full w-[12%] cursor-e-resize sm:w-[15%] md:block"></div>
 
-  <div class="max-w-7xl mx-auto px-6 mb-20 relative z-10 text-center">
-    <p class="text-[14px] font-mono font-black uppercase tracking-[0.5em] text-[#FB8500] mb-6">
-      Precision Engineering
+  <div class="relative z-10 mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 md:mb-20 sm:px-6">
+    <div class="mb-8 w-full max-w-full px-1 text-center leading-snug">
+      <span class="mr-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:mr-4" aria-hidden="true"></span><span class="inline-block max-w-[calc(100%-6rem)] align-middle font-mono text-sm font-bold uppercase tracking-[0.5em] text-orange-400 sm:max-w-none">Case Studies</span><span class="ml-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:ml-4" aria-hidden="true"></span>
+    </div>
+
+    <div class="flex flex-col items-center justify-center">
+      <h2 class="max-w-full px-1 text-balance text-5xl sm:text-6xl font-black uppercase leading-[0.9] md:text-8xl md:leading-[0.85] tracking-tighter text-black">
+        <span class="text-orange-400">Results </span>in Practice
+      </h2>
+
+      <div class="mx-auto my-6 h-1 w-60 max-w-[85vw] rounded-full bg-orange-400 opacity-50"></div>
+
+      <p class="mx-auto max-w-2xl px-1 text-lg font-light text-balance text-gray-800">
+        A selection of projects focused on improving performance, building trust, and driving measurable business growth
+      </p>
+    </div>
+
+    <p class="mb-3 font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-black/25 md:hidden" aria-hidden="true">
+      Swipe to browse
     </p>
-    
-    <h2 class="text-7xl md:text-9xl font-black text-black uppercase tracking-tighter leading-[0.85] mb-8">
-      Digital <span class="text-[#FB8500] italic">Mastery.</span>
-    </h2>
 
-    <p class="text-black/60 max-w-2xl mx-auto font-medium text-lg md:text-xl leading-relaxed tracking-tight text-center">
-      <span class="text-black font-bold">A proven track record</span> 
-      of transforming complex technical requirements into 
-      <span class="text-[#FB8500] font-bold">high-performance revenue assets.</span>
-    </p>
-
-    <div class="flex justify-center gap-4 mt-12">
+    <div class="mt-10 flex flex-wrap justify-center gap-2 px-2 sm:mt-14 sm:gap-4 md:mt-16" id="featured-indicators" aria-hidden="true">
       {projects.map((_, i) => (
-        <div class="carousel-indicator h-1 w-20 bg-black/5 rounded-full overflow-hidden">
-          <div class="indicator-progress h-full bg-[#FB8500] w-0 transition-all duration-500"></div>
+        <div class="carousel-indicator h-1 w-14 max-w-[28vw] overflow-hidden rounded-full bg-black/5 sm:w-20">
+          <div class="indicator-progress h-full w-0 bg-[#FB8500] transition-all duration-500" data-i={i}></div>
         </div>
       ))}
     </div>
   </div>
 
-  <div class="relative w-full overflow-visible">
-    <div id="apple-track" class="flex transition-transform duration-[1000ms] ease-[cubic-bezier(0.23,1,0.32,1)]">
+  <!-- Small screens: horizontal snap -->
+  <div
+    id="featured-mobile-scroll"
+    class="featured-mobile-strip flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 snap-x snap-mandatory scroll-smooth scroll-pl-4 scroll-pr-4 px-4 md:hidden"
+    tabindex="0"
+    aria-label="Case studies — swipe horizontally"
+  >
+    {projects.map((project, i) => (
+      <article class="featured-mobile-card w-[min(19.5rem,calc(100vw-2rem))] shrink-0 snap-start" data-slide-index={i}>
+        <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-black/5 bg-black shadow-xl sm:aspect-video sm:rounded-[2rem]">
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={1200}
+            height={675}
+            class="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+          <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/50 to-transparent p-4 sm:p-5">
+            <p class="mb-2 text-[10px] font-black uppercase tracking-[0.35em] text-[#FB8500]">{project.tag}</p>
+            <h3 class="mb-2 text-2xl font-black uppercase leading-none tracking-tighter text-white text-balance sm:text-3xl">
+              {project.title}
+            </h3>
+            <p class="mb-4 line-clamp-2 text-sm font-medium leading-relaxed text-white/75 text-balance">
+              {project.desc}
+            </p>
+            <div class="relative w-full max-w-full group rounded-full p-px overflow-hidden bg-gradient-to-r from-black/10 via-orange-400/50 to-black/10">
+              <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+              <a
+                href={project.link}
+                class="relative flex w-full max-w-full items-center gap-3 rounded-full bg-[#0a0a0a] px-3 py-2.5 transition-all duration-300 hover:bg-black sm:gap-4 sm:px-4 sm:py-3"
+              >
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] sm:h-10 sm:w-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px] sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </div>
+                <div class="min-w-0 flex-1 pr-1 text-left">
+                  <p class="mb-0.5 text-[9px] font-black uppercase tracking-[.22em] text-orange-400 sm:text-[10px] sm:tracking-[.25em]">Project Preview</p>
+                  <span class="block text-sm font-bold leading-tight tracking-tight text-white sm:text-base">View Case Study</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- md+: original hover carousel -->
+  <div class="relative hidden w-full overflow-visible md:block">
+    <div id="apple-track" class="flex items-center transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]">
       {projects.map((project, i) => (
-        <div class="apple-card min-w-[90vw] md:min-w-[75vw] lg:min-w-[70vw] px-4 transition-all duration-1000" data-index={i}>
-          <div class="relative rounded-[3rem] overflow-hidden aspect-[16/9] bg-black group border border-black/5 shadow-2xl">
-            <img src={project.image} alt={project.title} class="w-full h-full object-cover opacity-50 grayscale-[20%] transition-transform duration-1000 group-hover:scale-105" />
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-10 md:p-20">
-              <p class="text-[#FB8500] font-black uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4">
+        <div class="apple-card min-w-[75vw] px-2 transition-all duration-1000 sm:px-4 lg:min-w-[70vw]" data-index={i}>
+          <div class="group relative aspect-video overflow-hidden rounded-[3rem] border border-black/5 bg-black shadow-2xl">
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={1200}
+              height={675}
+              class="h-full w-full object-cover opacity-50 grayscale-20 transition-transform duration-1000 group-hover:scale-105"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+
+            <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/20 to-transparent p-8 md:p-12 lg:p-20">
+              <p class="mb-3 text-[10px] font-black uppercase tracking-[0.4em] text-[#FB8500] sm:mb-4 md:text-xs">
                 {project.tag}
               </p>
-              <h3 class="text-white text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
+              <h3 class="mb-6 text-5xl font-black uppercase leading-none tracking-tighter text-white text-balance sm:mb-8 md:text-8xl">
                 {project.title}
               </h3>
-              
-              <!-- THE REVEAL SECTION -->
-              <div class="apple-reveal opacity-0 translate-y-10 transition-all duration-700 delay-300">
-                <p class="text-white/70 text-lg md:text-2xl max-w-2xl mb-12 font-medium leading-relaxed">
+
+              <div class="apple-reveal translate-y-10 opacity-0 transition-all delay-300 duration-700">
+                <p class="mb-8 max-w-2xl text-lg font-medium leading-relaxed text-balance text-white/70 sm:mb-12 md:text-2xl">
                   {project.desc}
                 </p>
-                <a href={project.link} class="inline-flex items-center gap-4 px-12 py-5 bg-[#FB8500] text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-full hover:bg-white transition-all transform hover:-translate-y-1 active:scale-95 shadow-2xl">
-                    Explore Case Study
-                </a>
+                <div class="relative w-full max-w-md group rounded-full p-px overflow-hidden bg-gradient-to-r from-white/10 via-orange-400/50 to-white/10 lg:max-w-lg">
+                  <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                  <a
+                    href={project.link}
+                    class="relative flex max-w-full items-center gap-4 rounded-full bg-[#0a0a0a] px-3 py-3 transition-all duration-300 hover:bg-black sm:gap-6 sm:px-4 lg:px-6 lg:py-4"
+                  >
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] lg:h-14 lg:w-14">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                    <div class="min-w-0 pr-3 text-left sm:pr-6">
+                      <p class="mb-0.5 text-[10px] font-black uppercase tracking-[.25em] text-orange-400 lg:text-[11px]">Project Preview</p>
+                      <span class="text-lg font-bold tracking-tight text-white whitespace-normal sm:whitespace-nowrap lg:text-xl">View Case Study</span>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       ))}
+    </div>
+  </div>
+
+  <div class="mx-auto mt-10 w-full max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16">
+    <div class="rounded-3xl border border-black/10 bg-black/[0.03] p-5 sm:p-6 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:p-8">
+      <div class="max-w-2xl">
+        <p class="mb-2 text-[10px] font-black uppercase tracking-[.25em] text-orange-500">Still Comparing Options?</p>
+        <h3 class="text-3xl font-black uppercase leading-[0.95] tracking-tight text-black sm:text-4xl lg:text-5xl">See More Real Results</h3>
+        <p class="mt-3 text-sm font-medium leading-relaxed text-gray-600 sm:text-base">
+          Review additional case studies to see how each project solved different business goals: speed, trust, conversion, and long-term growth.
+        </p>
+      </div>
+
+      <div class="mt-6 lg:mt-0 lg:shrink-0">
+        <div class="relative w-full max-w-full group rounded-full p-px overflow-hidden bg-gradient-to-r from-black/10 via-orange-400/50 to-black/10 sm:w-auto">
+          <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+          <a
+            href="/portfolio"
+            class="relative flex max-w-full items-center gap-4 rounded-full bg-[#0a0a0a] px-3 py-3 transition-all duration-300 hover:bg-black sm:gap-6 sm:px-4 lg:px-6 lg:py-4"
+          >
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] lg:h-14 lg:w-14">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+            <div class="min-w-0 pr-3 text-left sm:pr-6">
+              <p class="mb-0.5 text-[10px] font-black uppercase tracking-[.25em] text-orange-400 lg:text-[11px]">Want More Success Stories?</p>
+              <span class="text-lg font-bold tracking-tight text-white whitespace-normal sm:whitespace-nowrap lg:text-xl">Explore Case Studies</span>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -101,7 +207,6 @@ const projects = [
     pointer-events: auto;
   }
 
-  /* REVEAL LOGIC FIX */
   .apple-card.is-active .apple-reveal {
     opacity: 1;
     transform: translateY(0);
@@ -116,6 +221,11 @@ const projects = [
     display: flex;
     align-items: center;
   }
+
+  .featured-mobile-strip:focus-visible {
+    outline: 2px solid rgb(251 146 60 / 0.6);
+    outline-offset: 4px;
+  }
 </style>
 
 <script>
@@ -125,31 +235,40 @@ const projects = [
     const indicators = document.querySelectorAll('.indicator-progress');
     const zoneLeft = document.getElementById('zone-left');
     const zoneRight = document.getElementById('zone-right');
-    
-    let currentIndex = 1; // Starts on the second project
-    let isMoving = false;
-    let interval: any = null;
 
-    function updateCarousel() {
-      if (!track || cards.length === 0) return;
-      isMoving = true;
-      
-      const viewportCenter = window.innerWidth / 2;
-      const currentCard = cards[currentIndex] as HTMLElement;
-      const cardOffset = currentCard.offsetLeft;
-      const cardWidth = currentCard.offsetWidth;
-      
-      const move = viewportCenter - cardOffset - (cardWidth / 2);
-      
-      track.style.transform = `translateX(${move}px)`;
-      
-      cards.forEach((card, i) => card.classList.toggle('is-active', i === currentIndex));
-      indicators.forEach((ind, i) => ind.classList.toggle('is-active', i === currentIndex));
-      
-      setTimeout(() => { isMoving = false; }, 1000); 
+    let currentIndex = 0;
+    let isMoving = false;
+    /** @type {ReturnType<typeof setInterval> | null} */
+    let interval = null;
+
+    function desktopActive() {
+      return window.matchMedia('(min-width: 768px)').matches;
     }
 
-    function startAutoMove(direction: 'left' | 'right') {
+    function updateCarousel() {
+      if (!track || cards.length === 0 || !desktopActive()) return;
+      isMoving = true;
+
+      const viewportCenter = window.innerWidth / 2;
+      const currentCard = /** @type {HTMLElement} */ (cards[currentIndex]);
+      if (!currentCard) return;
+      const cardOffset = currentCard.offsetLeft;
+      const cardWidth = currentCard.offsetWidth;
+
+      const move = viewportCenter - cardOffset - cardWidth / 2;
+
+      track.style.transform = `translateX(${move}px)`;
+
+      cards.forEach((card, i) => card.classList.toggle('is-active', i === currentIndex));
+      indicators.forEach((ind, i) => ind.classList.toggle('is-active', i === currentIndex));
+
+      setTimeout(() => {
+        isMoving = false;
+      }, 1000);
+    }
+
+    /** @param {'left' | 'right'} direction */
+    function startAutoMove(direction) {
       if (interval) return;
       interval = setInterval(() => {
         if (isMoving) return;
@@ -162,7 +281,7 @@ const projects = [
         } else {
           stopAutoMove();
         }
-      }, 200); 
+      }, 200);
     }
 
     function stopAutoMove() {
@@ -172,15 +291,67 @@ const projects = [
       }
     }
 
-    zoneRight?.addEventListener('mouseenter', () => startAutoMove('right'));
+    zoneRight?.addEventListener('mouseenter', () => {
+      if (desktopActive()) startAutoMove('right');
+    });
     zoneRight?.addEventListener('mouseleave', stopAutoMove);
-    zoneLeft?.addEventListener('mouseenter', () => startAutoMove('left'));
+    zoneLeft?.addEventListener('mouseenter', () => {
+      if (desktopActive()) startAutoMove('left');
+    });
     zoneLeft?.addEventListener('mouseleave', stopAutoMove);
 
-    window.addEventListener('resize', updateCarousel);
-    setTimeout(updateCarousel, 150);
+    function onResize() {
+      if (desktopActive()) {
+        updateCarousel();
+      } else if (track) {
+        track.style.transform = '';
+      }
+    }
+
+    window.addEventListener('resize', onResize);
+    setTimeout(() => {
+      if (desktopActive()) updateCarousel();
+    }, 150);
+  }
+
+  function initFeaturedMobileIndicators() {
+    const scrollEl = document.getElementById('featured-mobile-scroll');
+    const cards = document.querySelectorAll('.featured-mobile-card');
+    const indicators = document.querySelectorAll('.indicator-progress');
+    if (!scrollEl || cards.length === 0 || indicators.length === 0) return;
+
+    const scroll = scrollEl;
+
+    function sync() {
+      if (window.matchMedia('(min-width: 768px)').matches) return;
+
+      const scRect = scroll.getBoundingClientRect();
+      const mid = scRect.left + scRect.width / 2;
+      let best = 0;
+      let bestDist = Infinity;
+
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const c = r.left + r.width / 2;
+        const d = Math.abs(c - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+
+      indicators.forEach((ind, i) => ind.classList.toggle('is-active', i === best));
+    }
+
+    scroll.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   }
 
   initHoverCarousel();
-  document.addEventListener('astro:after-swap', initHoverCarousel);
+  initFeaturedMobileIndicators();
+  document.addEventListener('astro:after-swap', () => {
+    initHoverCarousel();
+    initFeaturedMobileIndicators();
+  });
 </script>

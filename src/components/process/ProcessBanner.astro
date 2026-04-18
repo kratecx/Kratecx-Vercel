@@ -1,0 +1,157 @@
+---
+/**
+ * Process hero — aligned with portfolio index HeroComponent layout & image treatment.
+ */
+import { Image } from "astro:assets";
+import heroImg from "../../assets/Process/process_hero.png";
+
+const navLinks = [
+  { label: "Process Steps", id: "steps" },
+  { label: "Timeline", id: "timeline" },
+  { label: "Deliverables", id: "deliverables" },
+  { label: "Requirements", id: "requirements" },
+  { label: "Testimonials", id: "testimonials" },
+];
+---
+
+<section class="relative pt-8 lg:pt-16 w-full bg-black flex flex-col lg:flex-row overflow-hidden font-sans border-b border-white/5">
+  <div class="relative z-20 w-full lg:w-1/2 flex items-start lg:items-center pt-20 pb-10 sm:pt-24 sm:pb-14 lg:py-16 min-h-0 lg:min-h-[68vh]">
+    <div class="max-w-[750px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 flex flex-col justify-start lg:justify-center h-full w-full">
+      <div class="flex items-center gap-3 sm:gap-6 mb-6 sm:mb-10 lg:mb-12">
+        <span class="text-orange-400 font-bold text-[11px] sm:text-[11px] tracking-[0.35em] sm:tracking-[0.6em] uppercase whitespace-nowrap">
+          Our Process
+        </span>
+        <div class="h-[1px] w-full bg-white/10"></div>
+      </div>
+
+      <h1 class="text-6xl sm:text-7xl md:text-8xl xl:text-[110px] leading-[0.85] md:leading-[0.8] tracking-tighter uppercase mb-7 sm:mb-10 lg:mb-12 text-balance">
+        <span class="block text-white font-light mb-1 sm:mb-2">How We</span>
+        <span class="text-orange-400 font-black block">Build</span>
+      </h1>
+
+      <p class="max-w-xl text-zinc-500 text-base md:text-base font-medium leading-relaxed tracking-wide border-l-2 border-orange-400/40 pl-4 sm:pl-8 mb-8 sm:mb-14 lg:mb-20">
+        A clear, structured process focused on turning your website into a system that builds trust, improves engagement, and generates consistent{" "}
+        <span class="text-white">business leads.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="absolute inset-0 z-0 overflow-hidden lg:relative lg:top-0 lg:right-0 lg:w-1/2 lg:h-auto lg:z-10 lg:pt-12">
+    <Image
+      src={heroImg}
+      alt="Our process"
+      width={2070}
+      height={1380}
+      class="w-full h-full object-cover object-center brightness-[0.9] contrast-105 image-mask"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-black/65 lg:bg-transparent pointer-events-none"></div>
+
+    <div class="absolute bottom-10 right-10 z-30 hidden xl:block pointer-events-none">
+      <span class="text-white/[0.02] font-black text-9xl uppercase tracking-tighter select-none">
+        Kratecx.
+      </span>
+    </div>
+  </div>
+</section>
+
+<div
+  id="process-sticky-bar"
+  class="relative z-20 w-full border-b border-white/5 bg-black pb-2 backdrop-blur-none transition-all duration-500 ease-in-out sm:bg-black/95 sm:backdrop-blur-2xl sm:supports-[backdrop-filter]:bg-black/80 sm:sticky sm:top-15 sm:z-[1000] sm:pb-1 sm:pt-1"
+>
+  <div class="max-w-7xl mx-auto px-3 sm:px-6">
+    <div class="flex flex-wrap justify-center gap-2 py-1 sm:items-center sm:gap-3">
+      {navLinks.map((link) => (
+        <a
+          href={`#${link.id}`}
+          data-section={link.id}
+          class="portfolio-nav-btn flex min-h-[2.5rem] min-w-0 shrink-0 grow-0 basis-[calc((100%-1rem)/3)] max-w-[calc((100%-1rem)/3)] items-center justify-center rounded-full border border-white/10 bg-black px-2 py-2 text-center text-[8px] font-bold uppercase leading-tight tracking-[0.08em] text-gray-400 transition-all duration-300 hover:border-orange-400 sm:min-h-0 sm:max-w-none sm:basis-auto sm:shrink-0 sm:grow-0 sm:bg-white/5 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.2em]"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .image-mask {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  @media (max-width: 1023px) {
+    .image-mask {
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+    }
+  }
+
+  h1 {
+    letter-spacing: -0.06em;
+  }
+
+  .portfolio-nav-btn.active {
+    border-color: #fb923c !important;
+    color: white !important;
+    background: rgba(251, 146, 60, 0.2);
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+  }
+
+  .is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const stickyBar = document.getElementById("process-sticky-bar");
+    const navButtons = document.querySelectorAll(".portfolio-nav-btn");
+    const footer = document.querySelector("footer");
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-30% 0px -60% 0px",
+      threshold: 0,
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navButtons.forEach((btn) => {
+            btn.classList.toggle("active", btn.getAttribute("data-section") === id);
+          });
+        }
+      });
+    }, observerOptions);
+
+    const targets = ["steps", "timeline", "deliverables", "requirements", "testimonials"];
+    targets.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
+    });
+
+    if (stickyBar && footer) {
+      const footerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) stickyBar.classList.add("is-hidden");
+            else stickyBar.classList.remove("is-hidden");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      footerObserver.observe(footer);
+    }
+  });
+</script>

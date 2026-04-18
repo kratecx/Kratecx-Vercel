@@ -1,24 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-import HeroBanner from '@/components/services/mainpage/HeroBanner.astro';
+import ServiceHeroBanner from '@/components/services/mainpage/ServiceHeroBanner.astro';
 import ServicesCards from '@/components/services/mainpage/ServicesCards.astro';
-import CoreProtocols from '@/components/services/mainpage/CoreProtocols.astro';
-import Featured from '@/components/home/Featured.astro';
-import Process from '@/components/services/mainpage/Process.astro';
-import FAQ from '@/components/services/mainpage/FAQ.astro';
-import CTA from '@/components/services/mainpage/CTA.astro';
+import ServiceFAQ from '@/components/services/mainpage/ServiceFAQ.astro';
+import ProcessTimeline from '@/components/process/ProcessTimeline.astro';
+import ProcessDeliverables from '@/components/process/ProcessDeliverables.astro';
+import Testimonials from '@/components/home/Testimonials.astro';
+import ProcessCTA from '@/components/process/ProcessCTA.astro';
 
 ---
 
 <Layout title="Services - Elite Web Solutions">
   
-  <HeroBanner />
+  <ServiceHeroBanner />
   <ServicesCards />
-  <CoreProtocols />
-  <Process />
-  <Featured />
-  <FAQ />
-  <CTA />
+  <ProcessTimeline />
+  <ProcessDeliverables />
+  <ServiceFAQ />
+  <Testimonials />
+  <ProcessCTA />
 
 </Layout>

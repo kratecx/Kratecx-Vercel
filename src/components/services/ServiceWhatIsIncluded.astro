@@ -1,106 +1,80 @@
 ---
 /**
- * ServiceDeliverables.astro
- * Aesthetic: Obsidian Kinetic / Surgical Dark
- * Features: Laser-border tracing and glass depth
+ * BinaryLedger.astro
+ * Aesthetic: Surgical Dark / Two-Column Protocol
+ * Palette: 70% Black, 20% White, 10% Orange-400
  */
 interface Props {
-  title?: string;
-  subtitle?: string;
-  items: Array<{
-    title: string;
-    description: string;
-    icon?: string;
+  items?: Array<{
+    icon: string;
+    label: string;
+    value: string;
   }>;
 }
 
-const { 
-  title = "SERVICE DELIVERABLES", 
-  subtitle = "Surgical_Outputs_v1.0",
-  items 
-} = Astro.props;
+const { items = [] } = Astro.props;
 ---
 
-<section class="py-40 bg-[#050505] text-white relative overflow-hidden">
-  <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-orange-500/10 blur-[150px] rounded-full animate-pulse"></div>
-  
-  <div class="max-w-7xl mx-auto px-6 lg:px-24 relative z-10">
+<section class="py-24 bg-[#050505] text-white font-sans overflow-hidden">
+  <div class="max-w-5xl mx-auto px-8">
     
-    <div class="mb-32 reveal">
-      <div class="flex items-center gap-4 mb-8">
-        <div class="flex gap-1">
-          <span class="w-1 h-1 bg-orange-500 rounded-full"></span>
-          <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-          <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-        </div>
-        <span class="text-orange-500 font-mono text-[10px] tracking-[0.6em] uppercase">{subtitle}</span>
+    <div class="mb-6 flex flex-col items-center text-center mb-20">
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <span class="h-px w-10 bg-orange-400 block"></span>
+        <p
+          class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold"
+        >
+          System Verification
+        </p>
+        <span class="h-px w-10 bg-orange-400 block"></span>
       </div>
-      <h2 class="text-7xl md:text-9xl font-[1000] text-white uppercase tracking-tighter leading-[0.8]">
-        CORE <br/> <span class="text-orange-500 italic">SYSTEMS.</span>
+      <h2
+        class="text-7xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-white"
+      >
+        Service
+        <span class="text-orange-400 inline-block mt-2">Ledger</span>
       </h2>
+      <div class="w-60 h-1 bg-orange-400 my-4 rounded-full opacity-50"></div>
+      <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+        A precision-engineered lifecycle designed to transition your product
+        from initial concept to market-dominant scale.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {items.map((item, index) => (
-        <div 
-          class="reveal group relative aspect-[4/5] md:aspect-square bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-12 transition-all duration-700 hover:bg-white/[0.04] hover:border-white/10 overflow-hidden"
-          style={`transition-delay: ${index * 100}ms`}
-        >
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            <div class="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 delay-100"></div>
-          </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-x-16 border-t border-white/10"
+    >
+      {
+        items.map((item) => (
+          <div class="group flex items-start gap-6 py-10 border-b border-white/5 transition-all duration-300 hover:bg-white/[0.02]">
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-orange-400/5 border border-orange-400/20 group-hover:border-orange-400 transition-colors">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6 text-orange-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d={item.icon}
+                />
+              </svg>
+            </div>
 
-          <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-48 h-48 bg-orange-500/10 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-
-          <div class="relative z-10 h-full flex flex-col justify-between">
-            <div class="space-y-6">
-              <div class="flex justify-between items-center">
-                <div class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">
-                   <span class="text-[9px] font-mono text-white/40 uppercase tracking-widest">Mdl_{index + 1}</span>
-                </div>
-                {item.icon && (
-                  <div class="text-orange-500 group-hover:text-orange-500 transition-colors duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                      <path d={item.icon}></path>
-                    </svg>
-                  </div>
-                )}
-              </div>
-              
-              <h3 class="text-3xl font-black text-white uppercase tracking-tighter leading-none group-hover:text-orange-500 transition-colors">
-                {item.title}
+            <div class="space-y-1">
+              <h3 class="text-xl font-black uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
+                {item.label}
               </h3>
-            </div>
-
-            <div class="space-y-6">
-              <p class="text-gray-500 text-sm leading-relaxed font-medium group-hover:text-gray-300 transition-colors">
-                {item.description}
+              <p class="text-sm text-zinc-500 font-medium leading-relaxed max-w-[280px]">
+                {item.value}
               </p>
-              
-              <div class="flex items-center gap-2">
-                <div class="flex-1 h-[2px] bg-white/5 rounded-full overflow-hidden">
-                  <div class="h-full bg-orange-500 w-0 group-hover:w-full transition-all duration-1000 delay-300 ease-out"></div>
-                </div>
-                <span class="text-[8px] font-mono text-white/10 group-hover:text-orange-500 transition-colors tracking-tighter uppercase">Ready</span>
-              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
-
-<style is:global>
-  /* Reveal Animation with slight scale up */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-</style>

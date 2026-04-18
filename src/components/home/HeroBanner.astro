@@ -1,127 +1,99 @@
 ---
-// Reliable Unsplash URLs for Futuristic Tech & Architecture
-const slides = [
-  // "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop", // Deep space/tech
-  // "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop", // Cyber security
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop",  // Modern Architecture
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop",  // Modern Architecture
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop",  // Modern Architecture
-];
+import heroVideo from '@/assets/home/video_2.mp4'
 ---
 
-<section class="py-12 relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">
+<section id="hero-section" class="relative w-full min-h-screen min-h-dvh bg-black overflow-hidden flex items-center justify-center pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-40 md:pb-18">
   
-  <div class="absolute inset-0 z-0">
-    {slides.map((img, index) => (
-      <div 
-        class="absolute inset-0 opacity-0 animate-crossfade"
-        style={`animation-delay: ${index * 3}s; z-index: ${10 - index};`}
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <!-- Parallax on wrapper so the video stays full-bleed; overflow clips extra height -->
+    <div
+      id="parallax-bg"
+      class="absolute left-0 right-0 top-[-12%] h-[124%] w-full will-change-transform"
+      style="transform: translate3d(0, 0, 0);"
+    >
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="pointer-events-none h-full w-full object-cover object-center opacity-70"
       >
-        <img 
-          src={img} 
-          alt="Background Slide" 
-          class="w-full h-full object-cover animate-slow-zoom" 
-          loading={index === 0 ? "eager" : "lazy"}
-        />
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
-      </div>
-    ))}
+      <source src={heroVideo} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    </div>
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-black/50 z-[11] pointer-events-none"></div>
   </div>
 
-  <div class="relative z-20 text-center px-6 max-w-6xl">
-    <div class="flex items-center justify-center gap-4 mb-8 opacity-0 animate-fade-in" style="animation-delay: 0.2s;">
-        <span class="h-[1px] w-10 bg-orange-500"></span>
-        <span class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">Development for Growing Businesses</span>
-        <span class="h-[1px] w-10 bg-orange-500"></span>
+
+
+  <div class="relative z-20 w-full max-w-5xl text-center px-4 sm:px-6 mx-auto animate-fade-in">
+    
+    <div class="mb-6 text-center leading-snug px-1">
+        <span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 mr-2 sm:mr-4" aria-hidden="true"></span><span class="inline-block align-middle max-w-[calc(100%-5.5rem)] sm:max-w-none font-mono text-[14px] uppercase tracking-[0.6em] text-orange-400 font-bold text-center">Build Trust. Generate Leads. Grow Faster.</span><span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 ml-2 sm:ml-4" aria-hidden="true"></span>
     </div>
 
-<h1 class="relative z-10 text-7xl md:text-[140px] font-black tracking-[-0.04em] leading-[0.85] mb-12 opacity-0 animate-fade-in" style="animation-delay: 0.4s;">
-  
-  <span class="text-white text-outline  drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)]">
-    YOUR VISION
-  </span> <br />
+    <h1 class="text-6xl md:text-[100px] font-black mb-6 leading-[0.9] tracking-tighter text-white text-balance max-w-full px-0 sm:px-1">
+      Websites That Drive <span class="text-orange-400">Growth</span> & <span class="text-orange-400">Business</span>
+    </h1>
 
-  <span class="text-white bg-clip-text pe-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
-    ELEVATED
-  </span> <br />
-
-  <span class="text-orange-400 font-extrabold ">
-    SCALED.
-  </span>
-
-</h1>
+    <div class="max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12 px-0 sm:px-1">
+      <p class="text-zinc-400 text-lg md:text-xl font-light leading-relaxed tracking-wide text-balance">
+        We design and develop conversion-focused websites that help businesses build trust, attract leads, and grow with clarity
+      </p>
+    </div>
     
-    <div class="opacity-0 animate-fade-in" style="animation-delay: 0.6s;">
-        <p class="text-white/50 text-xl md:text-2xl italic font-medium max-w-xl mx-auto mb-14 leading-relaxed">
-          "Modernizing digital infrastructure for market-leading results."
-        </p>
-
-<div class="group relative inline-block p-[1.5px] rounded-full overflow-hidden bg-gradient-to-r from-white/5 via-[#FB8500]/50 to-white/5 shadow-2xl">
-    <div class="absolute -inset-2 bg-[#FB8500]/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-    
-    <a href="/contact" class="relative flex items-center justify-between gap-16 pl-4 pr-10 py-3.5 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
-        
-        <div class="w-14 h-14 rounded-full bg-[#FB8500] flex items-center justify-center text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] group-hover:rotate-[360deg] transition-transform duration-700">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-            </svg>
-        </div>
-        
-        <div class="flex flex-col text-left">
-            <p class="text-[11px] font-black tracking-[.3em] text-[#FB8500] uppercase mb-1">
-                Ready to Scale?
-            </p>
-            <span class="text-white font-bold text-xl tracking-tight whitespace-nowrap">
-                Start Your Journey
-            </span>
-        </div>
-        
-    </a>
-</div>
+    <div class="group relative inline-block max-w-full p-[1px] rounded-full overflow-hidden bg-white/10 hover:bg-orange-500/50 transition-colors duration-500">
+        <a href="/contact" class="relative flex max-w-full items-center justify-between gap-4 sm:gap-8 pl-3 pr-6 py-3 sm:pl-4 sm:pr-10 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
+            <div class="w-12 h-12 shrink-0 rounded-full bg-orange-400 flex items-center justify-center text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] group-hover:rotate-45 transition-transform duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17l10-10M7 7h10v10"/>
+                </svg>
+            </div>
+            
+            <div class="flex min-w-0 flex-col text-left">
+                <p class="text-[10px] font-bold tracking-[.3em] text-orange-400 uppercase">
+                    Ready to Grow??
+                </p>
+                <span class="text-white font-bold text-lg tracking-tight whitespace-normal sm:whitespace-nowrap">
+                    Let’s Get Started
+                </span>
+            </div>
+        </a>
     </div>
   </div>
 
 </section>
 
+<script>
+  const parallaxWrap = document.getElementById('parallax-bg');
+  window.addEventListener('scroll', () => {
+    const scrollValue = window.scrollY;
+    if (parallaxWrap && scrollValue < window.innerHeight) {
+      parallaxWrap.style.transform = `translate3d(0, ${scrollValue * 0.2}px, 0)`;
+    }
+  });
+</script>
+
 <style>
-  /* Outlined text effect */
-  .text-outline {
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
-    color: transparent;
-    transition: all 0.5s ease;
-  }
-  
-  
-  /* h1:hover .text-outline {
-    -webkit-text-stroke: 1.5px rgba(249, 115, 22, 1);
-  } */
-
-  /* Reveal animation */
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
   .animate-fade-in {
-    animation: fade-in 1s forwards cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fade-in 1.2s forwards cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Smooth Crossfade Logic */
-  @keyframes crossfade {
-    0% { opacity: 0; visibility: hidden; }
-    5%, 33% { opacity: 1; visibility: visible; }
-    38%, 100% { opacity: 0; visibility: hidden; }
-  }
-  .animate-crossfade {
-    animation: crossfade 9s infinite linear;
+  .animate-fade-in-delayed {
+    opacity: 0;
+    animation: fade-in 1.5s forwards 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Subtle zoom effect */
-  @keyframes slow-zoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.15); }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
-  .animate-slow-zoom {
-    animation: slow-zoom 15s infinite alternate ease-in-out;
+
+  ::selection {
+    background: #fb923c;
+    color: #000;
   }
 </style>

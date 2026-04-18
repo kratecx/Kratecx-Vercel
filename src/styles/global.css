@@ -18,7 +18,8 @@
 
 @layer base {
   body {
-    @apply bg-[#fafafa] text-neutral antialiased font-sans;
+    /* @apply bg-[#fafafa] text-neutral antialiased font-sans; */
+    @apply bg-white text-neutral antialiased font-sans;
   }
 
   /* Professional Heading Defaults */
@@ -26,4 +27,11 @@
     /* Use the new display font (Poppins) for headers */
     @apply font-poppins text-white tracking-tight;
   }
+}
+
+
+html {
+  scroll-behavior: smooth;
+  /* Provides extra padding so the heading isn't touching the top of the screen */
+  scroll-padding-top: 80px; 
 }

@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import HeroImage from "../../../assets/service/hero2.jpg";
+import HeroImageUpdated from "../../../assets/service/hero2update4.png";
+---
+
+<section class="relative flex w-full flex-col overflow-hidden border-b border-white/5 bg-black pt-8 font-sans lg:flex-row lg:pt-0">
+  <div class="relative z-20 flex w-full min-h-0 items-start sm:pt-24 sm:pb-14 lg:w-1/2 lg:items-center lg:py-16 lg:min-h-[68vh] pt-20 pb-10">
+    <div class="mx-auto flex h-full w-full max-w-[750px] flex-col justify-start px-4 sm:px-6 lg:justify-center lg:px-8 xl:px-16">
+      <div class="mb-6 flex items-center gap-3 sm:mb-10 sm:gap-6 lg:mb-12">
+        <span class="whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:tracking-[0.6em]">
+          Our Services
+        </span>
+        <div class="h-px w-full bg-white/10"></div>
+      </div>
+
+      <h1 class="mb-7 text-balance text-6xl uppercase leading-[0.85] tracking-tighter sm:mb-10 sm:text-7xl md:leading-[0.8] md:text-8xl lg:mb-12 xl:text-[110px]">
+        <span class="mb-1 block font-light text-white sm:mb-2">Web</span>
+        <span class="block font-black text-orange-400">Solutions</span>
+      </h1>
+
+      <p class="mb-8 max-w-xl border-l-2 border-orange-400/40 pl-4 text-base font-medium leading-relaxed tracking-wide text-zinc-500 sm:mb-14 sm:pl-8 lg:mb-20">
+        We design and build websites that help businesses grow, build trust, and generate consistent leads.
+      </p>
+    </div>
+  </div>
+
+  <div class="absolute inset-0 z-0 overflow-hidden lg:relative lg:top-0 lg:right-0 lg:z-10 lg:h-auto lg:w-1/2 lg:pt-12">
+    <Image
+      src={HeroImageUpdated}
+      alt="Web solutions"
+      width={1920}
+      height={1280}
+      class="h-full w-full object-cover object-center  contrast-105 image-mask"
+      loading="eager"
+    />
+    <div class="pointer-events-none absolute inset-0 bg-black/65 lg:bg-transparent"></div>
+
+    <div class="pointer-events-none absolute bottom-10 right-10 z-30 hidden xl:block">
+      <span class="select-none font-black uppercase tracking-tighter text-white/[0.02] text-9xl">Kratecx.</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .image-mask {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  @media (max-width: 1023px) {
+    .image-mask {
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+    }
+  }
+
+  h1 {
+    letter-spacing: -0.06em;
+  }
+</style>

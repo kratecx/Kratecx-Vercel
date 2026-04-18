@@ -1,22 +1,26 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-import ProcessOverview from '@/components/process/ProcessOverview.astro';
+import ProcessBanner from '@/components/process/ProcessBanner.astro';
 import ProcessStep from '@/components/process/ProcessSteps.astro';
-import ClientResponsibility from '@/components/process/ClientResponsibility.astro';
-import CommunicationMilestones from '@/components/process/CommunicationMilestones.astro';
-import DeliverySupports from '@/components/process/DeliverySupports.astro';
+import ProcessTimeline from '@/components/process/ProcessTimeline.astro';
+import ProcessClientResponsibility from '@/components/process/ProcessClientResponsibility.astro';
+import ProcessDeliverables from '@/components/process/ProcessDeliverables.astro';
+import ProcessTestimony from '@/components/process/ProcessTestimony.astro';
 import ProcessCTA from '@/components/process/ProcessCTA.astro';
+import Testimonials from '@/components/home/Testimonials.astro';
 
 ---
 
 <Layout>
 
-    <ProcessOverview />
+    <ProcessBanner />
     <ProcessStep />
-    <ClientResponsibility />
-    <CommunicationMilestones />
-    <DeliverySupports />
+    <ProcessTimeline />
+    <ProcessDeliverables />
+    <ProcessClientResponsibility />
+    <Testimonials />
+    <!-- <ProcessTestimony /> -->
     <ProcessCTA />
 
 </Layout>

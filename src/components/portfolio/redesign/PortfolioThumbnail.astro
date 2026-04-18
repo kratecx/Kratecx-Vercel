@@ -1,0 +1,85 @@
+---
+// PortfolioThumbnail.astro
+/**
+ * PORTFOLIO THUMBNAIL GRID
+ * Fully Dynamic: Fed via Prop-drilling.
+ */
+
+interface PortfolioItem {
+  id: string;
+  title: string;
+  client: string;
+  outcome: string;
+  img: string;
+}
+
+interface Props {
+  tagline?: string;
+  heading?: string;
+  portfolios?: PortfolioItem[];
+}
+
+const { 
+  tagline = "Case_Archive", 
+  heading = "Next Projects.", 
+  portfolios = [] 
+} = Astro.props;
+---
+
+<section class="bg-white py-24 px-6 lg:px-24">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="flex justify-between items-end mb-20 border-b-2 border-black pb-8">
+        <div>
+            <span class="text-orange-600 font-mono text-[10px] font-bold tracking-[0.5em] uppercase block mb-4">
+              {tagline}
+            </span>
+            <h2 class="text-6xl md:text-7xl font-black text-black uppercase tracking-tighter italic">
+              {heading}
+            </h2>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {portfolios.map((item) => (
+        <a href={`/portfolio/${item.id}`} class="group relative block overflow-hidden bg-black rounded-3xl">
+            
+            <div class="aspect-[4/5] overflow-hidden">
+                <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.2s] ease-in-out"
+                />
+            </div>
+
+            <div class="absolute inset-0 p-10 flex flex-col justify-between pointer-events-none">
+                
+                <div class="flex justify-between items-start opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span class="text-white font-mono text-[9px] tracking-[0.3em] uppercase">{item.id}</span>
+                    <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center">
+                        <svg class="w-3 h-3 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-orange-500 font-mono text-[8px] font-black tracking-widest uppercase mb-1 block">
+                      Client: {item.client}
+                    </span>
+                    <h3 class="text-3xl font-black text-white uppercase italic leading-none mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        {item.title}
+                    </h3>
+                    
+                    <div class="inline-block bg-white text-black px-4 py-1.5 rounded-full">
+                        <p class="text-[9px] font-black uppercase tracking-widest">{item.outcome}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-orange-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

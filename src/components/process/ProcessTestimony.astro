@@ -1,0 +1,147 @@
+---
+// ProofSection.astro
+const stats = [
+  { 
+    label: "Project Velocity", 
+    value: 24, 
+    suffix: "+",
+    sub: "Delivered in 2025",
+    description: "Rapid deployment of high-performance digital assets without compromising code integrity." 
+  },
+  { 
+    label: "Performance Floor", 
+    value: 98, 
+    suffix: "/100",
+    sub: "Lighthouse Score",
+    description: "We don't just build; we optimize. Every project launches with industry-leading speed metrics." 
+  },
+  { 
+    label: "Tech Stack Mastery", 
+    value: 12, 
+    suffix: "",
+    sub: "Core Frameworks",
+    description: "Deep integration expertise across the modern web ecosystem (Astro, Next.js, Go, etc.)" 
+  }
+];
+---
+
+<section class="pt-18 pb-18 bg-white relative overflow-hidden text-black" id="proofs">
+  <!-- <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none select-none overflow-hidden">
+    <span class="text-[20vw] font-black text-slate-100 leading-none uppercase">Reliability</span>
+  </div> -->
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-24 relative z-10">
+    
+    <div class="max-w-7xl mx-auto mb-24 relative z-10 text-center">
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <span class="h-0.5 w-10 bg-orange-400"></span>
+        <p class="font-mono text-sm uppercase tracking-[0.5em] text-orange-400 font-bold"></p>
+        <span class="h-0.5 w-10 bg-orange-400"></span>
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <h2 class="text-7xl md:text-8xl font-[900] text-black uppercase tracking-tighter leading-[0.85]">
+          <span class="text-orange-400">Trusted </span>By Clients 
+        </h2>
+        <div class="w-60 h-1 bg-orange-400 my-6 rounded-full opacity-50"></div>
+        <p class="text-gray-500 max-w-2xl mx-auto text-xl font-light leading-relaxed">
+          Real feedback from clients who improved their online presence, built trust, and achieved measurable business growth through our work
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {stats.map((stat) => (
+        <div class="proof-card group relative bg-slate-50 border border-slate-200 rounded-[2.5rem] p-10 transition-all duration-500 hover:bg-white hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:border-orange-400/30">
+          
+          <div class="relative z-10">
+            <div class="flex flex-col mb-10">
+              <div class="flex items-baseline gap-1">
+                <span 
+                    class="counter text-5xl font-poppins  text-black group-hover:text-orange-400 transition-colors duration-500" 
+                    data-target={stat.value}
+                >
+                    0
+                </span>
+                <span class="text-3xl font-bold text-orange-400">{stat.suffix}</span>
+              </div>
+              <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 mt-2">{stat.sub}</span>
+            </div>
+
+            <h3 class="text-black font-black text-xl mb-4 flex items-center gap-3">
+               <span class="w-3 h-3 rounded-full bg-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></span>
+               {stat.label}
+            </h3>
+            
+            <p class="text-slate-600 text-base leading-relaxed font-normal">
+              {stat.description}
+            </p>
+          </div>
+          
+          <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="text-orange-400">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+
+
+  </div>
+</section>
+
+<style>
+  .proof-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .proof-card.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<script>
+  function initProof() {
+    const cards = document.querySelectorAll('.proof-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          const counter = entry.target.querySelector('.counter');
+          if (counter) animateValue(counter);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  function animateValue(obj: HTMLElement) {
+    const target = parseFloat(obj.getAttribute('data-target'));
+    const duration = 2000; 
+    let start: number | null = null;
+    
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
+      obj.innerText = Math.floor(easeOut * target);
+      if (progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  initProof();
+  document.addEventListener('astro:after-swap', initProof);
+</script>

@@ -1,180 +1,88 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import arrow from "@/assets/Portfolio/arrow2.png"
-import Image from "astro/components/Image.astro";
+import Hero from "@/components/portfolio/index/HeroComponent.astro";
+import CaseStudies from "@/components/portfolio/index/CaseStudiesComponent.astro";
+
+// 1. Updated Data Arrays matched to your exact Filter IDs
+
 
 const categories = [
   {
-    id: "saas",
-    heading: "Enterprise SaaS Systems",
-    subheading: "High-performance dashboards & cloud infrastructure.",
+    id: "business",
+    heading: "Business Websites",
+    subheading: "Professional Presence & Lead Generation",
+    desc: "Websites built to establish credibility, communicate clearly, and generate consistent leads for service-based businesses.",
     projects: [
-      { id: "01", title: "Vortex Analytics", tech: "Next.js // AWS", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800" },
-      { id: "02", title: "Lumina Admin", tech: "Vue // Firebase", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=800" },
-      { id: "03", title: "ScaleFlow CRM", tech: "React // Node", img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800" }
+      { id: "01", title: "Finance Consulting Firm", tech: "Next.js // Tailwind", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" },
+      { id: "02", title: "Legal Services Website", tech: "Astro // CMS", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200" }
     ]
   },
   {
-    id: "ai",
-    heading: "Artificial Intelligence",
-    subheading: "LLM integration and automated neural workflows.",
+    id: "startup",
+    heading: "Startup Websites",
+    subheading: "Launch, Positioning & Early Growth",
+    desc: "High-impact websites designed to communicate value, build trust, and support early-stage growth for startups and SaaS products.",
     projects: [
-      { id: "04", title: "GeniusAI Content", tech: "Python // GPT-4", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800" },
-      { id: "05", title: "Visionary ML", tech: "PyTorch // AWS", img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800" },
-      { id: "06", title: "Neural Ledger", tech: "Solidity // AI", img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800" }
+      { id: "03", title: "AI SaaS Platform", tech: "React // API Integration", img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200" },
+      { id: "04", title: "Fintech Startup Site", tech: "Next.js // Node", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200" }
     ]
   },
   {
-    id: "shopify",
-    heading: "Headless E-Commerce",
-    subheading: "Custom Shopify Plus storefronts and API scaling.",
+    id: "ecommerce",
+    heading: "E\u2011Commerce Websites",
+    subheading: "Conversion & Scalable Online Stores",
+    desc: "Online stores built for performance, smooth user experience, and higher conversion rates across devices.",
     projects: [
-      { id: "07", title: "Aura Home", tech: "Remix // Shopify", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800" },
-      { id: "08", title: "Velo Gear", tech: "Hydrogen // Node", img: "https://images.unsplash.com/photo-1556740734-7f9a2b774159?q=80&w=800" },
-      { id: "09", title: "Moda Global", tech: "Next.js // Shopify", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800" }
+      { id: "05", title: "Luxury Clothing Store", tech: "Shopify // Custom Theme", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200" },
+      { id: "06", title: "Tech Accessories Store", tech: "Shopify // Headless", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200" }
+    ]
+  },
+  {
+    id: "landing",
+    heading: "Landing Pages",
+    subheading: "Focused Conversion & Campaign Performance",
+    desc: "Landing pages designed to capture attention, communicate value quickly, and convert visitors into qualified leads.",
+    projects: [
+      { id: "07", title: "Analytics Product Landing", tech: "HTML // Tailwind", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200" },
+      { id: "08", title: "Cyber Security Campaign Page", tech: "Next.js // Animations", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" }
+    ]
+  },
+  {
+    id: "redesign",
+    heading: "Redesigned Websites",
+    subheading: "Modernization & Performance Improvement",
+    desc: "Redesigning outdated websites to improve user experience, increase trust, and align with modern business goals.",
+    projects: [
+      { id: "09", title: "SaaS Dashboard Redesign", tech: "React // UI System", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1200" },
+      { id: "10", title: "Brand Website Revamp", tech: "Vue // CMS", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200" }
     ]
   }
 ];
 
 const filters = [
-    { label: "All Records", value: "all" },
-    { label: "SaaS Systems", value: "saas" },
-    { label: "AI Neural", value: "ai" },
-    { label: "Shopify Plus", value: "shopify" }
+  { label: "Business Websites", id: "business" },
+  { label: "Startup Websites", id: "startup" },
+  { label: "E\u2011Commerce Websites", id: "ecommerce" },
+  { label: "Landing Pages", id: "landing" },
+  { label: "Website Redesigns", id: "redesign" },
 ];
 ---
 
-<Layout title="Service Catalog | Engineering">
-  <section class="relative min-h-screen bg-white py-24 lg:py-32 overflow-x-clip" x-data="{ activeFilter: 'all' }">
+<Layout title="Portfolio | KRATECX">
+  <div class="relative bg-[#050505]">
+    <Hero />
     
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FB8500]/5 rounded-full blur-[120px] -z-10"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gray-100 rounded-full blur-[100px] -z-10"></div>
-
-    <div class="max-w-7xl mx-auto px-6">
-      
-<header class="mb-32 flex flex-col items-center text-center">
-  <div class="flex items-center gap-4 mb-8">
-    <span class="h-[1px] w-8 bg-[#FB8500]"></span>
-    <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400">Portfolio Archive</span>
-    <span class="h-[1px] w-8 bg-[#FB8500]"></span>
+    <CaseStudies categories={categories} filters={filters} />
   </div>
-  
-<div class="relative w-full flex flex-col items-center">
-
-  <h1 class="relative z-10 text-7xl md:text-[9.5rem] font-black tracking-tighter leading-[0.8] uppercase text-[#111]">
-      Our <span class="text-[#FB8500]">Projects</span>
-  </h1>
-
-    <div class="mt-12 max-w-3xl">
-    <p class="text-xl md:text-2xl font-light leading-relaxed text-gray-500">
-      A curated showcase of <span class="text-[#111] font-medium italic">digital craftsmanship</span>. 
-      Bridging the gap between complex engineering and 
-      <span class="text-[#FB8500] font-semibold">intuitive user experiences</span>.
-    </p>
-    
-
-  </div>
-
-  <!-- <div class="absolute right-0 top-1/2 -translate-y-1/2 z-0 w-64 md:w-[500px] opacity-90 pointer-events-none">
-    <Image 
-      src={arrow} 
-      alt="Arrow Icon" 
-      class="w-full h-auto"
-    />
-  </div> -->
-  
-</div>
-
-</header>
-
-<!-- <div class="sticky top-30 z-[100]  w-full flex justify-center pointer-events-none mb-24"> -->
-<div class="w-full flex justify-center pointer-events-none mb-24">
-  <nav class="pointer-events-auto inline-flex p-1.5 bg-white/80 backdrop-blur-xl border border-gray-300 rounded-full shadow-lg transition-all duration-500">
-      {filters.map((f) => (
-          <button 
-              @click={`activeFilter = '${f.value}'`}
-              class="px-8 md:px-12 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 rounded-full cursor-pointer"
-              :class={`activeFilter === '${f.value}' ? 'bg-[#111] text-white shadow-xl' : 'text-gray-500 hover:text-[#111]'`}
-          >
-              {f.label}
-          </button>
-      ))}
-  </nav>
-</div>
-
-      {categories.map((group) => (
-        <div 
-            class="mb-40 last:mb-0" 
-            x-show={`activeFilter === 'all' || activeFilter === '${group.id}'`}
-            x-transition:enter="transition ease-out duration-700"
-            x-transition:enter-start="opacity-0 translate-y-12"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            x-cloak
-        >
-<div class="flex flex-col items-center mb-20 group/title">
-  <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-[#111] text-center leading-none">
-    {group.heading.split(' ').slice(0, -1).join(' ')} 
-    <span class="text-[#FB8500] block md:inline">
-      {group.heading.split(' ').pop()}
-    </span>
-  </h2>
-  
-  {/* <div class="mt-4 h-1.5 w-24 bg-[#111] transition-all duration-500 group-hover/title:w-48 group-hover/title:bg-[#FB8500]"></div> */}
-</div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {group.projects.map((post) => (
-              <a href={`/portfolio/${post.id}`} class="group relative aspect-[16/10] overflow-hidden rounded-[3rem] bg-gray-100 cursor-pointer shadow-sm transition-all duration-700 hover:shadow-2xl hover:shadow-[#FB8500]/10 hover:-translate-y-2">
-                
-                <img 
-                  src={post.img} 
-                  alt={post.title}
-                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
-                />
-
-                <div class="absolute inset-x-4 bottom-4">
-                    <div class="bg-white/60 backdrop-blur-2xl border border-white/40 p-8 rounded-[2rem] flex flex-col md:flex-row md:items-end justify-between gap-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                        <div>
-                            <span class="text-[9px] font-black text-[#FB8500] uppercase tracking-[0.3em] mb-2 block">ID_{post.id}</span>
-                            <h3 class="text-3xl font-black text-[#111] uppercase tracking-tighter">
-                                {post.title}
-                            </h3>
-                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">
-                                // {post.tech}
-                            </p>
-                        </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <span class="hidden md:block text-[9px] font-black uppercase tracking-widest text-[#111] opacity-0 group-hover:opacity-100 transition-opacity duration-700">Explore_Project</span>
-                            <div class="w-12 h-12 rounded-2xl bg-[#111] flex items-center justify-center text-white group-hover:bg-[#FB8500] transition-colors duration-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
-
-    </div>
-  </section>
 </Layout>
 
-<style>
+<style is:global>
+  html { scroll-behavior: smooth; }
   [x-cloak] { display: none !important; }
-  
-  h1, h2, h3 {
-    -webkit-text-stroke: 0.5px rgba(0,0,0,0.05);
-  }
 
+  /* Ensure selection color matches brand orange */
   ::selection {
     background: #FB8500;
     color: white;
   }
 </style>
-
-<script is:inline src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

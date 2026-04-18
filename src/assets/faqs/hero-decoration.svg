@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+  <!-- Legacy asset: kept so stale tooling/cache that still resolves this path does not ENOENT. FAQ hero uses remote Unsplash image. -->
+  <rect width="16" height="16" rx="2" fill="none" stroke="#fb923c" stroke-opacity="0.2" />
+</svg>

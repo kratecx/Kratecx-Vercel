@@ -1,67 +1,106 @@
 ---
+/**
+ * ServiceDeliverables.astro
+ * Two-Half Layout: Checklist (Left) | Blended Image (Right)
+ */
+import { Image } from "astro:assets";
+
 interface Props {
   title?: string;
   deliverables: Array<{
-    title: string;
-    description: string;
+    title: string; // Matches your page data
+    description: string; // Matches your page data
   }>;
+  mainImage: ImageMetadata;
 }
 
 const { 
-  title = "Deliverables", 
-  deliverables 
+  title = "Service Ledger", 
+  deliverables = [],
+  mainImage
 } = Astro.props;
 ---
 
-<section class="py-32 bg-black text-white relative overflow-hidden">
-  <div class="absolute inset-0 opacity-[0.03] pointer-events-none" 
-       style="background-image: radial-gradient(#FB8500 0.5px, transparent 0.5px); background-size: 30px 30px;">
-  </div>
+<section class="py-24 bg-[#050505] text-white relative overflow-hidden font-sans">
+  <div class="absolute inset-0 bg-[radial-gradient(#FB850008_1px,transparent_1px)] [background-size:30px_30px] pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-6 lg:px-24 relative z-10">
-    <div class="mb-16 reveal">
-      <p class="text-orange-500 font-black tracking-[0.4em] uppercase text-[10px] mb-4">What You Get</p>
-      <h2 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
-        {title}
+    
+    <div class="mb-14 flex flex-col items-center text-center reveal">
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <span class="h-px w-10 bg-orange-400"></span>
+        <p class="font-mono text-[12px] uppercase tracking-[0.5em] text-orange-400 font-bold">
+          System Verification
+        </p>
+        <span class="h-px w-10 bg-orange-400"></span>
+      </div>
+      <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tight leading-[0.85]">
+        Service <span class="text-orange-400">Ledger</span>
       </h2>
+      <div class="w-60 h-1 bg-orange-400 my-4 rounded-full opacity-50"></div>
+      <p class="text-zinc-500 max-w-2xl mx-auto text-base font-light leading-relaxed">
+        A precision-engineered lifecycle designed to transition your product
+        from initial concept to market-dominant scale.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {deliverables.map((item, index) => (
-        <div 
-          class="group relative bg-[#0a0a0a] border-l-4 border-orange-500/20 pl-8 py-6 hover:border-orange-500 transition-all duration-700 reveal"
-          style={`transition-delay: ${index * 150}ms`}
-        >
-          <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/[0.02] transition-colors duration-700 pointer-events-none"></div>
-
-          <div class="flex items-start gap-6 relative z-10">
-            <div class="flex-shrink-0 w-12 h-12 bg-orange-500 text-black rounded-full flex items-center justify-center text-xl font-black group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(251,133,0,0.3)] transition-all duration-500">
-              ✓
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center border-t border-white/10 pt-16">
+      
+      <div class="space-y-4">
+        {deliverables.map((item, index) => (
+          <div 
+            class="group flex items-start gap-5 py-5 px-6 rounded-lg transition-all duration-500 hover:bg-white/[0.02] border-l-2 border-transparent hover:border-orange-400 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-400 flex items-center justify-center text-black group-hover:shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
             </div>
             
             <div class="flex-1">
-              <h3 class="text-2xl font-bold uppercase tracking-tight mb-3 group-hover:text-orange-500 transition-colors duration-500">
+              <h3 class="text-sm font-black uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
                 {item.title}
               </h3>
-              <p class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-200 transition-colors duration-500">
+              <p class="text-xs text-zinc-500 font-medium leading-relaxed max-w-[320px] mt-1">
                 {item.description}
               </p>
             </div>
           </div>
+        ))}
+      </div>
+
+      <div class="relative flex items-center justify-center p-8 reveal" style="transition-delay: 300ms">
+        <div class="relative w-full max-w-[400px] aspect-square group">
+          <div class="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_60px_40px_#050505]"></div>
+          
+          {mainImage ? (
+            <Image 
+              src={mainImage} 
+              alt="Technical Infrastructure" 
+              class="w-full h-full object-cover  brightness-[1] contrast-125 "
+            />
+          ) : (
+            <div class="w-full h-full bg-zinc-900 flex items-center justify-center text-[10px] font-mono opacity-20 uppercase tracking-[0.5em]">
+                Missing_Asset
+            </div>
+          )}
+
+          <!-- <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-orange-400/40 z-20"></div>
+          <div class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-orange-400/40 z-20"></div> -->
         </div>
-      ))}
+      </div>
+
     </div>
   </div>
 </section>
 
 <style is:global>
-  /* Reveal Animation Logic */
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
   .reveal.active {
     opacity: 1;
     transform: translateY(0);
@@ -70,23 +109,13 @@ const {
 
 <script is:inline>
   function initDeliverableAnimations() {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
-
-  // Support for both standard load and Astro view transitions
   document.addEventListener('DOMContentLoaded', initDeliverableAnimations);
   document.addEventListener('astro:page-load', initDeliverableAnimations);
 </script>

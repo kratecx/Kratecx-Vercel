@@ -1,94 +1,187 @@
 ---
+import { Search, Lightbulb, Layout, Rocket, LineChart } from 'lucide-react';
+
 const steps = [
   { 
     id: "01", 
-    phase: "Discovery & Strategy", 
-    process: "We conduct deep-tier technical audits and competitor landscape mapping to define project KPIs and market positioning.",
-    value: "A comprehensive Strategy Roadmap and a Data-Audit report that serves as the project's 'North Star'." 
+    phase: "Discovery", 
+    status: "Website Audit",
+    status2: "Goals Defined",
+    outcome: "We analyze your current website, identify gaps, and define clear goals focused on improving trust, engagement, and lead generation.",
+    icon: Search
   },
   { 
     id: "02", 
-    phase: "Architecture & Wireframing", 
-    process: "We map out the entire user journey and information architecture, creating high-fidelity wireframes to finalize functionality.",
-    value: "A functional blueprint of your site's structure, ensuring the UX is perfect before development begins." 
+    phase: "Strategy", 
+    status: "Plan Structured",
+    status2: "Conversion Focused",
+    outcome: "We create a clear structure and strategy for your website, focusing on user flow, messaging, and conversion optimization.",
+    icon: Lightbulb
   },
   { 
     id: "03", 
-    phase: "Iterative Development", 
-    process: "Coding happens in agile sprints. We push updates to a staging environment where you can track progress live.",
-    value: "A 24/7 staging link and weekly status reports, giving you total transparency during development." 
+    phase: "Design & Development", 
+    status: "Build in Progress",
+    status2: "User-Focused",
+    outcome: "We design and develop your website with a focus on clarity, performance, and a seamless user experience across all devices.",
+    icon: Layout
   },
   { 
     id: "04", 
-    phase: "QA & SEO Testing", 
-    process: "Our team runs 50+ point checks covering mobile responsiveness, Core Web Vitals, and technical SEO schemas.",
-    value: "A high-performance, bug-free site optimized for speed and search engines for a flawless launch." 
+    phase: "Launch", 
+    status: "Website Live",
+    status2: "Performance Optimized",
+    outcome: "Your website is launched with optimized speed, responsiveness, and on-page SEO for better visibility and performance.",
+    icon: Rocket
+  },
+  { 
+    id: "05", 
+    phase: "Growth", 
+    status: "Performance Tracked",
+    status2: "Ongoing Improvements",
+    outcome: "We monitor performance and provide ongoing improvements to increase conversions, user engagement, and business growth.",
+    icon: LineChart
   }
 ];
 ---
 
-<section class="bg-[#020202] py-32 px-6 font-sans antialiased text-white overflow-hidden scroll-mt-20">
-  
-  <div class="fixed inset-0 pointer-events-none -z-10">
-    <div class="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-orange-600/10 blur-[200px] rounded-full"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto relative z-10 opacity-0 translate-y-10 transition-all duration-[1200ms]" id="main-container">
+<section id="steps" class="relative scroll-mt-24 overflow-hidden bg-[#FCFCFC] px-4 py-16 font-sans antialiased text-black sm:scroll-mt-28 sm:px-6 sm:py-24 md:py-28 lg:px-12 lg:py-32 xl:px-20">
+  <div class="relative z-10 mx-auto max-w-7xl">
     
-    <div class="mb-56 text-center max-w-4xl mx-auto">
-      <div class="flex items-center justify-center gap-4 mb-6">
-        <div class="w-12 h-[1px] bg-orange-500/40"></div>
-        <span class="text-orange-500 font-black text-xs uppercase tracking-[0.6em]">Process Framework</span>
-        <div class="w-12 h-[1px] bg-orange-500/40"></div>
+    <!-- <div class="text-center mb-32 md:mb-40">
+        <div class="flex items-center justify-center gap-4 mb-8">
+          <span class="h-[2px] w-10 bg-orange-400 block"></span>
+          <p class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">
+            Steps to Growth
+          </p>
+          <span class="h-[2px] w-10 bg-orange-400 block"></span>
+        </div>
+
+        <h2 class="relative w-fit mx-auto text-6xl md:text-8xl font-black text-black mb-4 tracking-tighter uppercase pb-8">
+            From Idea to <span class="text-orange-400">Execution</span>
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 my-6 w-48 md:w-80 h-[4px] bg-orange-400 opacity-60 rounded-full"></span>
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-xl font-light leading-relaxed">
+            A precision-engineered lifecycle designed to transition your product from initial concept to market-dominant scale.
+        </p>
+    </div> -->
+    <div class="relative z-10 mx-auto mb-14 max-w-7xl text-center sm:mb-20 md:mb-24">
+      <div class="mb-7 flex items-center justify-center gap-3 sm:mb-10 sm:gap-5">
+        <span class="h-0.5 w-8 bg-orange-400 sm:w-12 md:w-14"></span>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-base sm:tracking-[0.45em] md:text-lg md:tracking-[0.5em]">
+          Steps to Growth
+        </p>
+        <span class="h-0.5 w-8 bg-orange-400 sm:w-12 md:w-14"></span>
       </div>
-      <h2 class="text-6xl md:text-[140px] font-black tracking-tighter leading-none uppercase">
-        The <span class="text-orange-500">Method</span>
-      </h2>
+
+      <div class="flex flex-col items-center justify-center px-1">
+        <h2 class="text-balance text-5xl font-[900] uppercase leading-[0.9] tracking-tighter text-black sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:[font-size:clamp(5rem,7vw,8.5rem)]">
+          <span class="text-orange-400">Progress</span>
+          <br />
+          At Every Step
+        </h2>
+        <div class="my-6 h-1 w-48 rounded-full bg-orange-400 opacity-50 sm:my-8 sm:w-72 md:w-80"></div>
+        <p class="mx-auto max-w-2xl px-1 text-base font-light leading-relaxed text-gray-500 sm:text-lg md:text-xl">
+          A clear and straightforward process designed to take your website from idea to launch without confusion or unnecessary complexity.
+        </p>
+      </div>
     </div>
 
-    <div class="space-y-40">
+    <div class="mx-auto max-w-5xl space-y-16 sm:space-y-24 md:space-y-32 lg:space-y-40">
       {steps.map((step) => (
-        <div class="process-phase relative flex flex-col lg:flex-row items-center gap-16 lg:gap-24 transition-all duration-1000 opacity-20 blur-[2px] scale-[0.98]">
-          
-          <div class="absolute left-0 top-1/2 -translate-y-1/2 -z-10 transition-all duration-1000 phase-bg-id opacity-[0.05]">
-            <span class="text-[12rem] md:text-[16rem] font-black leading-none text-orange-500 italic select-none">
+        <div class="group/main relative">
+          <div class="pointer-events-none absolute -top-12 left-0 z-0 select-none overflow-hidden sm:-top-16 md:-top-24 lg:-top-36 xl:-top-44">
+            <span class="inline-block -translate-y-2 transform text-[5rem] font-black italic leading-none text-orange-500/[0.13] sm:text-[7rem] md:text-[11rem] lg:text-[18rem] xl:text-[24rem]">
               {step.id}
             </span>
           </div>
 
-          <div class="lg:w-[40%] space-y-6">
-            <div class="flex items-center gap-3">
-              <span class="text-orange-500 font-mono text-sm font-bold">{step.id}</span>
-              <div class="w-10 h-[1px] bg-white/10"></div>
+          <div class="relative z-10 flex flex-col gap-6 sm:gap-8">
+            <div class="flex min-w-0 items-center gap-3 sm:gap-4">
+              <span class="shrink-0 font-poppins text-[10px] font-black uppercase tracking-[0.25em] text-orange-400 sm:text-xs sm:tracking-[0.4em]">
+                Step {step.id}
+              </span>
+              <div class="h-px min-w-0 flex-1 bg-black/20"></div>
             </div>
-            <h3 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
-              {step.phase}
-            </h3>
-            <p class="text-gray-500 text-base md:text-lg leading-relaxed max-w-sm">
-              {step.process}
-            </p>
-          </div>
 
-          <div class="lg:w-[60%] w-full">
-            <div class="glass-card p-10 md:p-14 rounded-[3rem] relative overflow-hidden border border-white/5 bg-white/[0.01]">
-              
-              <div class="absolute -top-1/2 -right-1/2 w-full h-full bg-orange-500/10 blur-[100px] rounded-full"></div>
-              
-              <div class="relative z-10 flex flex-col gap-8">
-                <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-black shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span class="text-orange-500 font-bold text-[10px] uppercase tracking-[0.4em]">Client Deliverable</span>
+            <h3 class="-mt-2 max-w-full text-balance break-words text-3xl font-black uppercase leading-[1.05] tracking-tighter sm:-mt-4 sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl">
+              {(() => {
+                const mid = Math.ceil(step.phase.length / 2);
+                const firstHalf = step.phase.slice(0, mid);
+                const secondHalf = step.phase.slice(mid);
+                return (
+                  <>
+                    <span class="text-black">{firstHalf}</span><span class="text-orange-400">{secondHalf}</span>
+                  </>
+                );
+              })()}
+            </h3>
+
+            <div class="grid grid-cols-1 items-start gap-8 pt-2 sm:gap-10 sm:pt-4 md:grid-cols-2 md:gap-12">
+              <div class="flex min-w-0 flex-col gap-4 sm:gap-6">
+                <div class="group/status flex min-w-0 items-start gap-3 transition-transform duration-500 sm:items-center sm:gap-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-0.5 h-6 w-6 shrink-0 text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.4)] sm:mt-0 sm:h-8 sm:w-8"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span class="min-w-0 text-lg font-semibold uppercase tracking-tighter text-black/90 transition-colors group-hover/status:text-black sm:text-2xl md:text-3xl lg:text-4xl">
+                    {step.status}
+                  </span>
                 </div>
-                
-                <p class="text-white text-xl md:text-3xl font-bold leading-tight tracking-tight">
-                  "{step.value}"
-                </p>
+
+                <div class="group/status2 flex min-w-0 items-start gap-3 transition-transform duration-500 sm:items-center sm:gap-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-0.5 h-6 w-6 shrink-0 text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.4)] sm:mt-0 sm:h-8 sm:w-8"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span class="min-w-0 text-lg font-semibold uppercase tracking-tighter text-black/90 transition-colors group-hover/status2:text-black sm:text-2xl md:text-3xl lg:text-4xl">
+                    {step.status2}
+                  </span>
+                </div>
               </div>
+
+              <div class="group/card relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 p-5 shadow-2xl transition-all duration-500 hover:border-orange-400/40 sm:p-7 md:p-9 lg:p-10">
+                <div class="pointer-events-none absolute -right-2 -top-2 text-orange-400 opacity-20 transition-all duration-700 sm:-right-4 sm:-top-4 [&>svg]:h-24 [&>svg]:w-24 sm:[&>svg]:h-32 sm:[&>svg]:w-32 md:[&>svg]:h-40 md:[&>svg]:w-40 lg:[&>svg]:h-[180px] lg:[&>svg]:w-[180px]">
+                  <step.icon size={180} strokeWidth={0.5} />
+                </div>
+
+                <div class="relative z-10 flex h-full min-h-0 flex-col">
+                  <div class="mb-6 flex items-center justify-between sm:mb-10">
+                    <div class="flex flex-col gap-2">
+                      <p class="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-orange-400 sm:text-[10px] sm:tracking-[0.4em]">
+                        Outcome Module
+                      </p>
+                      <div class="h-px w-8 origin-left bg-orange-400/40 transition-all duration-700 group-hover/card:w-full"></div>
+                    </div>
+                  </div>
+                  <p class="text-base font-light leading-relaxed tracking-tight text-white/95 sm:text-lg md:text-xl lg:text-2xl">
+                    {step.outcome}
+                  </p>
+                </div>
+
+                <div class="absolute bottom-0 left-0 w-full h-[2px] bg-white/5 overflow-hidden">
+                    <div class="h-full w-full bg-orange-400 scale-x-0 group-hover/card:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_15px_#fb923c]"></div>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -96,82 +189,3 @@ const steps = [
     </div>
   </div>
 </section>
-
-<style>
-  .glass-card {
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    /* Ultra-snappy response */
-    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  /* FAST FOCUS LOGIC */
-  .process-phase {
-    /* Instant-start easing (Expo Out) */
-    transition: 
-      opacity 350ms cubic-bezier(0.19, 1, 0.22, 1), 
-      filter 300ms cubic-bezier(0.19, 1, 0.22, 1), 
-      transform 400ms cubic-bezier(0.19, 1, 0.22, 1);
-    will-change: opacity, filter, transform;
-  }
-
-  /* Once triggered, these stay applied */
-  .is-focused {
-    opacity: 1 !important;
-    filter: blur(0px) !important;
-    transform: scale(1) !important;
-  }
-
-  .is-focused .phase-bg-id {
-    opacity: 0.15;
-    transition: transform 350ms cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .is-focused .glass-card {
-    border-color: rgba(249, 115, 22, 0.3);
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  /* Main Container Entrance - Reduced to 500ms for speed */
-  .reveal-active {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-  }
-</style>
-
-<script>
-  function initStickyFastObserver() {
-    const container = document.getElementById('main-container');
-    const phases = document.querySelectorAll('.process-phase');
-
-    const globalObs = new IntersectionObserver((e) => {
-      if (e[0].isIntersecting && container) {
-        container.classList.add('reveal-active');
-        // Unobserve after firing to keep it active
-        globalObs.unobserve(container);
-      }
-    }, { threshold: 0.01 });
-
-    const focusObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // Only Add class, never Remove it
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-focused');
-          // Optional: Stop watching this element once it's arrived
-          focusObs.unobserve(entry.target);
-        }
-      });
-    }, { 
-      threshold: 0.1, 
-      rootMargin: "15% 0px -5% 0px" 
-    });
-
-    if (container) globalObs.observe(container);
-    phases.forEach(p => focusObs.observe(p));
-  }
-
-  // Window load ensures no "jumpy" calculation during the fast transition
-  window.addEventListener('load', initStickyFastObserver);
-</script>

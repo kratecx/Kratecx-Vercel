@@ -6,33 +6,48 @@
  */
 ---
 
-<section class="bg-white pb-42 px-6 relative overflow-hidden">
+<section class="bg-white px-4 pb-16 pt-4 sm:px-6 sm:pb-24 md:pb-42 relative overflow-hidden">
   <div class="max-w-7xl mx-auto">
     <div 
       id="needs-cta" 
       class="opacity-0 translate-y-12 transition-all duration-1000 ease-out"
     >
-      <div class="bg-black rounded-[4rem] p-1 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden">
-        <div class="bg-black rounded-[3.8rem] px-10 py-16 md:px-20 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden">
+      <div class="bg-black rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] border border-orange-400/50 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden">
+        <div class="bg-black rounded-[1.8rem] sm:rounded-[2.8rem] md:rounded-[3.8rem] px-5 py-10 sm:px-8 sm:py-12 md:px-20 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 md:gap-12 relative overflow-hidden">
           
           <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#f97316 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
 
           <div class="relative z-10 max-w-xl text-center md:text-left">
-            <h4 class="text-white text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 leading-none">
-              Ready to build <br/> the <span class="text-orange-500">Infrastructure?</span>
+            <h4 class="text-white text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter mb-3 sm:mb-4 leading-none">
+              Ready to build <br/> your <span class="text-orange-400">Website ?</span>
             </h4>
-            <p class="text-slate-400 text-lg font-medium italic">
-              If you have these pillars ready, we can launch the discovery phase immediately.
+            <p class="text-slate-400 text-base sm:text-lg font-medium italic">
+              If you have a clear idea or even just a starting point, we’ll guide you through the process and take it from there.
             </p>
           </div>
 
-          <a 
-            href="#contact" 
-            class="group relative z-10 bg-orange-500 px-12 py-6 rounded-2xl text-white font-black uppercase tracking-widest text-sm overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(249,115,22,0.5)]"
-          >
-            <span class="relative z-10">Start Project Now</span>
-            <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-20"></div>
-          </a>
+          <div class="group mt-3 sm:mt-6 md:mt-8 relative inline-block p-[1.5px] rounded-full overflow-hidden bg-gradient-to-r from-white/10 via-orange-500/60 to-white/10 shadow-2xl shadow-orange-500/10 transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]">
+    
+    <div class="absolute -inset-4 bg-orange-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+    
+    <a href="/contact" class="relative flex items-center gap-3 sm:gap-4 md:gap-6 pl-2.5 sm:pl-3 pr-4 sm:pr-5 md:pr-6 py-2 bg-[#080808] rounded-full hover:bg-black transition-all duration-500">
+        
+        <div class="relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-orange-400 flex items-center justify-center text-black shadow-[0_0_30px_rgba(251,133,0,0.4)] group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="relative z-10 size-5 sm:size-6 md:size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+        </div>
+        
+        <div class="flex flex-col text-left">
+            <span class="text-white font-black text-base sm:text-xl md:text-2xl tracking-tight whitespace-nowrap uppercase group-hover:text-orange-400 transition-colors duration-300">
+                Let's Get Started
+            </span>
+        </div>
+    </a>
+</div>
+          
         </div>
       </div>
     </div>

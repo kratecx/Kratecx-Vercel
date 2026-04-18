@@ -1,69 +1,152 @@
 ---
+import logo from "@/assets/about/kratecs_image5.svg";
+
+/** Replace href values with your real profiles */
+const socialLinks = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/kratecs" },
+  { name: "X", href: "https://twitter.com/kratecs" },
+  { name: "Instagram", href: "https://www.instagram.com/kratecs" },
+  { name: "GitHub", href: "https://github.com/kratecs" },
+] as const;
 // Contact.astro - Professional High-Contrast Console
 ---
 
-<section class="relative w-full py-24 bg-white flex items-center justify-center p-6">
-  
-  <div class="max-w-6xl w-full bg-[#050505] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] flex flex-col lg:flex-row min-h-[700px] border border-white/5">
-    
-    <div class="w-full lg:w-1/2 relative p-12 md:p-20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-[radial-gradient(circle_at_center,_#111_0%,_#050505_100%)]">
-      
-      <div class="flex items-center gap-2">
-        <div class="w-1.5 h-6 bg-[#ea580c]"></div>
-        <span class="text-[10px] font-mono font-bold text-white/60 tracking-[0.3em] uppercase">Connect</span>
-      </div>
+<section
+  class="relative w-full bg-white px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 md:px-8 md:pb-24 lg:px-10"
+>
+  <div
+    class="mx-auto flex max-w-6xl w-full min-h-0 flex-col overflow-hidden rounded-2xl border border-white/5 bg-black shadow-[0_50px_100px_rgba(0,0,0,0.5)] sm:rounded-3xl lg:min-h-[min(700px,90svh)] lg:flex-row lg:rounded-[3rem]"
+  >
+    <div
+      class="relative flex w-full flex-col justify-center border-b border-white/10 bg-[radial-gradient(circle_at_center,_#111_0%,_#050505_100%)] px-6 py-10 sm:px-10 sm:py-14 md:p-14 lg:w-1/2 lg:border-b-0 lg:border-r lg:py-16 xl:p-20"
+    >
+      <div class="flex w-full max-w-xl flex-col items-center text-left">
+        <a
+          href="/"
+          class="block shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-400"
+        >
+          <img
+            src={logo.src}
+            alt="Kratecs"
+            class="h-11 w-auto sm:h-12 md:h-14 lg:h-26 xl:h-20 2xl:h-24"
+            width="320"
+            height="96"
+            loading="eager"
+          />
+        </a>
 
-      <div class="flex flex-col items-center text-center">
-        <div class="w-20 h-20 mb-10 text-[#ea580c]">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-        </div>
-        <h1 class="text-5xl md:text-6xl font-bold font-display tracking-[-0.05em] text-white leading-tight mb-4">
-          Elevate Your <br/> <span class="text-white/30">Architecture.</span>
-        </h1>
-        <p class="text-sm text-white/40 max-w-xs font-medium leading-relaxed">
-          Partner with us to engineer high-velocity systems built for longevity.
-        </p>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <span class="text-[9px] font-mono text-white/20 uppercase tracking-widest">Global HQ</span>
-        <div class="h-[1px] w-12 bg-white/10"></div>
-        <span class="text-[9px] font-mono text-white/20 uppercase tracking-widest">Available 2025</span>
+        <nav
+          class="contact-social-nav mt-8 flex w-full flex-wrap items-center justify-around gap-y-3 lg:mt-10 lg:max-w-none lg:justify-center lg:gap-4 xl:gap-5"
+          aria-label="Social media"
+        >
+          {socialLinks.map((item) => (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-link inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/75 transition-colors hover:border-orange-400/35 hover:bg-white/[0.07] hover:text-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 lg:h-14 lg:w-14 xl:h-16 xl:w-16"
+              aria-label={item.name}
+            >
+              <svg
+                class="h-[42%] w-[42%] lg:h-[44%] lg:w-[44%]"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                {item.name === "LinkedIn" && (
+                  <path
+                    fill="currentColor"
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.063 2.063 0 1.139-.925 2.065-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                )}
+                {item.name === "X" && (
+                  <path
+                    fill="currentColor"
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                )}
+                {item.name === "Instagram" && (
+                  <path
+                    fill="currentColor"
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                )}
+                {item.name === "GitHub" && (
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                    clip-rule="evenodd"
+                  />
+                )}
+              </svg>
+            </a>
+          ))}
+        </nav>
       </div>
     </div>
 
-    <div class="w-full lg:w-1/2 p-12 md:p-16 flex flex-col justify-center bg-[#080808]">
-      
-      <div class="mb-12">
-         <h2 class="text-2xl font-bold text-white tracking-tight uppercase">Let's Build Together</h2>
-         <p class="text-white/40 text-xs mt-2">Submit your project details for a priority review.</p>
+    <div
+      class="flex w-full flex-col justify-center bg-[#080808] px-6 py-10 sm:px-10 sm:py-12 md:p-12 lg:w-1/2 lg:py-14 xl:p-16"
+    >
+      <div class="mb-8 sm:mb-10 md:mb-12">
+        <h2 class="text-xl font-bold uppercase tracking-tight text-white sm:text-2xl">
+          Let's Build Together
+        </h2>
+        <p class="mt-2 text-xs text-white/50 sm:text-sm">
+          Submit your project details for a priority review.
+        </p>
       </div>
 
       <form class="space-y-6">
         <div class="group relative">
-          <label class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10">Full Name</label>
-          <input type="text" required class="w-full bg-transparent border border-[#ea580c]/40 rounded-xl px-5 py-4 text-sm text-white focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] outline-none transition-all placeholder:text-white/5" placeholder="Enter your name" />
+          <label
+            class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            required
+            class="w-full bg-transparent border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none transition-all placeholder:text-white/20"
+            placeholder="Enter your name"
+          />
         </div>
 
         <div class="group relative">
-          <label class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10">Email Address</label>
-          <input type="email" inputmode="email" required class="w-full bg-transparent border border-[#ea580c]/40 rounded-xl px-5 py-4 text-sm text-white focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] outline-none transition-all placeholder:text-white/5" placeholder="email@example.com" />
+          <label
+            class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            required
+            class="w-full bg-transparent border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none transition-all placeholder:text-white/20"
+            placeholder="Enter your email"
+          />
         </div>
 
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div class="group relative">
-            <label class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10">Service</label>
-            <select class="w-full bg-transparent border border-[#ea580c]/40 rounded-xl px-5 py-4 text-sm text-white/80 focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] outline-none transition-all appearance-none cursor-pointer">
+            <label
+              class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10"
+              >Service
+            </label>
+
+            <select
+              class="w-full bg-transparent border border-white/20 rounded-xl px-5 py-4 text-sm text-white/80 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none transition-all appearance-none cursor-pointer"
+            >
               <option class="bg-black">System Architecture</option>
               <option class="bg-black">Performance Audit</option>
               <option class="bg-black">Product Design</option>
             </select>
           </div>
           <div class="group relative">
-            <label class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10">Budget</label>
-            <select class="w-full bg-transparent border border-[#ea580c]/40 rounded-xl px-5 py-4 text-sm text-white/80 focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] outline-none transition-all appearance-none cursor-pointer">
+            <label
+              class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10"
+              >Budget</label
+            >
+            <select
+              class="w-full bg-transparent border border-white/20 rounded-xl px-5 py-4 text-sm text-white/80 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none transition-all appearance-none cursor-pointer"
+            >
               <option class="bg-black">$10k - $25k</option>
               <option class="bg-black">$25k - $50k</option>
               <option class="bg-black">$50k+</option>
@@ -72,18 +155,48 @@
         </div>
 
         <div class="group relative">
-          <label class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10">Project Brief</label>
-          <textarea rows="4" class="w-full bg-transparent border border-[#ea580c]/40 rounded-xl px-5 py-4 text-sm text-white focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] outline-none transition-all resize-none placeholder:text-white/5" placeholder="Briefly describe your goals..."></textarea>
+          <label
+            class="absolute -top-2.5 left-4 px-2 bg-[#080808] text-[10px] font-bold text-white uppercase tracking-wider z-10"
+            >Project Brief</label
+          >
+          <textarea
+            rows="4"
+            class="w-full bg-transparent border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none transition-all resize-none placeholder:text-white/20"
+            placeholder="Briefly describe your goals..."></textarea>
         </div>
 
-        <button type="submit" class="w-full py-5 bg-[#ea580c] text-white rounded-xl font-bold uppercase text-[11px] tracking-[0.3em] transition-all hover:bg-[#ff6a1a] hover:shadow-[0_15px_30px_rgba(234,88,12,0.3)] active:scale-[0.98]">
-          Send Message
-        </button>
+        <div class="group relative block overflow-hidden rounded-full p-[1.5px] shadow-2xl transition-all duration-500 bg-gradient-to-r from-white/5 via-orange-400/50 to-white/5">
+          <button
+            type="submit"
+            class="relative flex w-full cursor-pointer items-center justify-between gap-3 rounded-full border-none bg-[#0a0a0a] py-3 pl-2 pr-4 outline-none transition-all duration-300 hover:bg-black active:scale-[0.98] sm:gap-6 sm:pl-3 sm:pr-10"
+          >
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black shadow-[0_0_15px_rgba(251,133,0,0.3)] transition-transform duration-700 group-hover:rotate-[360deg] sm:h-12 sm:w-12">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 sm:h-6 sm:w-6"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </div>
 
-        <p class="text-center text-[9px] font-mono text-white/10 uppercase tracking-[0.4em] mt-4">Confidential Transmission</p>
+            <div class="min-w-0 flex-1 pr-2 text-center sm:pr-6">
+              <span class="text-sm font-black uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.15em]">
+                Send Message
+              </span>
+            </div>
+          </button>
+        </div>
       </form>
     </div>
-
   </div>
 </section>
 
@@ -95,8 +208,10 @@
     background-position: right 1rem center;
     background-size: 1.2em;
   }
-  
-  input:focus, select:focus, textarea:focus {
+
+  input:focus,
+  select:focus,
+  textarea:focus {
     background-color: rgba(234, 88, 12, 0.03);
   }
 </style>

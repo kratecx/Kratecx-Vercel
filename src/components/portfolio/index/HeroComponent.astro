@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import HeroImage from '../../../assets/portfolio/portfolio_hero.png';
+---
+
+<section class="relative pt-8 lg:pt-16 w-full bg-black flex flex-col lg:flex-row overflow-hidden font-sans border-b border-white/5">
+
+  <div class="relative z-20 w-full lg:w-1/2 flex items-start lg:items-center pt-20 pb-10 sm:pt-24 sm:pb-14 lg:py-16 min-h-0 lg:min-h-[68vh]">
+    <div class="max-w-[750px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 flex flex-col justify-start lg:justify-center h-full w-full">
+
+      <div class="flex items-center gap-3 sm:gap-6 mb-6 sm:mb-10 lg:mb-12">
+        <span class="text-orange-400 font-bold text-[11px] sm:text-[11px] tracking-[0.35em] sm:tracking-[0.6em] uppercase whitespace-nowrap">
+          Case Studies
+        </span>
+        <div class="h-[1px] w-full bg-white/10"></div>
+      </div>
+
+      <h1 class="text-6xl sm:text-7xl md:text-8xl xl:text-[110px] leading-[0.85] md:leading-[0.8] tracking-tighter uppercase mb-7 sm:mb-10 lg:mb-12 text-balance">
+        <span class="block text-white font-light mb-1 sm:mb-2">Selected</span>
+        <span class="text-orange-400 font-black block">Work</span>
+      </h1>
+
+      <p class="max-w-xl text-zinc-500 text-base md:text-base font-medium leading-relaxed tracking-wide border-l-2 border-orange-400/40 pl-4 sm:pl-8 mb-8 sm:mb-14 lg:mb-20">
+        Projects focused on turning strategy into execution - <br class="hidden md:block" />
+        and websites into <span class="text-white">business outcomes.</span>
+      </p>
+
+    </div>
+  </div>
+
+  <div class="absolute inset-0 z-0 overflow-hidden lg:relative lg:top-0 lg:right-0 lg:w-1/2 lg:h-auto lg:z-10 lg:pt-12">
+    <Image
+      src={HeroImage}
+      alt="Technical Ecosystem"
+      width={2070}
+      height={1380}
+      class="w-full h-full object-cover object-center brightness-[0.9] contrast-105 image-mask"
+    />
+    <div class="absolute inset-0 bg-black/65 lg:bg-transparent pointer-events-none"></div>
+
+    <div class="absolute bottom-10 right-10 z-30 hidden xl:block pointer-events-none">
+      <span class="text-white/[0.02] font-black text-9xl uppercase tracking-tighter select-none">
+        Kratecx.
+      </span>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /**
+   * REFINED MASKING:
+   * Creates a seamless blend into the center-line and bottom.
+   */
+  .image-mask {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 100%),
+      linear-gradient(to top, transparent 0%, black 20%, black 100%);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  @media (max-width: 1023px) {
+    .image-mask {
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, black 16%, black 100%);
+    }
+  }
+
+  h1 {
+    letter-spacing: -0.06em;
+  }
+</style>

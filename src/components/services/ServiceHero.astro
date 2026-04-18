@@ -1,98 +1,86 @@
 ---
 /**
  * ServiceHero.astro
- * Aesthetic: Obsidian Glass on Surgical White
+ * Aesthetic: Industrial Infrastructure / High-Contrast Black
  */
 import { Image } from "astro:assets";
 
 interface Props {
-  title: string; // e.g., "BACKEND"
-  subtitle?: string; // e.g., "SYSTEMS."
-  tag?: string; // e.g., "Core_Infrastructure_v2"
+  title: string;       // e.g., "BACKEND"
+  subtitle?: string;    // e.g., "ENGINEERING"
+  tag?: string;         // e.g., "SYSTEM_ARCHITECTURE"
   description: string;
   mainImage: ImageMetadata;
   imageAlt?: string;
-  specs?: Array<{ label: string; value: string }>;
   primaryCTA?: { text: string; link: string };
-  secondaryCTA?: { text: string; link: string };
 }
 
 const { 
   title, 
   subtitle,
-  tag = "System_Deployment_v1",
+  tag = "OPERATIONAL_PROTOCOL",
   description, 
   mainImage,
-  imageAlt = "Service Illustration",
-  specs = [
-    { label: "Latency", value: "<40ms" },
-    { label: "Protocol", value: "gRPC/REST" },
-    { label: "Security", value: "AES-256" }
-  ],
-  primaryCTA = { text: "Initiate Project", link: "#initiate" },
-  secondaryCTA = { text: "View Specs", link: "#specs" }
+  imageAlt = "Technical Infrastructure",
+  primaryCTA = { text: "Initiate Deployment", link: "#initiate" }
 } = Astro.props;
 ---
 
-<section class="relative min-h-[90vh] flex items-center bg-[#FFFFFF] overflow-hidden pt-20">
-  <div class="absolute inset-0 bg-[radial-gradient(#00000005_1px,transparent_1px)] [background-size:32px_32px]"></div>
+<section class="relative min-h-screen flex  bg-black overflow-hidden font-sans">
+  <div class="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:40px_40px] z-0"></div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-24 w-full relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16 w-full relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
       
-      <div class="space-y-8 reveal">
-        <div class="inline-flex items-center gap-3 px-4 py-2 bg-black/[0.03] border border-black/[0.05] rounded-full">
-            <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-black">{tag}</span>
+      <div class="space-y-10 reveal pt-16">
+        <div class="inline-flex items-center  gap-4">
+            <div class="h-[1px] w-8 bg-orange-400"></div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-orange-400">{tag}</span>
         </div>
 
-        <h1 class="text-7xl md:text-8xl font-[1000] text-black uppercase tracking-tighter leading-[0.85]">
+        <h1 class="text-7xl md:text-8xl xl:text-[110px] font-black text-white uppercase tracking-tighter leading-[0.8] mb-6">
           {title} <br />
-          {subtitle && <span class="text-orange-500 italic">{subtitle}</span>}
+          {subtitle && <span class="text-orange-400">{subtitle}</span>}
         </h1>
 
-        <p class="text-lg text-gray-500 font-medium leading-relaxed max-w-md">
+        <p class="text-zinc-500 text-sm md:text-base font-medium leading-relaxed max-w-md border-l border-zinc-800 pl-8">
           {description}
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href={primaryCTA.link} class="px-10 py-5 bg-black text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-500 hover:shadow-[0_20px_40px_rgba(251,133,0,0.3)] transition-all duration-500 text-center">
-            {primaryCTA.text}
-          </a>
-          <a href={secondaryCTA.link} class="px-10 py-5 bg-white border border-black/10 text-black rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-gray-50 transition-all text-center">
-            {secondaryCTA.text}
-          </a>
-        </div>
+    <div class="group relative inline-block p-[1.5px] rounded-full overflow-hidden bg-linear-to-r from-white/5 via-orange-500/50 to-white/5 shadow-2xl">
+        <div class="absolute -inset-2 bg-orange-500/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <a href="/contact" class="relative flex items-center justify-between gap-16 pl-4 pr-10 py-3.5 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
+            
+            <div class="w-14 h-14 rounded-full bg-orange-400 flex items-center justify-center text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] group-hover:rotate-360 transition-transform duration-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+            </div>
+            
+            <div class="flex flex-col text-left">
+                <p class="text-[11px] font-black tracking-[.3em] text-orange-400 uppercase mb-1">
+                    Ready to Scale?
+                </p>
+                <span class="text-white font-bold text-xl tracking-tight whitespace-nowrap">
+                    Start Your Journey
+                </span>
+            </div>
+        </a>
+    </div>
 
-        <div class="grid grid-cols-3 gap-8 pt-12 border-t border-black/[0.05]">
-            {specs.map((spec) => (
-              <div>
-                <span class="block text-[10px] font-black text-gray-300 uppercase mb-1">{spec.label}</span>
-                <span class="text-xl font-bold text-black tracking-tighter">{spec.value}</span>
-              </div>
-            ))}
-        </div>
       </div>
 
-      <div class="relative reveal" style="transition-delay: 300ms;">
-        <div class="relative aspect-square w-full max-w-[500px] mx-auto group">
-          <div class="absolute inset-0 bg-black rounded-[3rem] shadow-2xl rotate-3 transition-transform hover:rotate-0 duration-1000 overflow-hidden">
-              <Image
-                  src={mainImage}
-                  alt={imageAlt}
-                  class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1s]"
-              />
-          </div>
-
-          <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-white/40 backdrop-blur-2xl border border-white rounded-3xl shadow-xl flex items-center justify-center animate-bounce-slow z-20">
-              <span class="text-orange-500 font-black text-2xl">01</span>
-          </div>
-          
-          <div class="absolute -top-6 -right-6 w-40 h-16 bg-black backdrop-blur-2xl border border-white/10 rounded-2xl shadow-xl flex items-center justify-center gap-3 px-4 z-20">
-              <div class="w-2 h-2 rounded-full bg-green-500"></div>
-              <span class="text-white font-black text-[10px] tracking-widest uppercase italic">Scalability_ON</span>
-          </div>
-        </div>
+      <div class="relative w-full h-full reveal-image">
+        <div class="absolute inset-0 z-10 pointer-events-none image-mask"></div>
+        <Image
+            src={mainImage}
+            alt={imageAlt}
+            class="w-full h-full object-cover brightness-70 contrast-105"
+        />
+        
+        <!-- <div class="absolute top-0 right-0 w-32 h-32 border-t border-r border-orange-400/30 z-20"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 border-b border-l border-orange-400/30 z-20"></div> -->
       </div>
 
     </div>
@@ -100,21 +88,27 @@ const {
 </section>
 
 <style>
-  @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  /* Seamless Blending Mask */
+  .image-mask {
+    background: linear-gradient(to right, #000 0%, transparent 20%, transparent 80%, #000 100%),
+                linear-gradient(to bottom, #000 0%, transparent 15%, transparent 85%, #000 100%);
   }
-  .animate-bounce-slow {
-    animation: bounce-slow 4s ease-in-out infinite;
-  }
+
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(-40px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .reveal.active {
+
+  .reveal-image {
+    opacity: 0;
+    transform: scale(1.05);
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.active, .reveal-image.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0) scale(1);
   }
 </style>
 
@@ -125,7 +119,8 @@ const {
         if (entry.isIntersecting) entry.target.classList.add('active');
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    document.querySelectorAll('.reveal, .reveal-image').forEach(el => observer.observe(el));
   }
   document.addEventListener('DOMContentLoaded', initHeroReveal);
   document.addEventListener('astro:page-load', initHeroReveal);

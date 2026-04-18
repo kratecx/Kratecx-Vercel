@@ -1,0 +1,327 @@
+---
+/**
+ * Services index FAQ — title matches other services sections; white background.
+ */
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  tag?: string;
+  /** First line of main title (uppercase). */
+  title?: string;
+  /** Second line, orange-400 (uppercase). */
+  titleAccent?: string;
+  faqs?: FAQItem[];
+  ctaHref?: string;
+  ctaLabel?: string;
+  showCta?: boolean;
+}
+
+const defaultFaqs: FAQItem[] = [
+  {
+    question: "What types of websites do you build?",
+    answer:
+      "We build business websites, e-commerce stores, landing pages, and custom web applications, with a focus on credibility, usability, and lead generation.",
+  },
+  {
+    question: "How long does a typical project take?",
+    answer:
+      "Most engagements finish within one to three weeks, depending on scope. Timelines and milestones are agreed up front and tracked through delivery.",
+  },
+  {
+    question: "Are sites built for performance and SEO?",
+    answer:
+      "Yes. We apply performance best practices, responsive layouts, and on-page SEO fundamentals so your site remains fast, usable, and discoverable.",
+  },
+  {
+    question: "Do you provide support after launch?",
+    answer:
+      "Ongoing maintenance and support are available to keep your site secure, up to date, and aligned with your business needs.",
+  },
+  {
+    question: "How do we begin?",
+    answer:
+      "Start with a brief consultation or audit request. We clarify requirements, outline options, and propose clear next steps before any commitment.",
+  },
+];
+
+const {
+  tag = "FAQ",
+  title = "Common",
+  titleAccent = "questions",
+  faqs: faqsProp,
+  ctaHref = "/contact",
+  ctaLabel = "Get in touch",
+  showCta = true,
+} = Astro.props;
+
+const faqs =
+  faqsProp && faqsProp.length > 0 ? faqsProp : defaultFaqs;
+
+const hasAccent = Boolean(titleAccent && titleAccent.trim() !== "");
+
+/** Prefix for unique panel/trigger ids (avoids clashes if multiple FAQ blocks exist). */
+const faqIdPrefix = "service-faq";
+---
+
+<section
+  id="service-faq"
+  class="service-faq-scope relative bg-white text-neutral-900"
+  aria-labelledby="service-faq-heading"
+>
+  <div
+    class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-20 lg:px-12 lg:py-24 xl:px-24"
+  >
+    <header class="mb-10 flex flex-col items-center text-center sm:mb-12 md:mb-14">
+      <div class="mb-5 flex items-center justify-center gap-2 sm:mb-6 sm:gap-4">
+        <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true"></span>
+        <p
+          id="service-faq-tag"
+          class="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-orange-400 sm:text-sm sm:tracking-[0.45em] md:text-[14px] md:tracking-[0.5em]"
+        >
+          {tag}
+        </p>
+        <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true"></span>
+      </div>
+
+      <h2
+        id="service-faq-heading"
+        class="text-balance text-5xl font-black uppercase leading-[0.88] tracking-[-0.05em] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+        aria-describedby="service-faq-tag"
+      >
+        {
+          hasAccent ? (
+            <>
+              <span class="text-neutral-950">{title}</span>
+              <br />
+              <span class="text-orange-400">{titleAccent}</span>
+            </>
+          ) : (
+            <span class="text-neutral-950">{title}</span>
+          )
+        }
+      </h2>
+
+      <div
+        class="my-4 h-1 w-48 max-w-[90vw] rounded-full bg-orange-400 opacity-50 sm:my-5 sm:w-64 md:my-6 md:w-80"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        class="mx-auto max-w-2xl px-1 text-sm font-light leading-snug text-neutral-600 sm:text-base md:text-lg"
+      >
+        Direct answers on how we work, what to expect, and how projects are delivered.
+      </p>
+
+      {
+        showCta && (
+          <div class="mt-8 sm:mt-10">
+            <a
+              href={ctaHref}
+              class="inline-flex items-center gap-2 rounded-full border-2 border-orange-400 bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.2em] text-orange-400 transition-colors hover:bg-orange-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:px-8 sm:text-base md:tracking-[0.25em]"
+            >
+              {ctaLabel}
+              <svg
+                class="h-4 w-4 shrink-0 sm:h-5 sm:w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        )
+      }
+    </header>
+
+    <div class="mx-auto w-full max-w-5xl">
+      {
+        faqs.length > 0 ? (
+          <div class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+            {faqs.map((faq, index) => (
+              <div class="service-faq-item border-b border-neutral-200 last:border-b-0">
+                <button
+                  type="button"
+                  class="service-faq-trigger flex w-full touch-manipulation items-start justify-between gap-3 border-0 bg-transparent px-4 py-[1.125rem] text-left font-inherit text-inherit outline-none transition-colors hover:bg-neutral-50 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:gap-5 sm:px-5 sm:py-5 md:px-6 md:py-6"
+                  aria-expanded="false"
+                  aria-controls={`${faqIdPrefix}-panel-${index}`}
+                  id={`${faqIdPrefix}-trigger-${index}`}
+                >
+                  <span class="min-w-0 flex-1 text-[15px] font-semibold leading-snug text-neutral-950 sm:text-base md:text-lg">
+                    {faq.question}
+                  </span>
+                  <span
+                    class="service-faq-chevron mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center text-orange-400/80 sm:h-10 sm:w-10 md:h-9 md:w-9"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      class="h-5 w-5 transition-transform duration-[400ms] ease-[cubic-bezier(0.33,1,0.68,1)] sm:h-[1.35rem] sm:w-[1.35rem]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  class="service-faq-answer"
+                  id={`${faqIdPrefix}-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`${faqIdPrefix}-trigger-${index}`}
+                  aria-hidden="true"
+                  data-faq-panel
+                >
+                  <div class="service-faq-answer-inner">
+                    <div class="border-t border-neutral-100 bg-white px-4 pb-5 pt-1 sm:px-5 sm:pb-6 md:px-6 md:pb-7">
+                      <div class="border-l-2 border-orange-400/35 pl-4 sm:pl-5">
+                        <p class="text-pretty text-[15px] leading-relaxed text-neutral-700 sm:text-base md:max-w-2xl md:text-[17px] md:leading-[1.65]">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="rounded-lg border border-dashed border-neutral-300 bg-white px-4 py-6 text-center text-sm text-neutral-600 sm:text-base">
+            No questions are listed in this section.
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .service-faq-scope .service-faq-item.is-faq-open .service-faq-trigger {
+    background-color: rgb(250 250 250);
+    border-bottom: 1px solid rgb(229 229 229);
+  }
+
+  .service-faq-scope .service-faq-item.is-faq-open .service-faq-chevron {
+    color: rgb(251 146 60);
+  }
+
+  .service-faq-scope .service-faq-item.is-faq-open .service-faq-chevron svg {
+    transform: rotate(180deg);
+  }
+
+  .service-faq-scope .service-faq-answer {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-faq-scope .service-faq-answer {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
+
+<script>
+  function bindServiceFaqResizeOnce() {
+    if (document.documentElement.dataset.serviceFaqResizeBound === "1") return;
+    document.documentElement.dataset.serviceFaqResizeBound = "1";
+    window.addEventListener("resize", () => {
+      document.querySelectorAll(".service-faq-item.is-faq-open").forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        const panel = node.querySelector("[data-faq-panel]");
+        const inner = node.querySelector(".service-faq-answer-inner");
+        if (!(panel instanceof HTMLElement) || !(inner instanceof HTMLElement)) return;
+        const h = inner.scrollHeight;
+        panel.style.height = `${h}px`;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            panel.style.height = "auto";
+          });
+        });
+      });
+    });
+  }
+
+  function initServiceFaqAccordion() {
+    bindServiceFaqResizeOnce();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    document.querySelectorAll(".service-faq-scope").forEach((root) => {
+      root.querySelectorAll(".service-faq-item").forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        if (node.dataset.faqAccordionBound === "1") return;
+        node.dataset.faqAccordionBound = "1";
+
+        const trigger = node.querySelector(".service-faq-trigger");
+        const panel = node.querySelector("[data-faq-panel]");
+        const inner = node.querySelector(".service-faq-answer-inner");
+        if (!trigger || !panel || !inner) return;
+
+        const btn = trigger as HTMLButtonElement;
+        const panelEl = panel as HTMLElement;
+        const innerEl = inner as HTMLElement;
+
+        function openPanel() {
+          btn.setAttribute("aria-expanded", "true");
+          node.classList.add("is-faq-open");
+          panelEl.setAttribute("aria-hidden", "false");
+          if (reduceMotion) {
+            panelEl.style.height = "auto";
+            return;
+          }
+          const target = innerEl.scrollHeight;
+          panelEl.style.height = "0px";
+          void panelEl.offsetHeight;
+          requestAnimationFrame(() => {
+            panelEl.style.height = `${target}px`;
+          });
+          const onEnd = (e: Event) => {
+            if (!(e instanceof TransitionEvent) || e.propertyName !== "height") return;
+            if (btn.getAttribute("aria-expanded") === "true") {
+              panelEl.style.height = "auto";
+            }
+            panelEl.removeEventListener("transitionend", onEnd);
+          };
+          panelEl.addEventListener("transitionend", onEnd);
+        }
+
+        function closePanel() {
+          btn.setAttribute("aria-expanded", "false");
+          node.classList.remove("is-faq-open");
+          panelEl.setAttribute("aria-hidden", "true");
+          if (reduceMotion) {
+            panelEl.style.height = "0px";
+            return;
+          }
+          const h = innerEl.scrollHeight;
+          panelEl.style.height = `${h}px`;
+          void panelEl.offsetHeight;
+          requestAnimationFrame(() => {
+            panelEl.style.height = "0px";
+          });
+        }
+
+        btn.addEventListener("click", () => {
+          const open = btn.getAttribute("aria-expanded") === "true";
+          if (open) closePanel();
+          else openPanel();
+        });
+      });
+    });
+  }
+
+  initServiceFaqAccordion();
+  document.addEventListener("astro:page-load", initServiceFaqAccordion);
+</script>

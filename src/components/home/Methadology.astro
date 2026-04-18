@@ -1,162 +1,182 @@
 ---
 // Methodology.astro
 const steps = [
-  { 
-    id: '01', 
-    date: 'Phase One',
-    title: 'Technical Discovery', 
-    desc: 'Translating high-level business goals into a robust architectural roadmap for long-term scalability.',
-    position: 'top'
-  },
-  { 
-    id: '02', 
-    date: 'Phase Two',
-    title: 'System Architecture', 
-    desc: 'Mapping out high-performance data structures and user logic before writing any production code.',
-    position: 'bottom'
-  },
-  { 
-    id: '03', 
-    date: 'Phase Three',
-    title: 'Agile Engineering', 
-    desc: 'Building core infrastructure through rapid sprint cycles for consistent and transparent delivery.',
-    position: 'top'
-  },
-  {
-    id: '04',
-    date: 'Phase Four',
-    title: 'Performance Tuning',
-    desc: 'Eliminating technical debt and optimizing critical rendering paths for lightning-fast load speeds.',
-    position: 'bottom'
-  },
-  {
-    id: '05',
-    date: 'Phase Five',
-    title: 'Production Launch', // Changed from Adaptive Scaling
-    desc: 'Deploying a high-availability digital asset engineered for immediate market impact and growth.',
-    position: 'top'
-  }
+  { id: '01', date: 'Phase One', title: 'Discovery & Strategy', desc: 'Understanding your goals and audience to create a clear growth plan.', position: 'top' },
+  { id: '02', date: 'Phase Two', title: 'Structure & Planning', desc: 'Defining site structure and user flow for a conversion-focused experience.', position: 'bottom' },
+  { id: '03', date: 'Phase Three', title: 'Design & Development', desc: 'Building a high-performing website aligned with your brand and goals.', position: 'top' },
+  { id: '04', date: 'Phase Four', title: 'Optimization & Refinement', desc: 'Improving speed, usability, and conversions for better performance.', position: 'bottom' },
+  { id: '05', date: 'Phase Five', title: 'Launch & Sustainable Growth', desc: 'Launching a lead-ready website built for credibility and growth.', position: 'top' }
 ];
-
-// Calculate length in frontmatter to pass to script
 const totalSteps = steps.length;
 ---
 
-<section class="py-20 bg-[#0a0a0a] text-white overflow-hidden" id="roadmap-section">
-  <div class="max-w-7xl mx-auto px-6 lg:px-24">
+<section class="relative py-16 sm:py-20 md:py-24 bg-black text-white overflow-x-hidden" id="roadmap-section">
+  
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,100vw)] max-w-full h-[300px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-24 z-10">
     
-    <div class="text-center mb-24 reveal opacity-0 transition-all duration-1000">
-        <p class="text-[#FB8500] font-mono text-[14px] md:text-xs font-bold tracking-[0.5em] uppercase  opacity-80">
-          ENGINEERING LIFECYCLE
-        </p>
-        <h2 class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-4 leading-tight">
-            Mastering <span class="text-[#FB8500] relative inline-block">
-                Technical Evolution
-                <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-60 h-1 bg-[#FB8500] opacity-50 rounded-full"></span>
-            </span>
-        </h2>
-        <p class="text-gray-400 max-w-2xl mx-auto text-lg mt-6 font-light">
-            A precision-engineered lifecycle designed to transition your product from initial concept to market-dominant scale.
-        </p>
+    <div class="mb-6 flex flex-col items-center text-center">
+      <div class="mb-8 text-center leading-snug px-1 w-full max-w-full">
+        <span class="inline-block align-middle h-px w-10 bg-orange-400 mr-2 sm:mr-4" aria-hidden="true"></span><span class="inline-block align-middle max-w-[calc(100%-6rem)] sm:max-w-none font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">Our Process</span><span class="inline-block align-middle h-px w-10 bg-orange-400 ml-2 sm:ml-4" aria-hidden="true"></span>
+      </div>
+      <h2 class="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.9] md:leading-[0.95] text-white text-balance max-w-full px-1">
+        <span class="text-orange-400 inline-block mt-2">Process</span>
+        Built for Results
+      </h2>
+            <div class="w-60 max-w-[85vw] h-1 bg-orange-400 my-6 rounded-full opacity-50 mx-auto"></div>
+      <p class="text-zinc-400 max-w-3xl mx-auto text-lg font-light text-balance px-1">
+        A clear, step-by-step process designed to take your website from idea to a high-performing asset
+      </p>
     </div>
 
-    <div class="relative py-16">
-      <div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2"></div>
+    <div id="timeline-container" class="relative py-16 md:py-24 lg:py-36">
+      <div class="absolute top-1/2 left-0 w-full h-px bg-white/10 -translate-y-1/2 z-0 max-md:hidden"></div>
       
       <div 
         id="progress-line"
-        class="absolute top-1/2 left-0 h-[2px] bg-[#FB8500] -translate-y-1/2 shadow-[0_0_20px_#FB8500] transition-all duration-[2500ms] ease-out w-0"
+        class="absolute top-1/2 left-0 h-0.5 bg-orange-400 -translate-y-1/2 transition-all duration-700 ease-out w-0 z-10 max-md:hidden"
       ></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0 relative">
-        {steps.map((step, index) => (
-          <div class="relative h-72 flex flex-col justify-center items-center milestone opacity-0 translate-y-10 transition-all duration-700" style={`transition-delay: ${index * 300 + 500}ms`}>
-            
-            <div class={`w-4 h-4 rounded-full border-4 border-[#0a0a0a] z-20 ring-1 transition-colors duration-1000 ${index < 2 ? 'bg-[#FB8500] ring-[#FB8500]' : 'bg-gray-800 ring-white/20'}`}></div>
+      <!-- Mobile: vertical spine through milestone dots (no hover; see script guards) -->
+      <div
+        class="timeline-mobile-spine md:hidden pointer-events-none absolute left-1/2 top-10 bottom-10 z-[8] w-px -translate-x-1/2 bg-gradient-to-b from-white/[0.07] via-white/[0.18] to-white/[0.07]"
+        aria-hidden="true"
+      ></div>
 
-            <div class={`absolute w-full px-4 transition-all duration-500 hover:scale-105 ${step.position === 'top' ? 'bottom-[55%]' : 'top-[55%]'}`}>
-              
-              <div class={`absolute left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-transparent via-gray-600 to-transparent h-16 border-l border-dashed border-gray-700 ${step.position === 'top' ? 'top-full' : 'bottom-full'}`}></div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-y-16 md:gap-y-0 relative z-20">
+        {steps.map((step, index) => (
+          <div 
+            class="relative min-h-[220px] md:h-48 md:min-h-0 flex flex-col justify-center items-center milestone opacity-0 translate-y-10 transition-all duration-700 group/item py-4 md:py-0" 
+            style={`transition-delay: ${index * 200}ms`}
+            data-index={index}
+          >
+            <div class="milestone-dot is-active w-4 h-4 shrink-0 rounded-full border-4 border-[#0a0a0a] z-30 bg-orange-400 ring-1 ring-orange-400 transition-all duration-500"></div>
+
+            <div class={`relative md:absolute w-full px-4 sm:px-4 transition-all duration-500 md:group-hover/item:scale-105 ${step.position === 'top' ? 'md:bottom-[65%] mt-6 md:mt-0' : 'md:top-[65%] mt-6 md:mt-0'}`}>
+              <div class={`hidden md:block absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-zinc-800 to-transparent h-12 ${step.position === 'top' ? 'top-full' : 'bottom-full rotate-180'}`}></div>
 
               <div class="text-center group cursor-default">
-                <span class="text-[#FB8500] text-[10px] font-black tracking-[0.2em] uppercase block mb-3 opacity-80 group-hover:opacity-100 transition-opacity">{step.date}</span>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-[#FB8500] transition-colors">{step.title}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto font-light">
-                  {step.desc}
-                </p>
+                <span class="text-orange-400 text-[10px] font-black tracking-[0.2em] uppercase block mb-3 opacity-60 md:group-hover:opacity-100 max-md:opacity-90 transition-opacity">{step.date}</span>
+                <h3 class="text-lg font-bold mb-2 md:group-hover:text-orange-400 max-md:text-white transition-colors">{step.title}</h3>
+                <p class="text-zinc-500 text-[14px] leading-relaxed max-w-[180px] mx-auto font-light">{step.desc}</p>
               </div>
             </div>
-
           </div>
         ))}
       </div>
     </div>
 
-<div class="mt-16 flex flex-col items-center reveal opacity-0 transition-all duration-1000">
-        <div class="relative group p-[1px] rounded-full overflow-hidden bg-gradient-to-r from-white/10 via-[#FB8500]/50 to-white/10">
-            <div class="absolute -inset-1 bg-[#FB8500]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            <a href="/contact" class="relative flex items-center gap-6 px-4 py-3 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
-                <div class="w-12 h-12 rounded-full bg-[#FB8500] flex items-center justify-center text-white shadow-[0_0_15px_#FB8500]/40 group-hover:rotate-[360deg] transition-transform duration-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-                
-                <div class="pr-6">
-                    <p class="text-[10px] font-black tracking-[.25em] text-[#FB8500] uppercase mb-0.5">Ready to Scale?</p>
-                    <span class="text-white font-bold text-lg tracking-tight">Start Your Journey</span>
-                </div>
-            </a>
-        </div>
-        
-        <p class="mt-6 text-gray-500 text-xs font-medium tracking-wide">Join 50+ high-growth brands dominating search today.</p>
+    <div class="mt-12 sm:mt-16 flex flex-col items-center reveal opacity-0 transition-all duration-1000 w-full max-w-full px-1">
+      <div class="relative group p-px rounded-full overflow-hidden bg-gradient-to-r from-white/10 via-orange-400/50 to-white/10 max-w-full">
+        <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <a href="/contact" class="relative flex max-w-full items-center gap-4 sm:gap-6 px-3 py-3 sm:px-4 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
+          <div class="w-12 h-12 shrink-0 rounded-full bg-orange-400 flex items-center justify-center text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] group-hover:rotate-[360deg] transition-transform duration-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+          <div class="min-w-0 pr-3 sm:pr-6 text-left">
+            <p class="text-[10px] font-black tracking-[.25em] text-orange-400 uppercase mb-0.5">Ready to Scale?</p>
+            <span class="text-white font-bold text-lg tracking-tight whitespace-normal sm:whitespace-nowrap">Let's Build Your Website</span>
+          </div>
+        </a>
+      </div>
+      <p class="mt-6 text-gray-500 text-sm font-medium tracking-wide text-center text-balance max-w-lg px-2">Work with a process built for real business results</p>
     </div>
 
   </div>
 </section>
 
 <script define:vars={{ totalSteps }}>
-  const observerOptions = { 
-    threshold: 0.1, // Trigger earlier so the user sees the animation
-    rootMargin: "0px 0px -50px 0px" 
-  };
+  const progressLine = document.getElementById('progress-line');
+  const milestones = document.querySelectorAll('.milestone');
   
+  const baseWidth = 100;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const progressLine = document.getElementById('progress-line');
-        if (progressLine) {
-            // progressLine now uses 'totalSteps' correctly from define:vars
-            progressLine.style.width = `${(2 / totalSteps) * 100}%`;
-        }
-        
-        // Find all hidden elements in this section and show them
-        const reveals = entry.target.querySelectorAll('.reveal, .milestone');
-        reveals.forEach(el => {
-          el.classList.remove('opacity-0', 'translate-y-10', 'translate-y-30');
+        entry.target.querySelectorAll('.reveal, .milestone').forEach(el => {
+          el.classList.remove('opacity-0', 'translate-y-10');
           el.classList.add('opacity-100', 'translate-y-0');
         });
-
-        observer.unobserve(entry.target);
+        if (progressLine) progressLine.style.width = `${baseWidth}%`;
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.2 });
 
-  const section = document.querySelector('#roadmap-section');
+  const section = document.getElementById('roadmap-section');
   if (section) observer.observe(section);
+
+  function timelineHoverEnabled() {
+    return window.matchMedia('(min-width: 768px)').matches;
+  }
+
+  milestones.forEach((milestone) => {
+    milestone.addEventListener('mouseenter', () => {
+      if (!timelineHoverEnabled()) return;
+      const index = parseInt(milestone.getAttribute('data-index') || '0', 10);
+      const hoverWidth = ((index + 0.5) / totalSteps) * 100;
+      if (progressLine) progressLine.style.width = `${hoverWidth}%`;
+
+      milestones.forEach((m, idx) => {
+        const dot = m.querySelector('.milestone-dot');
+        if (!dot) return;
+        if (idx <= index) {
+          dot.classList.add('is-active', 'bg-orange-400', 'ring-orange-400');
+          dot.classList.remove('bg-zinc-800', 'ring-white/10');
+        } else {
+          dot.classList.remove('is-active', 'bg-orange-400', 'ring-orange-400');
+          dot.classList.add('bg-zinc-800', 'ring-white/10');
+        }
+      });
+    });
+
+    milestone.addEventListener('mouseleave', () => {
+      if (!timelineHoverEnabled()) return;
+      if (progressLine) progressLine.style.width = `${baseWidth}%`;
+      milestones.forEach((m) => {
+        const dot = m.querySelector('.milestone-dot');
+        if (!dot) return;
+        dot.classList.add('is-active', 'bg-orange-400', 'ring-orange-400');
+        dot.classList.remove('bg-zinc-800', 'ring-white/10');
+      });
+    });
+  });
 </script>
 
 <style>
-  /* Base hidden states */
-  .reveal {
-    transform: translateY(30px);
+  .reveal { transform: translateY(30px); }
+  .milestone { transform: translateY(10px); }
+
+  .milestone-dot {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Default glow on every milestone dot */
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.14),
+      0 0 28px rgba(161, 161, 170, 0.22),
+      0 0 44px rgba(0, 0, 0, 0.35);
   }
 
-  .milestone {
-    transform: translateY(10px);
+  .milestone-dot.is-active {
+    box-shadow:
+      0 0 18px rgba(251, 133, 0, 0.95),
+      0 0 36px rgba(251, 133, 0, 0.55),
+      0 0 56px rgba(251, 133, 0, 0.28);
   }
 
-  /* Active node glow */
-  .bg-\[\#FB8500\] {
-    box-shadow: 0 0 25px rgba(251, 133, 0, 0.5);
+  @media (max-width: 767px) {
+    .milestone-dot {
+      box-shadow:
+        0 0 14px rgba(255, 255, 255, 0.16),
+        0 0 32px rgba(180, 180, 190, 0.26),
+        0 0 52px rgba(0, 0, 0, 0.4);
+    }
+
+    .milestone-dot.is-active {
+      box-shadow:
+        0 0 22px rgba(251, 133, 0, 1),
+        0 0 48px rgba(251, 133, 0, 0.58),
+        0 0 72px rgba(251, 133, 0, 0.28);
+    }
   }
 </style>

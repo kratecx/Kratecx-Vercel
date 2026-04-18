@@ -1,30 +1,35 @@
 ---
-import Hero from '@/components/portfolio/Hero.astro';
-import ClientContext from '@/components/portfolio/ClientContext.astro';
 import Layout from '@/layouts/Layout.astro';
-import Problems from '@/components/portfolio/Problems.astro';
-import Constraints from '@/components/portfolio/Constraints.astro';
-import Strategy from '@/components/portfolio/Strategy.astro';
-import Execution from '@/components/portfolio/Execution.astro';
-import Thumbnail from '@/components/portfolio/Thumbnail.astro';
+import { allProjects } from '@/data/projects/index';
+
+// Components
+import Redesigned_Hero from '@/components/portfolio/redesign/PortfolioHero.astro';
+import Redesigned_Problems from '@/components/portfolio/redesign/PortfolioProblems.astro';
+import Redesigned_Strategy from '@/components/portfolio/redesign/PortfolioStrategy.astro';
+import Redesigned_Execution from '@/components/portfolio/redesign/PortfolioExecution.astro';
+import Redesigned_Results from '@/components/portfolio/redesign/PortfolioResults.astro';
+import Redesigned_Thumbnail from '@/components/portfolio/redesign/PortfolioThumbnail.astro';
 
 export async function getStaticPaths() {
-  return [
-    { params: { id: '01' } },
-    { params: { id: '02' } },
-    { params: { id: '03' } },
-  ];
+  return allProjects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
 }
 
-const { id } = Astro.params;
+const { project } = Astro.props;
 ---
 
-<Layout>
-    <Hero />
-    <!-- <ClientContext /> -->
-    <Problems />
-    <Constraints />
-    <Strategy />
-    <Execution />
-    <Thumbnail />
+<Layout title={project.hero.title}>
+  <Redesigned_Hero {...project.hero} />
+  
+  <Redesigned_Problems {...project.problems} /> 
+  
+  <Redesigned_Strategy {...project.strategy} />
+  
+  <Redesigned_Execution {...project.execution} />
+  
+  <Redesigned_Results {...project.results} /> 
+  
+  <Redesigned_Thumbnail {...project.thumbnail} />
 </Layout>
