@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 // Problem Data - Hardcoded for impact
 const problem = {
   title: "The Friction",
@@ -22,7 +23,7 @@ const problem = {
   
   <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
 
-  <div class="max-w-7xl mx-auto relative z-10">
+  <div class="max-w-7xl mx-auto relative z-10" data-reveal>
     
     <nav class="mb-12">
       <a href="/" class="group inline-flex items-center gap-2 text-black/30 hover:text-orange-600 transition-all">
@@ -48,16 +49,16 @@ const problem = {
 
     <div class="relative h-[600px] mb-32">
       <div class="absolute top-0 left-0 w-3/5 h-[450px] rounded-2xl overflow-hidden shadow-2xl  hover:grayscale-0 transition-all duration-700 z-10 shadow-black rotate-[-2deg]">
-        <img src={problem.images[1]} class="w-full h-full object-cover" alt="The stress" />
+        <Image src={problem.images[1]} width={800} height={600} alt="The stress" class="h-full w-full object-cover" />
         <div class="absolute inset-0 bg-orange-900/10 mix-blend-multiply"></div>
       </div>
 
       <div class="absolute top-20 right-0 w-2/5 h-[380px] rounded-2xl overflow-hidden shadow-2xl  brightness-50 z-20 rotate-[3deg] translate-x-4 shadow-black">
-        <img src={problem.images[0]} class="w-full h-full object-cover" alt="Clutter" />
+        <Image src={problem.images[0]} width={800} height={600} alt="Clutter" class="h-full w-full object-cover" />
       </div>
 
       <div class="absolute bottom-0 left-1/4 w-1/4 h-[220px] rounded-2xl overflow-hidden shadow-2xl z-30 -translate-y-4 border-2 border-black/20 shadow-black rotate-[-5deg]">
-        <img src={problem.images[2]} class="w-full h-full object-cover" alt="Old tech" />
+        <Image src={problem.images[2]} width={800} height={600} alt="Old tech" class="h-full w-full object-cover" />
       </div>
     </div>
 

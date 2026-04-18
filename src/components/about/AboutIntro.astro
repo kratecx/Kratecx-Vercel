@@ -1,82 +1,64 @@
 ---
-import heroImage from '../../assets/about/kratecs_image5.svg';
-import Image from 'astro/components/Image.astro';
+import { Image } from "astro:assets";
+import heroImage from "../../assets/about/kratecx_full.svg";
+
+const aboutIntroBg =
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070";
 ---
 
-<section class="relative w-full min-h-screen min-h-dvh flex items-center justify-center overflow-hidden bg-[#050505] pt-28 pb-14 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20">
+<section class="relative w-full bg-[#050505] overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-20 lg:pt-30">
   <div class="absolute inset-0 z-0">
-    <img 
-      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070" 
-      alt="Professional Architecture" 
-      class="w-full h-full object-cover opacity-20 grayscale"
+    <Image
+      src={aboutIntroBg}
+      alt=""
+      width={2070}
+      height={1380}
+      class="h-full w-full object-cover opacity-20 grayscale"
+      sizes="100vw"
     />
     <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/40 to-[#0a0a0a]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_100%)]"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-5xl px-4 sm:px-6 text-center selection:bg-orange-400/30">
-    <div class="mb-6 text-center leading-snug px-1">
-      <span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 mr-2 sm:mr-4" aria-hidden="true"></span><span class="inline-block align-middle max-w-[calc(100%-5.5rem)] sm:max-w-none font-mono text-[14px] uppercase tracking-[0.6em] text-orange-400 font-bold">About Kratex</span><span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 ml-2 sm:ml-4" aria-hidden="true"></span>
+  <div class="relative z-10 mx-auto w-full max-w-5xl px-4 sm:px-6 text-center" data-reveal>
+    <div class="mb-6 flex items-center justify-center gap-2 sm:gap-4">
+      <span class="h-px w-6 sm:w-8 bg-orange-500/60" aria-hidden="true"></span>
+      <span class="font-mono text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.5em] text-orange-400 font-bold">
+        About Kratex
+      </span>
+      <span class="h-px w-6 sm:w-8 bg-orange-500/60" aria-hidden="true"></span>
     </div>
 
-    <div class="relative mx-auto mb-6 sm:mb-8 w-[min(180px,56vw)] opacity-0 animate-fade-in delay-700">
-      <Image src={heroImage} width={900} height={900} alt="KRATEX Logo" />
-      <div class="absolute -inset-3 bg-orange-400/5 blur-xl rounded-full"></div>
+    <div class="mx-auto mb-6 sm:mb-10 w-full max-w-3xl">
+      <Image
+        src={heroImage}
+        width={1640}
+        height={342}
+        alt="KRATEX full logo"
+        class="h-auto w-full object-contain"
+      />
     </div>
 
-    <h1 class="text-5xl sm:text-6xl md:text-[100px] font-black mb-6 leading-[0.9] tracking-tighter text-white text-balance max-w-full px-0 sm:px-1 opacity-0 animate-fade-in-up">
-      We Build Websites That <span class="text-orange-400">Build Trust</span>
-    </h1>
+    <div class="mx-auto mb-6 h-1 w-40 sm:w-60 rounded-full bg-orange-400/60"></div>
 
-    <div class="w-60 max-w-[85vw] h-1 bg-orange-400 my-6 rounded-full opacity-50 mx-auto"></div>
-
-    <p class="max-w-3xl mx-auto text-zinc-300 text-base sm:text-lg md:text-xl leading-relaxed font-light text-balance opacity-0 animate-fade-in-up delay-500">
+    <p class="mx-auto max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-light text-zinc-300">
       We design and develop websites that help businesses generate qualified leads, establish credibility, and scale with confidence through performance-driven execution.
     </p>
 
-    <div class="mt-8 sm:mt-10 opacity-0 animate-fade-in-up delay-700">
-      <div class="group relative inline-block max-w-full p-[1px] rounded-full overflow-hidden bg-white/10 hover:bg-orange-500/50 transition-colors duration-500">
-        <a href="/contact" class="relative flex max-w-full items-center justify-between gap-4 sm:gap-8 pl-3 pr-6 py-3 sm:pl-4 sm:pr-10 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
-          <div class="w-12 h-12 shrink-0 rounded-full bg-orange-400 flex items-center justify-center text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] group-hover:rotate-45 transition-transform duration-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 17l10-10M7 7h10v10"/>
-            </svg>
-          </div>
-          <div class="flex min-w-0 flex-col text-left">
-            <p class="text-[10px] font-bold tracking-[.3em] text-orange-400 uppercase">Ready to Grow?</p>
-            <span class="text-white font-bold text-lg tracking-tight whitespace-normal sm:whitespace-nowrap">Let's Build Your Website</span>
-          </div>
-        </a>
-      </div>
+    <div class="mt-8 flex justify-center">
+      <a
+        href="/contact"
+        class="group inline-flex items-center gap-3 sm:gap-4 rounded-full bg-[#0a0a0a] border border-white/10 pl-2 pr-5 py-2 sm:pl-3 sm:pr-8 sm:py-3 hover:border-orange-500/50 transition-colors duration-300"
+      >
+        <span class="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black group-hover:rotate-45 transition-transform duration-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17l10-10M7 7h10v10"/>
+          </svg>
+        </span>
+        <span class="flex flex-col text-left">
+          <span class="text-[10px] font-bold tracking-[0.25em] text-orange-400 uppercase">Ready to Grow?</span>
+          <span class="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white">Let's Build Your Website</span>
+        </span>
+      </a>
     </div>
   </div>
 </section>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap');
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 1.8s ease-out forwards;
-  }
-
-  .delay-500 { animation-delay: 0.6s; }
-  .delay-700 { animation-delay: 0.9s; }
-
-  h1 {
-    font-family: 'Inter', sans-serif;
-  }
-</style>

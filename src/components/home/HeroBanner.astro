@@ -2,13 +2,19 @@
 import heroVideo from '@/assets/home/video_2.mp4'
 ---
 
-<section id="hero-section" class="relative w-full min-h-screen min-h-dvh bg-black overflow-hidden flex items-center justify-center pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-40 md:pb-18">
+<section
+  id="hero-section"
+  class="relative flex w-full flex-col overflow-hidden bg-black
+    min-h-[88svh] sm:min-h-dvh sm:min-h-screen
+    items-center justify-start pt-34 pb-0
+    sm:justify-center sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20"
+>
   
   <div class="absolute inset-0 z-0 overflow-hidden">
     <!-- Parallax on wrapper so the video stays full-bleed; overflow clips extra height -->
     <div
       id="parallax-bg"
-      class="absolute left-0 right-0 top-[-12%] h-[124%] w-full will-change-transform"
+      class="absolute left-0 right-0 top-[-12%] h-[100%] w-full will-change-transform"
       style="transform: translate3d(0, 0, 0);"
     >
       <video
@@ -29,39 +35,88 @@ import heroVideo from '@/assets/home/video_2.mp4'
 
 
 
-  <div class="relative z-20 w-full max-w-5xl text-center px-4 sm:px-6 mx-auto animate-fade-in">
-    
-    <div class="mb-6 text-center leading-snug px-1">
-        <span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 mr-2 sm:mr-4" aria-hidden="true"></span><span class="inline-block align-middle max-w-[calc(100%-5.5rem)] sm:max-w-none font-mono text-[14px] uppercase tracking-[0.6em] text-orange-400 font-bold text-center">Build Trust. Generate Leads. Grow Faster.</span><span class="inline-block align-middle h-[1.8px] w-8 bg-orange-500/50 ml-2 sm:ml-4" aria-hidden="true"></span>
+  <div
+    class="relative z-20 mx-auto w-full max-w-5xl animate-fade-in px-3 text-center sm:px-5 md:px-6 lg:max-w-6xl lg:px-8 2xl:max-w-7xl"
+    data-reveal
+  >
+    <div class="mb-3 text-center leading-snug px-0.5 sm:mb-5 sm:px-1 md:mb-6">
+      <span
+        class="inline-block align-middle h-[1.5px] w-5 bg-orange-500/50 mr-1.5 sm:h-[1.8px] sm:w-7 sm:mr-3 md:w-8 md:mr-4"
+        aria-hidden="true"
+      />
+      <span
+        class="inline-block align-middle max-w-[calc(100%-3.5rem)] text-balance font-mono font-bold uppercase text-orange-400 text-center leading-snug
+          text-[10px] tracking-[0.05em]
+          sm:max-w-[calc(100%-4.5rem)] sm:text-[11px] sm:tracking-[0.1em]
+          md:max-w-none md:text-xs md:tracking-[0.16em]
+          lg:text-sm lg:tracking-[0.22em]
+          xl:text-[15px] xl:tracking-[0.3em]
+          2xl:text-base 2xl:tracking-[0.4em]"
+      >
+        Build Trust. Generate Leads. Grow Faster.
+      </span>
+      <span
+        class="inline-block align-middle h-[1.5px] w-5 bg-orange-500/50 ml-1.5 sm:h-[1.8px] sm:w-7 sm:ml-3 md:w-8 md:ml-4"
+        aria-hidden="true"
+      />
     </div>
 
-    <h1 class="text-6xl md:text-[100px] font-black mb-6 leading-[0.9] tracking-tighter text-white text-balance max-w-full px-0 sm:px-1">
+    <h1
+      class="mx-auto mb-3 max-w-full px-0 text-balance font-black tracking-[-0.05em] text-white sm:mb-5 sm:px-0.5 md:mb-6 md:px-1
+        text-6xl leading-[0.9] sm:text-6xl md:text-8xl md:leading-[0.95]"
+    >
       Websites That Drive <span class="text-orange-400">Growth</span> & <span class="text-orange-400">Business</span>
     </h1>
 
-    <div class="max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12 px-0 sm:px-1">
-      <p class="text-zinc-400 text-lg md:text-xl font-light leading-relaxed tracking-wide text-balance">
+    <div class="mx-auto mb-5 max-w-2xl px-0 sm:mb-9 sm:px-0.5 md:mb-11 md:max-w-3xl lg:mb-12 lg:max-w-4xl">
+      <p
+        class="text-balance font-light leading-relaxed tracking-wide text-zinc-400
+          text-[15px] sm:text-base md:text-lg lg:text-xl xl:text-2xl xl:leading-relaxed"
+      >
         We design and develop conversion-focused websites that help businesses build trust, attract leads, and grow with clarity
       </p>
     </div>
-    
-    <div class="group relative inline-block max-w-full p-[1px] rounded-full overflow-hidden bg-white/10 hover:bg-orange-500/50 transition-colors duration-500">
-        <a href="/contact" class="relative flex max-w-full items-center justify-between gap-4 sm:gap-8 pl-3 pr-6 py-3 sm:pl-4 sm:pr-10 bg-[#0a0a0a] rounded-full hover:bg-black transition-all duration-300">
-            <div class="w-12 h-12 shrink-0 rounded-full bg-orange-400 flex items-center justify-center text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] group-hover:rotate-45 transition-transform duration-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 17l10-10M7 7h10v10"/>
-                </svg>
-            </div>
-            
-            <div class="flex min-w-0 flex-col text-left">
-                <p class="text-[10px] font-bold tracking-[.3em] text-orange-400 uppercase">
-                    Ready to Grow??
-                </p>
-                <span class="text-white font-bold text-lg tracking-tight whitespace-normal sm:whitespace-nowrap">
-                    Let’s Get Started
-                </span>
-            </div>
-        </a>
+
+    <div
+      class="group relative mx-auto inline-block max-w-full rounded-full bg-white/10 p-px overflow-hidden transition-colors duration-500 hover:bg-orange-500/50"
+    >
+      <a
+        href="/contact"
+        class="relative flex max-w-full items-center justify-between gap-3 rounded-full bg-[#0a0a0a] py-2.5 pl-2.5 pr-4 transition-all duration-300 hover:bg-black sm:gap-5 sm:py-3 sm:pl-3 sm:pr-8 md:gap-8 md:pl-4 md:pr-10"
+      >
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black shadow-[0_0_20px_rgba(251,133,0,0.3)] transition-transform duration-500 group-hover:rotate-45 sm:h-12 sm:w-12"
+        >
+          <svg
+            class="h-5 w-5 sm:h-6 sm:w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17l10-10M7 7h10v10" />
+          </svg>
+        </div>
+
+        <div class="flex min-w-0 flex-col text-left">
+          <p
+            class="font-bold uppercase text-orange-400
+              text-[9px] tracking-[0.18em] sm:text-[10px] sm:tracking-[.28em] md:tracking-[.3em]"
+          >
+            Ready to Grow??
+          </p>
+          <span
+            class="font-bold tracking-tight text-white whitespace-normal sm:whitespace-nowrap
+              text-sm sm:text-base md:text-lg lg:text-xl"
+          >
+            Let’s Get Started
+          </span>
+        </div>
+      </a>
     </div>
   </div>
 

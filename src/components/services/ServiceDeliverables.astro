@@ -21,48 +21,53 @@ const {
 } = Astro.props;
 ---
 
-<section class="py-24 bg-[#050505] text-white relative overflow-hidden font-sans">
-  <div class="absolute inset-0 bg-[radial-gradient(#FB850008_1px,transparent_1px)] [background-size:30px_30px] pointer-events-none"></div>
+<section class="relative overflow-hidden bg-[#050505] py-14 font-sans text-white sm:py-20 lg:py-24">
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(#FB850008_1px,transparent_1px)] [background-size:30px_30px]"
+  ></div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-24 relative z-10">
-    
-    <div class="mb-14 flex flex-col items-center text-center reveal">
-      <div class="flex items-center justify-center gap-4 mb-6">
-        <span class="h-px w-10 bg-orange-400"></span>
-        <p class="font-mono text-[12px] uppercase tracking-[0.5em] text-orange-400 font-bold">
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 xl:px-16">
+    <div class="reveal mb-10 flex flex-col items-center text-center sm:mb-12 md:mb-14">
+      <div class="mb-5 flex items-center justify-center gap-2 sm:mb-6 sm:gap-4">
+        <span class="h-px w-8 bg-orange-400 sm:w-10"></span>
+        <p
+          class="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-xs sm:tracking-[0.45em] md:text-[12px] md:tracking-[0.5em]"
+        >
           System Verification
         </p>
-        <span class="h-px w-10 bg-orange-400"></span>
+        <span class="h-px w-8 bg-orange-400 sm:w-10"></span>
       </div>
-      <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tight leading-[0.85]">
+      <h2
+        class="text-balance text-4xl font-black uppercase leading-[0.88] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+      >
         Service <span class="text-orange-400">Ledger</span>
       </h2>
-      <div class="w-60 h-1 bg-orange-400 my-4 rounded-full opacity-50"></div>
-      <p class="text-zinc-500 max-w-2xl mx-auto text-base font-light leading-relaxed">
-        A precision-engineered lifecycle designed to transition your product
-        from initial concept to market-dominant scale.
+      <div class="my-3 h-1 w-48 max-w-[85vw] rounded-full bg-orange-400 opacity-50 sm:my-4 sm:w-60"></div>
+      <p class="mx-auto max-w-2xl px-1 text-sm font-light leading-relaxed text-zinc-500 sm:text-base md:text-lg">
+        A precision-engineered lifecycle designed to transition your product from initial concept to
+        market-dominant scale.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center border-t border-white/10 pt-16">
+    <div class="grid grid-cols-1 items-center gap-10 border-t border-white/10 pt-10 sm:gap-12 sm:pt-14 lg:grid-cols-2 lg:gap-12 lg:pt-16">
       
-      <div class="space-y-4">
+      <div class="min-w-0 space-y-3 sm:space-y-4">
         {deliverables.map((item, index) => (
           <div 
-            class="group flex items-start gap-5 py-5 px-6 rounded-lg transition-all duration-500 hover:bg-white/[0.02] border-l-2 border-transparent hover:border-orange-400 reveal"
+            class="reveal group flex items-start gap-4 rounded-lg border-l-2 border-transparent px-4 py-4 transition-all duration-500 hover:border-orange-400 hover:bg-white/[0.02] sm:gap-5 sm:px-6 sm:py-5"
             style={`transition-delay: ${index * 100}ms`}
           >
-            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-400 flex items-center justify-center text-black group-hover:shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black transition-all group-hover:shadow-[0_0_15px_rgba(251,133,0,0.4)]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
             
-            <div class="flex-1">
-              <h3 class="text-sm font-black uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
+            <div class="min-w-0 flex-1">
+              <h3 class="text-xs font-black uppercase tracking-wider text-white transition-colors group-hover:text-orange-400 sm:text-sm">
                 {item.title}
               </h3>
-              <p class="text-xs text-zinc-500 font-medium leading-relaxed max-w-[320px] mt-1">
+              <p class="mt-1 max-w-none text-xs font-medium leading-relaxed text-zinc-500 sm:max-w-md sm:text-[13px] md:text-sm">
                 {item.description}
               </p>
             </div>
@@ -70,8 +75,8 @@ const {
         ))}
       </div>
 
-      <div class="relative flex items-center justify-center p-8 reveal" style="transition-delay: 300ms">
-        <div class="relative w-full max-w-[400px] aspect-square group">
+      <div class="relative flex items-center justify-center p-4 reveal sm:p-6 lg:p-8" style="transition-delay: 300ms">
+        <div class="group relative aspect-square w-full max-w-[min(100%,400px)]">
           <div class="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_60px_40px_#050505]"></div>
           
           {mainImage ? (

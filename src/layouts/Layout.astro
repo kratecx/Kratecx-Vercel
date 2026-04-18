@@ -27,5 +27,96 @@ const { title = "Your Brand Name" } = Astro.props;
     </main>
 
     <Footer />
+    <script is:inline>
+      (function () {
+        var obs = null;
+        var debounceTimer = null;
+
+        function collectTargets() {
+          var seen = new Set();
+          var out = [];
+          document.querySelectorAll("main [data-reveal]:not([data-reveal-off])").forEach(function (el) {
+            if (seen.has(el)) return;
+            seen.add(el);
+            out.push(el);
+          });
+          document.querySelectorAll("footer [data-reveal]:not([data-reveal-off])").forEach(function (el) {
+            if (seen.has(el)) return;
+            seen.add(el);
+            out.push(el);
+          });
+          return out;
+        }
+
+        function revealNow(target) {
+          target.classList.add("reveal-visible");
+          if (obs) obs.unobserve(target);
+        }
+
+        function flushInitialIntersecting(observer) {
+          if (!observer || typeof observer.takeRecords !== "function") return;
+          observer.takeRecords().forEach(function (entry) {
+            if (entry.isIntersecting) revealNow(entry.target);
+          });
+        }
+
+        function initViewportReveal() {
+          if (obs) {
+            try {
+              obs.disconnect();
+            } catch (_) {}
+            obs = null;
+          }
+
+          var reduce =
+            typeof window.matchMedia === "function" &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          var targets = collectTargets();
+          if (!targets.length) return;
+
+          targets.forEach(function (el) {
+            el.classList.remove("reveal-pending", "reveal-visible");
+            el.classList.add("reveal-pending");
+            if (reduce) {
+              el.classList.add("reveal-visible");
+            }
+          });
+
+          if (reduce) return;
+
+          obs = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                revealNow(entry.target);
+              });
+            },
+            { threshold: 0.01, rootMargin: "0px 0px 8% 0px" }
+          );
+
+          targets.forEach(function (el) {
+            obs.observe(el);
+          });
+
+          flushInitialIntersecting(obs);
+        }
+
+        function queueInit() {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(function () {
+            debounceTimer = null;
+            initViewportReveal();
+          }, 0);
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", queueInit);
+        } else {
+          queueInit();
+        }
+        document.addEventListener("astro:page-load", queueInit);
+      })();
+    </script>
   </body>
 </html>

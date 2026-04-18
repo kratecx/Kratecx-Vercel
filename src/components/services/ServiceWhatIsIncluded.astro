@@ -15,60 +15,54 @@ interface Props {
 const { items = [] } = Astro.props;
 ---
 
-<section class="py-24 bg-[#050505] text-white font-sans overflow-hidden">
-  <div class="max-w-5xl mx-auto px-8">
-    
-    <div class="mb-6 flex flex-col items-center text-center mb-20">
-      <div class="flex items-center justify-center gap-4 mb-8">
-        <span class="h-px w-10 bg-orange-400 block"></span>
+<section class="overflow-hidden bg-[#050505] py-14 font-sans text-white sm:py-20 lg:py-24">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8" data-reveal>
+    <div class="mb-12 flex flex-col items-center text-center sm:mb-16 md:mb-20">
+      <div class="mb-6 flex items-center justify-center gap-2 sm:mb-8 sm:gap-4">
+        <span class="block h-px w-8 bg-orange-400 sm:w-10"></span>
         <p
-          class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold"
+          class="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-xs sm:tracking-[0.45em] md:text-[14px] md:tracking-[0.5em]"
         >
           System Verification
         </p>
-        <span class="h-px w-10 bg-orange-400 block"></span>
+        <span class="block h-px w-8 bg-orange-400 sm:w-10"></span>
       </div>
       <h2
-        class="text-7xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-white"
+        class="text-balance text-4xl font-black uppercase leading-[0.88] tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
         Service
-        <span class="text-orange-400 inline-block mt-2">Ledger</span>
+        <span class="mt-1 block text-orange-400 sm:mt-2 sm:inline sm:mt-0">Ledger</span>
       </h2>
-      <div class="w-60 h-1 bg-orange-400 my-4 rounded-full opacity-50"></div>
-      <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">
-        A precision-engineered lifecycle designed to transition your product
-        from initial concept to market-dominant scale.
+      <div class="my-3 h-1 w-48 max-w-[85vw] rounded-full bg-orange-400 opacity-50 sm:my-4 sm:w-60"></div>
+      <p class="mx-auto max-w-2xl px-1 text-sm font-light leading-relaxed text-gray-400 sm:text-base md:text-lg">
+        A precision-engineered lifecycle designed to transition your product from initial concept to
+        market-dominant scale.
       </p>
     </div>
 
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 gap-x-16 border-t border-white/10"
-    >
+    <div class="grid grid-cols-1 gap-x-8 border-t border-white/10 md:grid-cols-2 md:gap-x-12 lg:gap-x-16">
       {
         items.map((item) => (
-          <div class="group flex items-start gap-6 py-10 border-b border-white/5 transition-all duration-300 hover:bg-white/[0.02]">
-            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-orange-400/5 border border-orange-400/20 group-hover:border-orange-400 transition-colors">
+          <div class="group flex items-start gap-4 border-b border-white/5 py-8 transition-all duration-300 hover:bg-white/[0.02] sm:gap-6 sm:py-10">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-orange-400/20 bg-orange-400/5 transition-colors group-hover:border-orange-400 sm:h-12 sm:w-12">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 text-orange-400"
+                class="h-5 w-5 text-orange-400 sm:h-6 sm:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 stroke-width="1.5"
+                aria-hidden="true"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d={item.icon}
-                />
+                <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
               </svg>
             </div>
 
-            <div class="space-y-1">
-              <h3 class="text-xl font-black uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
+            <div class="min-w-0 flex-1 space-y-1">
+              <h3 class="text-base font-black uppercase tracking-wider text-white transition-colors group-hover:text-orange-400 sm:text-lg md:text-xl">
                 {item.label}
               </h3>
-              <p class="text-sm text-zinc-500 font-medium leading-relaxed max-w-[280px]">
+              <p class="max-w-none text-sm font-medium leading-relaxed text-zinc-500 sm:max-w-md md:text-[15px] lg:max-w-sm">
                 {item.value}
               </p>
             </div>

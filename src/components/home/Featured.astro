@@ -31,7 +31,7 @@ const projects = [
   <div id="zone-left" class="absolute left-0 top-0 z-30 hidden h-full w-[12%] cursor-w-resize sm:w-[15%] md:block"></div>
   <div id="zone-right" class="absolute right-0 top-0 z-30 hidden h-full w-[12%] cursor-e-resize sm:w-[15%] md:block"></div>
 
-  <div class="relative z-10 mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 md:mb-20 sm:px-6">
+  <div class="relative z-10 mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 md:mb-20 sm:px-6" data-reveal>
     <div class="mb-8 w-full max-w-full px-1 text-center leading-snug">
       <span class="mr-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:mr-4" aria-hidden="true"></span><span class="inline-block max-w-[calc(100%-6rem)] align-middle font-mono text-sm font-bold uppercase tracking-[0.5em] text-orange-400 sm:max-w-none">Case Studies</span><span class="ml-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:ml-4" aria-hidden="true"></span>
     </div>
@@ -64,6 +64,7 @@ const projects = [
   <!-- Small screens: horizontal snap -->
   <div
     id="featured-mobile-scroll"
+    data-reveal
     class="featured-mobile-strip flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 snap-x snap-mandatory scroll-smooth scroll-pl-4 scroll-pr-4 px-4 md:hidden"
     tabindex="0"
     aria-label="Case studies — swipe horizontally"
@@ -110,7 +111,7 @@ const projects = [
   </div>
 
   <!-- md+: original hover carousel -->
-  <div class="relative hidden w-full overflow-visible md:block">
+  <div class="relative hidden w-full overflow-visible md:block" data-reveal>
     <div id="apple-track" class="flex items-center transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]">
       {projects.map((project, i) => (
         <div class="apple-card min-w-[75vw] px-2 transition-all duration-1000 sm:px-4 lg:min-w-[70vw]" data-index={i}>

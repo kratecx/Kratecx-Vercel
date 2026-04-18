@@ -2,87 +2,28 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/portfolio/index/HeroComponent.astro";
 import CaseStudies from "@/components/portfolio/index/CaseStudiesComponent.astro";
-
-// 1. Updated Data Arrays matched to your exact Filter IDs
-
-
-const categories = [
-  {
-    id: "business",
-    heading: "Business Websites",
-    subheading: "Professional Presence & Lead Generation",
-    desc: "Websites built to establish credibility, communicate clearly, and generate consistent leads for service-based businesses.",
-    projects: [
-      { id: "01", title: "Finance Consulting Firm", tech: "Next.js // Tailwind", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" },
-      { id: "02", title: "Legal Services Website", tech: "Astro // CMS", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200" }
-    ]
-  },
-  {
-    id: "startup",
-    heading: "Startup Websites",
-    subheading: "Launch, Positioning & Early Growth",
-    desc: "High-impact websites designed to communicate value, build trust, and support early-stage growth for startups and SaaS products.",
-    projects: [
-      { id: "03", title: "AI SaaS Platform", tech: "React // API Integration", img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200" },
-      { id: "04", title: "Fintech Startup Site", tech: "Next.js // Node", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200" }
-    ]
-  },
-  {
-    id: "ecommerce",
-    heading: "E\u2011Commerce Websites",
-    subheading: "Conversion & Scalable Online Stores",
-    desc: "Online stores built for performance, smooth user experience, and higher conversion rates across devices.",
-    projects: [
-      { id: "05", title: "Luxury Clothing Store", tech: "Shopify // Custom Theme", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200" },
-      { id: "06", title: "Tech Accessories Store", tech: "Shopify // Headless", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200" }
-    ]
-  },
-  {
-    id: "landing",
-    heading: "Landing Pages",
-    subheading: "Focused Conversion & Campaign Performance",
-    desc: "Landing pages designed to capture attention, communicate value quickly, and convert visitors into qualified leads.",
-    projects: [
-      { id: "07", title: "Analytics Product Landing", tech: "HTML // Tailwind", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200" },
-      { id: "08", title: "Cyber Security Campaign Page", tech: "Next.js // Animations", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" }
-    ]
-  },
-  {
-    id: "redesign",
-    heading: "Redesigned Websites",
-    subheading: "Modernization & Performance Improvement",
-    desc: "Redesigning outdated websites to improve user experience, increase trust, and align with modern business goals.",
-    projects: [
-      { id: "09", title: "SaaS Dashboard Redesign", tech: "React // UI System", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1200" },
-      { id: "10", title: "Brand Website Revamp", tech: "Vue // CMS", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200" }
-    ]
-  }
-];
-
-const filters = [
-  { label: "Business Websites", id: "business" },
-  { label: "Startup Websites", id: "startup" },
-  { label: "E\u2011Commerce Websites", id: "ecommerce" },
-  { label: "Landing Pages", id: "landing" },
-  { label: "Website Redesigns", id: "redesign" },
-];
+import { portfolioCategories, portfolioFilters } from "@/data/portfolioIndex";
 ---
 
 <Layout title="Portfolio | KRATECX">
   <div class="relative bg-[#050505]">
     <Hero />
-    
-    <CaseStudies categories={categories} filters={filters} />
+
+    <CaseStudies categories={portfolioCategories} filters={portfolioFilters} />
   </div>
 </Layout>
 
 <style is:global>
-  html { scroll-behavior: smooth; }
-  [x-cloak] { display: none !important; }
+  html {
+    scroll-behavior: smooth;
+  }
+  [x-cloak] {
+    display: none !important;
+  }
 
   /* Ensure selection color matches brand orange */
   ::selection {
-    background: #FB8500;
+    background: #fb8500;
     color: white;
   }
 </style>

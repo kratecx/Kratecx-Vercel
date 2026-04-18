@@ -1,139 +1,32 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from "@/layouts/Layout.astro";
+import { backendDevelopmentPage } from "@/data/service";
 
-// Component Imports
-import ServiceHero from '../../../components/services/ServiceHero.astro';
-import ServiceWhatIsIncluded from '../../../components/services/ServiceWhatIsIncluded.astro';
-import ServiceDeliverables from '../../../components/services/ServiceDeliverables.astro';
-import ServiceCaseStudies from '../../../components/services/ServiceCaseStudies.astro';
-import ServiceFAQs from '@/components/services/mainpage/ServiceFAQ.astro';
+import ServiceHero from "@/components/services/ServiceHero.astro";
+import ServiceWhatIsIncluded from "@/components/services/ServiceWhatIsIncluded.astro";
+import ServiceDeliverables from "@/components/services/ServiceDeliverables.astro";
+import ServiceCaseStudies from "@/components/services/ServiceCaseStudies.astro";
+import ServiceFAQs from "@/components/services/mainpage/ServiceFAQ.astro";
 
-// Asset Imports
-import BackendImg from '@/assets/backend-services/security2.jpg'
-
-/**
- * DATA_ARCHITECTURE_MANIFEST_2026
- * All data is structured for the Obsidian Surgical Aesthetic.
- */
-
-const myProjects = [
-  {
-    tag: "FinTech Architecture",
-    title: "Apex Ledger",
-    desc: "Engineered a high-frequency banking dashboard for sub-100ms latency.",
-    image: BackendImg,
-    link: "/cases/apex"
-  },
-  {
-    tag: "Infrastructure Scale",
-    title: "Vanguard Core",
-    desc: "Architecting a global distribution network for real-time asset tracking.",
-    image: BackendImg,
-    link: "/cases/vanguard"
-  }
-];
-
-const backendFAQs = [
-  { 
-    question: "How do you handle massive scaling?", 
-    answer: "We utilize Kubernetes-based auto-scaling coupled with Go-based microservices to ensure sub-100ms response times even at 100k+ concurrent users." 
-  },
-  { 
-    question: "Is my data secure?", 
-    answer: "Every deployment includes AES-256 encryption at rest and TLS 1.3 in transit, following ISO 27001 compliance standards." 
-  },
-  {
-    question: "Do you provide API documentation?",
-    answer: "Absolutely. We provide comprehensive Swagger/OpenAPI documentation with every deployment."
-  }
-];
-
-const serviceFeatures = [
-  {
-    label: "RESTful APIs",
-    value: "High-performance endpoints with comprehensive documentation and error handling.",
-    icon: "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-  },
-  {
-    label: "Database Design",
-    value: "Optimized schemas and indexing for fast data retrieval at scale.",
-    icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
-  },
-  {
-    label: "Authentication",
-    value: "Secure JWT, OAuth, and RBAC systems to protect sensitive project data.",
-    icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-  },
-  {
-    label: "RESTful APIs",
-    value: "High-performance endpoints with comprehensive documentation and error handling.",
-    icon: "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-  },
-  {
-    label: "Database Design",
-    value: "Optimized schemas and indexing for fast data retrieval at scale.",
-    icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
-  },
-  {
-    label: "Authentication",
-    value: "Secure JWT, OAuth, and RBAC systems to protect sensitive project data.",
-    icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-  }
-];
-
-const deliverables = [
-  {
-    title: "Production Core",
-    description: "Well-documented, secure REST API built for high-scale environments."
-  },
-  {
-    title: "Cloud Infrastructure",
-    description: "Dockerized environments with Terraform configurations for AWS/GCP."
-  },
-  {
-    title: "Security Suite",
-    description: "Integrated authentication and automated testing with 90%+ coverage."
-  },
-    {
-    title: "Production Core",
-    description: "Well-documented, secure REST API built for high-scale environments."
-  },
-  {
-    title: "Cloud Infrastructure",
-    description: "Dockerized environments with Terraform configurations for AWS/GCP."
-  },
-];
+const p = backendDevelopmentPage;
 ---
 
-<Layout title="Backend Development - Robust Server Solutions">
-  
-  <ServiceHero 
-    title="BACKEND"
-    subtitle="SYSTEMS."
-    tag="Core_Infrastructure_v2"
-    description="Architecting high-concurrency server environments with 99.9% uptime. We build the Obsidian engine that powers your digital scale."
-    mainImage={BackendImg}
+<Layout title={p.layoutTitle}>
+  <ServiceHero {...p.hero} mainImage={p.heroImage} />
 
+  <ServiceWhatIsIncluded items={[...p.features]} />
+
+  <ServiceDeliverables deliverables={[...p.deliverables]} mainImage={p.heroImage} />
+
+  <ServiceCaseStudies
+    title={p.sectionTitles.caseStudiesTitle}
+    titleAccent={p.sectionTitles.caseStudiesTitleAccent}
+    projects={[...p.caseStudies]}
   />
 
-  <ServiceWhatIsIncluded items={serviceFeatures} />
-
-   <ServiceDeliverables 
-  deliverables={deliverables} 
-  mainImage={BackendImg} 
-/>
-
-  <ServiceCaseStudies 
-    title="SYSTEM" 
-    titleAccent="RELEASES." 
-    projects={myProjects}
+  <ServiceFAQs
+    faqs={[...p.faqs]}
+    title={p.sectionTitles.faqTitle}
+    titleAccent={p.sectionTitles.faqTitleAccent}
   />
-  
-  <ServiceFAQs 
-    faqs={backendFAQs} 
-    title="SYSTEM" 
-    titleAccent="LOGISTICS." 
-  />
-  
-
 </Layout>

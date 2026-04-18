@@ -8,10 +8,7 @@
 
 <section class="bg-white px-4 pb-16 pt-4 sm:px-6 sm:pb-24 md:pb-42 relative overflow-hidden">
   <div class="max-w-7xl mx-auto">
-    <div 
-      id="needs-cta" 
-      class="opacity-0 translate-y-12 transition-all duration-1000 ease-out"
-    >
+    <div data-reveal>
       <div class="bg-black rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] border border-orange-400/50 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden">
         <div class="bg-black rounded-[1.8rem] sm:rounded-[2.8rem] md:rounded-[3.8rem] px-5 py-10 sm:px-8 sm:py-12 md:px-20 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 md:gap-12 relative overflow-hidden">
           
@@ -53,35 +50,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  /* Ensuring priority for the entrance animation */
-  #needs-cta.arrived {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-</style>
-
-<script>
-  const initCtaAnimation = () => {
-    const cta = document.getElementById('needs-cta');
-    if (!cta) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('arrived');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { 
-      threshold: 0.15 
-    });
-
-    observer.observe(cta);
-  };
-
-  // Run on load and after Astro swaps
-  window.addEventListener('DOMContentLoaded', initCtaAnimation);
-  document.addEventListener('astro:after-swap', initCtaAnimation);
-</script>

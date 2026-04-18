@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 /**
  * Jratecs_Mixed_Text_Mosaic.astro
  * Style: Large Opaque Icons / Mixed Orange-White Typography
@@ -32,7 +33,7 @@ const values = [
     bullets: ["Clean UI Systems", "Transparent Structure", "Reliable User Experience"],
     icon: Shield,
     width: "md:col-span-4",
-    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1200" 
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200" 
   },
   {
     title: "Execution",
@@ -56,7 +57,7 @@ const values = [
 ---
 
 <section class="w-full bg-white px-4 sm:px-6 pb-16 font-sans antialiased text-black">
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-7xl mx-auto" data-reveal>
 
         <div class="max-w-7xl mx-auto mb-14 sm:mb-20 md:mb-24 relative z-10 text-center">
       <div class="flex items-center justify-center gap-2 sm:gap-4 mb-8">
@@ -81,10 +82,13 @@ const values = [
             <div class={`group relative ${item.width} h-auto min-h-[420px] md:h-[480px] overflow-hidden rounded-2xl sm:rounded-3xl bg-black cursor-default`}>
                 
                 <div class="absolute inset-0 z-0">
-                    <img 
-                        src={item.img} 
-                        alt={item.title} 
-                        class="w-full h-full object-cover grayscale brightness-50 contrast-125 transition-all duration-700 opacity-45 md:opacity-70 md:group-hover:scale-110 md:group-hover:opacity-30"
+                    <Image
+                        src={item.img}
+                        alt={item.title}
+                        width={1200}
+                        height={800}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        class="h-full w-full object-cover grayscale brightness-50 contrast-125 transition-all duration-700 opacity-45 md:opacity-70 md:group-hover:scale-110 md:group-hover:opacity-30"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 </div>

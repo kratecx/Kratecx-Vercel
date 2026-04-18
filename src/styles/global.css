@@ -35,3 +35,20 @@ html {
   /* Provides extra padding so the heading isn't touching the top of the screen */
   scroll-padding-top: 80px; 
 }
+
+/* Viewport reveal — add data-reveal on inner blocks only; section shells stay visible (opacity only; no transform — preserves sticky). */
+.reveal-pending {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.reveal-pending.reveal-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pending {
+    opacity: 1;
+    transition: none;
+  }
+}

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 /**
  * FINAL STRATEGIC AUDIT INTERFACE
  * Refactored: Internal Y-logic, zero-destructuring.
@@ -29,7 +30,7 @@ const Y_GAP = 200;   // Distance between items
 
 <section class="relative w-full min-h-screen bg-[#000000] text-white flex flex-col justify-start overflow-hidden font-sans antialiased">
   
-  <div class="mb-6 flex flex-col items-center text-center pt-12">
+  <div class="mb-6 flex flex-col items-center text-center pt-12" data-reveal>
     <div class="flex items-center justify-center gap-4 mb-8">
       <span class="h-px w-10 bg-orange-400 block"></span>
       <p class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">
@@ -50,20 +51,24 @@ const Y_GAP = 200;   // Distance between items
     </p>
   </div>
 
-  <div class="relative ps-12 flex-grow flex items-center justify-start py-20 z-20">
+  <div class="relative ps-12 flex-grow flex items-center justify-start py-20 z-20" data-reveal>
     <div class="relative">
-        <img 
-          src={gear_image.src} 
-          alt="" 
-          class="w-[1000px] max-w-none h-auto brightness-50 contrast-115" 
+        <Image
+          src={gear_image}
+          alt=""
+          width={1000}
+          height={667}
+          class="h-auto max-w-none w-[1000px] brightness-50 contrast-115"
         />
         <div class="absolute inset-0 bg-gradient-to-r z-0 from-black via-transparent to-black opacity-60"></div>
         
         <div class="absolute inset-0 bg-black opacity-100 w-120 ps-4">
-          <img 
-            src={gear_image_2.src} 
-            class="animate-gear-rotate w-[440px] brightness-50 contrast-125" 
-            alt="Rotating Gear Asset"
+          <Image
+            src={gear_image_2}
+            width={440}
+            height={440}
+            class="w-[440px] animate-gear-rotate brightness-50 contrast-125"
+            alt="Rotating gear asset"
           />
         </div>
     </div>

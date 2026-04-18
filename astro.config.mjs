@@ -11,5 +11,15 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [react()]
+  integrations: [react()],
+
+  image: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**'
+      }
+    ]
+  }
 });
