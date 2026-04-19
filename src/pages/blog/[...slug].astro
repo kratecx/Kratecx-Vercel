@@ -1,0 +1,275 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Breadcrumb from '@/components/seo/Breadcrumb.astro';
+import RelatedPosts from '@/components/blog/RelatedPosts.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { SITE } from '@/data/seo';
+import { articleSchema } from '@/data/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+
+const pageUrl = new URL(`/blog/${post.slug}`, SITE.domain).href;
+const title = post.data.seoTitle ?? post.data.title;
+const description = post.data.metaDescription ?? post.data.description;
+
+/** Reading time — 220 wpm, stripped of markdown noise. */
+const wordCount = (post.body ?? '')
+  .replace(/```[\s\S]*?```/g, '')   // strip fenced code blocks
+  .replace(/[#>*_`~\-\[\]!|]/g, ' ') // strip markdown punctuation
+  .split(/\s+/)
+  .filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+
+/** Only show ToC if the post has at least 3 H2s. */
+const tocItems = (headings ?? []).filter((h) => h.depth === 2);
+const showToc = tocItems.length >= 3;
+
+// Image for OG + schema — may be a string URL or an imported image object.
+const rawImage = post.data.image;
+const imageSrc =
+  typeof rawImage === 'string'
+    ? rawImage
+    : (rawImage && 'src' in rawImage)
+      ? (rawImage as { src: string }).src
+      : undefined;
+
+const schemas = [
+  articleSchema({
+    url: pageUrl,
+    title,
+    description,
+    image: imageSrc,
+    datePublished: post.data.publishedAt.toISOString(),
+    dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+    authorName: post.data.author,
+    tags: post.data.tags,
+  }),
+];
+
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={imageSrc}
+  keywords={post.data.tags}
+  ogType="article"
+  publishedTime={post.data.publishedAt.toISOString()}
+  modifiedTime={(post.data.updatedAt ?? post.data.publishedAt).toISOString()}
+  articleAuthor={post.data.author}
+  noIndex={post.data.noIndex}
+  extraSchemas={schemas}
+>
+  <article class="relative bg-black text-zinc-200 overflow-hidden">
+    {/* Ambient orange glow — matches the rest of the site */}
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(ellipse_at_center_top,rgba(249,115,22,0.15),transparent_60%)]"></div>
+
+    <div class="relative mx-auto max-w-3xl px-4 pt-32 pb-12 sm:px-6 sm:pt-40 sm:pb-16">
+      <div class="mb-8" data-anim="rise">
+        <Breadcrumb
+          crumbs={[
+            { label: 'Blog', href: '/blog' },
+            { label: post.data.title, href: `/blog/${post.slug}` },
+          ]}
+          currentLabel={post.data.title}
+        />
+      </div>
+
+      <header class="mb-10" data-anim="reveal" data-delay="100">
+        <p class="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-orange-400">
+          {post.data.category}
+        </p>
+        <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl md:leading-[1.05]">
+          {post.data.title}
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg font-light leading-relaxed text-zinc-400">
+          {post.data.description}
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-zinc-500">
+          <span>By <span class="text-white">{post.data.author}</span></span>
+          <span aria-hidden="true" class="text-zinc-700">·</span>
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {formatter.format(post.data.publishedAt)}
+          </time>
+          <span aria-hidden="true" class="text-zinc-700">·</span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-orange-400/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {readingMinutes} min read
+          </span>
+          <span aria-hidden="true" class="text-zinc-700">·</span>
+          <span>{wordCount.toLocaleString()} words</span>
+        </div>
+      </header>
+
+      {imageSrc && (
+        <figure class="mb-12 overflow-hidden rounded-2xl border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]" data-anim="rise" data-delay="200">
+          <img
+            src={imageSrc}
+            alt={post.data.imageAlt ?? post.data.title}
+            width="1600"
+            height="900"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto object-cover aspect-[16/9]"
+          />
+        </figure>
+      )}
+
+      {showToc && (
+        <aside
+          class="mb-12 rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6"
+          aria-label="Table of contents"
+          data-anim="rise"
+          data-delay="225"
+        >
+          <p class="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-orange-400">
+            In this article
+          </p>
+          <ol class="space-y-1.5 text-[14px]">
+            {tocItems.map((h, i) => (
+              <li>
+                <a
+                  href={`#${h.slug}`}
+                  class="group inline-flex items-baseline gap-3 text-zinc-400 transition-colors hover:text-orange-400"
+                >
+                  <span class="font-mono text-[10px] text-zinc-600 group-hover:text-orange-400/80">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span>{h.text}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      )}
+
+      <div class="prose-kx max-w-none" data-anim="fade" data-delay="250">
+        <Content />
+      </div>
+
+      {post.data.tags.length > 0 && (
+        <div class="mt-14 flex flex-wrap gap-2">
+          {post.data.tags.map((t) => (
+            <span class="rounded-full border border-orange-400/20 bg-orange-400/10 px-3 py-1 text-[11px] uppercase tracking-widest text-orange-300">
+              #{t}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <RelatedPosts currentSlug={post.slug} tags={post.data.tags} />
+  </article>
+</Layout>
+
+<style is:global>
+  /* Kratecx blog prose — dark theme */
+  .prose-kx {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: rgb(212, 212, 216); /* zinc-300 */
+  }
+  .prose-kx > * + * { margin-top: 1.1rem; }
+  .prose-kx h2 {
+    font-family: var(--font-kanit);
+    font-weight: 600;
+    font-size: 1.85rem;
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+  .prose-kx h3 {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: #ffffff;
+  }
+  .prose-kx p { margin: 1.1rem 0; }
+  .prose-kx a {
+    color: #fb923c;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(251, 146, 60, 0.4);
+    transition: all 0.2s;
+  }
+  .prose-kx a:hover {
+    color: #fed7aa;
+    text-decoration-color: #fb923c;
+  }
+  .prose-kx ul, .prose-kx ol { padding-left: 1.5rem; margin: 1.1rem 0; }
+  .prose-kx li { margin: 0.4rem 0; }
+  .prose-kx ul li::marker { color: #fb923c; }
+  .prose-kx ol li::marker { color: #fb923c; font-weight: 600; }
+  .prose-kx strong { color: #ffffff; font-weight: 600; }
+  .prose-kx em { color: #e4e4e7; }
+  .prose-kx code {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: var(--font-mono);
+    color: #fdba74;
+  }
+  .prose-kx pre {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.6rem;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-size: 0.9em;
+    line-height: 1.65;
+    margin: 1.5rem 0;
+  }
+  .prose-kx pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: #e4e4e7;
+  }
+  .prose-kx blockquote {
+    border-left: 3px solid #f97316;
+    padding: 0.25rem 1.25rem;
+    margin: 1.75rem 0;
+    color: #e4e4e7;
+    font-style: italic;
+    background: rgba(249, 115, 22, 0.04);
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  .prose-kx img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    margin: 1.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .prose-kx hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    margin: 2.5rem 0;
+  }
+</style>

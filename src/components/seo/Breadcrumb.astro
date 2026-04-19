@@ -1,0 +1,87 @@
+---
+/**
+ * Visual breadcrumb + BreadcrumbList JSON-LD.
+ * Pass either `crumbs` explicitly, or let the component derive them from the URL.
+ */
+import { SITE } from "@/data/seo";
+import { breadcrumbSchema } from "@/data/schema";
+import SchemaOrg from "./SchemaOrg.astro";
+
+interface Crumb {
+  label: string;
+  href: string;
+}
+interface Props {
+  /** Explicit crumbs (home will be prepended automatically). */
+  crumbs?: Crumb[];
+  /** Override the current page's label (defaults to prettified last segment). */
+  currentLabel?: string;
+  /** Hide the visible UI (but still emit JSON-LD). */
+  visuallyHidden?: boolean;
+  class?: string;
+}
+const { crumbs, currentLabel, visuallyHidden = false, class: className = "" } =
+  Astro.props as Props;
+
+/** Derive crumbs from pathname if not provided. */
+const pathname = Astro.url.pathname.replace(/\/+$/, "");
+const segments = pathname.split("/").filter(Boolean);
+
+const derived: Crumb[] =
+  crumbs ??
+  segments.map((seg, i) => {
+    const href = "/" + segments.slice(0, i + 1).join("/");
+    const label = seg
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (m) => m.toUpperCase());
+    return { label, href };
+  });
+
+/** Always prepend Home. */
+const full: Crumb[] = [{ label: "Home", href: "/" }, ...derived];
+
+/** If caller supplied a currentLabel override, replace the last crumb's label. */
+if (currentLabel && full.length > 1) {
+  full[full.length - 1] = { ...full[full.length - 1], label: currentLabel };
+}
+
+const pageUrl = new URL(pathname || "/", SITE.domain).href;
+const schema = breadcrumbSchema(full, pageUrl);
+---
+
+<SchemaOrg schema={schema} />
+
+{!visuallyHidden && full.length > 1 && (
+  <nav
+    aria-label="Breadcrumb"
+    class:list={[
+      "w-full text-[12px] sm:text-[13px] tracking-wide",
+      className,
+    ]}
+  >
+    <ol class="flex flex-wrap items-center gap-1.5 text-neutral-400">
+      {full.map((c, i) => {
+        const isLast = i === full.length - 1;
+        return (
+          <li class="flex items-center gap-1.5">
+            {isLast ? (
+              <span aria-current="page" class="text-white/90 font-medium">
+                {c.label}
+              </span>
+            ) : (
+              <a
+                href={c.href}
+                class="transition-colors hover:text-orange-400"
+              >
+                {c.label}
+              </a>
+            )}
+            {!isLast && (
+              <span class="text-neutral-600" aria-hidden="true">/</span>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}

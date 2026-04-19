@@ -1,0 +1,18 @@
+---
+/**
+ * Drop this anywhere on a page that has visible FAQ content.
+ * It only emits JSON-LD — no visible UI.
+ */
+import { SITE } from "@/data/seo";
+import { faqSchema } from "@/data/schema";
+import SchemaOrg from "./SchemaOrg.astro";
+
+interface Props {
+  faqs: { question: string; answer: string }[];
+}
+const { faqs } = Astro.props as Props;
+const pageUrl = new URL(Astro.url.pathname, SITE.domain).href;
+const schema = faqSchema(faqs, pageUrl);
+---
+
+<SchemaOrg schema={schema} />

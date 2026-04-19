@@ -64,17 +64,16 @@ const services = [
 ---
 
 <section 
-  class="py-20 sm:py-24 md:py-32 bg-black text-white relative overflow-x-hidden" 
-  id="services-section" 
-  data-animate="false"
+  class="py-20 sm:py-24 md:py-32 bg-black text-white relative overflow-x-hidden glow-top" 
+  id="services-section"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-24 relative z-10" data-reveal>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-24 relative z-10">
     
     <div class="mb-6 flex flex-col items-center text-center">
       <div class="mb-8 text-center leading-snug px-1 w-full max-w-full">
         <span class="inline-block align-middle h-px w-10 bg-orange-400 mr-2 sm:mr-4" aria-hidden="true"></span><span class="inline-block align-middle max-w-[calc(100%-6rem)] sm:max-w-none font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">Our Services</span><span class="inline-block align-middle h-px w-10 bg-orange-400 ml-2 sm:ml-4" aria-hidden="true"></span>
       </div>
-      <h2 class="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.9] md:leading-[0.95] text-white text-balance max-w-full px-1">
+      <h2 class="text-5xl sm:text-6xl md:text-8xl font-semibold uppercase tracking-[-0.05em] leading-[0.9] md:leading-[0.95] text-white text-balance max-w-full px-1">
         <span class="text-orange-400 inline-block mt-2">Services</span> That Drive Results
       </h2> 
             <div class="w-60 max-w-[85vw] h-1 bg-orange-400 my-6 rounded-full opacity-50 mx-auto"></div>
@@ -114,7 +113,7 @@ const services = [
               </div>
             </div>
 
-            <h3 class="mb-2 text-lg font-black uppercase tracking-tight transition-colors duration-300 group-hover:text-orange-400 md:mb-4 md:text-2xl">{service.title}</h3>
+            <h3 class="mb-2 text-lg font-semibold uppercase tracking-tight transition-colors duration-300 group-hover:text-orange-400 md:mb-4 md:text-2xl">{service.title}</h3>
             <p class="mb-4 line-clamp-2 flex-grow text-xs leading-relaxed text-neutral-400 md:mb-10 md:line-clamp-none md:text-sm">{service.description}</p>
             
             <div class="mt-auto flex flex-col gap-3 md:gap-6">
@@ -158,15 +157,11 @@ const services = [
 
 <style>
   .service-card {
-    opacity: 0;
-    transform: translateY(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     transition: 
-      opacity 0.6s ease-out, 
-      transform 0.4s cubic-bezier(0.2, 0, 0.2, 1),
+      transform 0.25s ease,
       background-color 0.3s ease;
-    will-change: transform, opacity;
   }
 
   /* Optimized border transition using a separate layer */
@@ -182,7 +177,7 @@ const services = [
   }
 
   .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     background-color: rgba(251, 133, 0, 0.04);
   }
 
@@ -195,40 +190,8 @@ const services = [
       transform: translateY(0);
       background-color: rgba(251, 133, 0, 0.02);
     }
-
     .service-card:hover::after {
       border-color: rgba(255, 255, 255, 0.12);
     }
   }
-
-  #services-section[data-animate="true"] .service-card {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Stagger delays */
-  .service-card:nth-child(1) { transition-delay: 50ms; }
-  .service-card:nth-child(2) { transition-delay: 100ms; }
-  .service-card:nth-child(3) { transition-delay: 150ms; }
-  .service-card:nth-child(4) { transition-delay: 200ms; }
-  .service-card:nth-child(5) { transition-delay: 250ms; }
-  .service-card:nth-child(6) { transition-delay: 300ms; }
 </style>
-
-<script>
-  function initServices() {
-    const section = document.querySelector('#services-section');
-    if (!section) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        section.setAttribute('data-animate', 'true');
-        observer.unobserve(section);
-      }
-    }, { threshold: 0.1 });
-    observer.observe(section);
-  }
-
-  initServices();
-  document.addEventListener('astro:after-swap', initServices);
-</script>

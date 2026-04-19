@@ -53,7 +53,7 @@ interface Props {
         <span class="block text-white font-light mb-1">
           {(Astro.props.title || "").split(' ')[0]}
         </span>
-        <span class="text-orange-400 font-black block">
+        <span class="text-orange-400 font-semibold block">
           {(Astro.props.title || "").split(' ').slice(1).join(' ')}
         </span>
       </h1>
@@ -69,8 +69,8 @@ interface Props {
             <div class="flex flex-col">
               <span class="text-zinc-600 font-mono text-[7px] uppercase tracking-[0.4em] mb-2">{Astro.props.vLabel}</span>
               <div class="flex items-baseline gap-2">
-                <span class="text-5xl font-black text-white tracking-tighter tabular-nums leading-none">{Astro.props.vValue}</span>
-                <span class="text-orange-400 font-black text-xs italic uppercase">{Astro.props.vUnit}</span>
+                <span class="text-5xl font-semibold text-white tracking-tighter tabular-nums leading-none">{Astro.props.vValue}</span>
+                <span class="text-orange-400 font-semibold text-xs italic uppercase">{Astro.props.vUnit}</span>
               </div>
             </div>
             <div class="flex gap-[3px] items-end h-10 border-l border-white/5 pl-4">
@@ -87,8 +87,8 @@ interface Props {
             <div class="flex flex-col">
               <span class="text-zinc-600 font-mono text-[7px] uppercase tracking-[0.4em] mb-2">{Astro.props.cLabel}</span>
               <div class="flex items-baseline gap-2">
-                <span class="text-5xl font-black text-white tracking-tighter tabular-nums leading-none">{Astro.props.cValue}</span>
-                <span class="text-orange-400 font-black text-xs italic uppercase">{Astro.props.cUnit}</span>
+                <span class="text-5xl font-semibold text-white tracking-tighter tabular-nums leading-none">{Astro.props.cValue}</span>
+                <span class="text-orange-400 font-semibold text-xs italic uppercase">{Astro.props.cUnit}</span>
               </div>
             </div>
             <div class="flex items-center justify-center h-10 w-10 border border-white/5 rounded-full relative">

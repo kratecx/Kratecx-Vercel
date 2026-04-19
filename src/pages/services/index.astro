@@ -9,10 +9,23 @@ import ProcessDeliverables from '@/components/process/ProcessDeliverables.astro'
 import Testimonials from '@/components/home/Testimonials.astro';
 import ProcessCTA from '@/components/process/ProcessCTA.astro';
 
+import { SITE, resolveSeo } from '@/data/seo';
+import { serviceSchema } from '@/data/schema';
+
+const seo = resolveSeo('/services');
+const pageUrl = new URL('/services', SITE.domain).href;
+
+const schemas = [
+  serviceSchema({
+    name: 'Web Development Services',
+    description: seo.description,
+    url: pageUrl,
+    serviceType: 'Web Development',
+  }),
+];
 ---
 
-<Layout title="Services - Elite Web Solutions">
-  
+<Layout extraSchemas={schemas}>
   <ServiceHeroBanner />
   <ServicesCards />
   <ProcessTimeline />
@@ -20,5 +33,4 @@ import ProcessCTA from '@/components/process/ProcessCTA.astro';
   <ServiceFAQ />
   <Testimonials />
   <ProcessCTA />
-
 </Layout>

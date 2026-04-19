@@ -5,25 +5,15 @@ import CaseStudies from "@/components/portfolio/index/CaseStudiesComponent.astro
 import { portfolioCategories, portfolioFilters } from "@/data/portfolioIndex";
 ---
 
-<Layout title="Portfolio | KRATECX">
+<Layout>
   <div class="relative bg-[#050505]">
     <Hero />
-
     <CaseStudies categories={portfolioCategories} filters={portfolioFilters} />
   </div>
 </Layout>
 
 <style is:global>
-  html {
-    scroll-behavior: smooth;
-  }
-  [x-cloak] {
-    display: none !important;
-  }
-
-  /* Ensure selection color matches brand orange */
-  ::selection {
-    background: #fb8500;
-    color: white;
-  }
+  html { scroll-behavior: smooth; }
+  [x-cloak] { display: none !important; }
+  ::selection { background: #fb8500; color: white; }
 </style>

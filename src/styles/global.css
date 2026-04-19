@@ -1,5 +1,5 @@
 /* global.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:wght@700&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,10 +10,13 @@
   --color-neutral: #D1D9D6;
   --color-body-bg: #05140F;
 
-  /* --- UPDATED TYPOGRAPHY --- */
-   --font-poppins: "Poppins", sans-serif;
-   --font-inter: "Inter", sans-serif;
-   --font-mono: "Space Mono", monospace;
+  /* --- TYPOGRAPHY: Poppins body/UI; Kanit display headings --- */
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-kanit: "Kanit", sans-serif;
+  /* Legacy utility name; stacks with Poppins for small caps / UI */
+  --font-inter: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 }
 
 @layer base {
@@ -22,10 +25,20 @@
     @apply bg-white text-neutral antialiased font-sans;
   }
 
-  /* Professional Heading Defaults */
-  h1, h2, h3 {
-    /* Use the new display font (Poppins) for headers */
-    @apply font-poppins text-white tracking-tight;
+  /* Large headings: Kanit; smaller section titles: Poppins */
+  h1,
+  h2 {
+    @apply font-kanit font-semibold text-white tracking-tight;
+  }
+
+  h3 {
+    @apply font-poppins font-semibold text-white tracking-tight;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply font-medium;
   }
 }
 
@@ -51,4 +64,154 @@ html {
     opacity: 1;
     transition: none;
   }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   PROFESSIONAL ANIMATION SYSTEM
+   ══════════════════════════════════════════════════════ */
+
+/* Page-load: no opacity trick — render immediately, let scroll animations do the work */
+
+/* ── GSAP data-animate preset: prevents FOUC before scripts hydrate ──
+   Applied immediately; GSAP removes opacity once the element animates in. */
+[data-animate] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] { opacity: 1; will-change: auto; }
+}
+
+/* 2 · data-anim entrance system — subtle, editorial motion.
+   Variants: up | down | left | right | fade | rise | reveal
+   Use data-delay="200" for a custom offset (ms). */
+[data-anim] {
+  opacity: 0;
+  will-change: opacity, transform, filter;
+  transition:
+    opacity   0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--_d, 0ms),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--_d, 0ms),
+    filter    0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--_d, 0ms);
+}
+/* fade: pure opacity, most neutral */
+[data-anim="fade"]   { /* only opacity */ }
+/* rise: the workhorse — 16px lift + tiny fade */
+[data-anim="rise"],
+[data-anim="up"]     { transform: translate3d(0, 18px, 0); }
+[data-anim="down"]   { transform: translate3d(0, -14px, 0); }
+[data-anim="left"]   { transform: translate3d(-22px, 0, 0); }
+[data-anim="right"]  { transform: translate3d(22px, 0, 0); }
+/* scale: barely there — goes from 98% to 100% */
+[data-anim="scale"]  { transform: scale(0.985); }
+/* reveal / blur: gentle rise only — no filter (filter creates stacking context
+   that can cause overflow-hidden parent sections to appear blank) */
+[data-anim="reveal"],
+[data-anim="blur"]   { transform: translate3d(0, 16px, 0); }
+/* flip: rise only — perspective/rotateX creates GPU stacking context that
+   causes overflow-hidden parent backgrounds to appear missing */
+[data-anim="flip"]   { transform: translate3d(0, 20px, 0); }
+[data-anim].in-view {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* 4 · Delay helpers — used by JS stagger or manually with data-delay="..." */
+[data-delay="50"]  { --_d:  50ms; }
+[data-delay="100"] { --_d: 100ms; }
+[data-delay="150"] { --_d: 150ms; }
+[data-delay="200"] { --_d: 200ms; }
+[data-delay="250"] { --_d: 250ms; }
+[data-delay="300"] { --_d: 300ms; }
+[data-delay="400"] { --_d: 400ms; }
+[data-delay="500"] { --_d: 500ms; }
+[data-delay="600"] { --_d: 600ms; }
+[data-delay="700"] { --_d: 700ms; }
+[data-delay="800"] { --_d: 800ms; }
+
+/* 5 · Ambient keyframes */
+@keyframes kf-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-12px) rotate(0.3deg); }
+}
+@keyframes kf-pulse-glow {
+  0%, 100% { box-shadow: 0 0 16px rgba(249,115,22, 0.35); }
+  50%       { box-shadow: 0 0 40px rgba(249,115,22, 0.75), 0 0 80px rgba(249,115,22, 0.18); }
+}
+@keyframes kf-shimmer {
+  0%   { background-position: -400% center; }
+  100% { background-position:  400% center; }
+}
+@keyframes kf-ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes kf-line-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes kf-count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 6 · Utility animation classes */
+.anim-float  { animation: kf-float   5s ease-in-out infinite; }
+.anim-glow   { animation: kf-pulse-glow 2.5s ease-in-out infinite; }
+.anim-ticker { animation: kf-ticker  30s linear infinite; }
+
+/* Shimmer gradient over text */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    currentColor 30%,
+    rgba(249,115,22, 0.9) 50%,
+    currentColor 70%
+  );
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: kf-shimmer 5s linear infinite;
+}
+
+/* Orange divider that bleeds at the top of a section */
+.glow-top {
+  position: relative;
+}
+.glow-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(249,115,22, 0.55), transparent);
+  box-shadow: 0 0 28px rgba(249,115,22, 0.22);
+  pointer-events: none;
+}
+
+/* Line-grow accent used for orange underline bars */
+.line-grow {
+  transform-origin: left center;
+  animation: kf-line-grow 0.8s cubic-bezier(0.16,1,0.3,1) both;
+}
+.in-view .line-grow,
+.line-grow.in-view {
+  animation-play-state: running;
+}
+
+/* 7 · Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none;
+  }
+  body              { animation: none; }
+  .anim-float,
+  .anim-glow,
+  .anim-ticker      { animation: none; }
+  .text-shimmer     { -webkit-text-fill-color: currentColor; background: none; animation: none; }
 }

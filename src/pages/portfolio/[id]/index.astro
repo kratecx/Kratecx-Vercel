@@ -1,8 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import Breadcrumb from '@/components/seo/Breadcrumb.astro';
 import { allProjects } from '@/data/projects/index';
+import { SITE } from '@/data/seo';
 
-// Components
 import Redesigned_Hero from '@/components/portfolio/redesign/PortfolioHero.astro';
 import Redesigned_Problems from '@/components/portfolio/redesign/PortfolioProblems.astro';
 import Redesigned_Strategy from '@/components/portfolio/redesign/PortfolioStrategy.astro';
@@ -18,18 +19,43 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const pageTitle = `${project.hero.title} — Case Study | ${SITE.name}`;
+const pageDescription = project.hero.description ?? SITE.description;
+const pageImage = project.hero.heroImage;
+const pageUrl = new URL(`/portfolio/${project.id}`, SITE.domain).href;
+
+const crumbs = [
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: project.hero.title, href: `/portfolio/${project.id}` },
+];
+
+const caseStudySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.hero.title,
+  headline: project.hero.title,
+  description: pageDescription,
+  image: pageImage,
+  url: pageUrl,
+  creator: { '@id': `${SITE.domain}/#organization` },
+  publisher: { '@id': `${SITE.domain}/#organization` },
+};
 ---
 
-<Layout title={project.hero.title}>
+<Layout
+  title={project.hero.title}
+  description={pageDescription}
+  image={pageImage}
+  extraSchemas={[caseStudySchema]}
+>
+  <div class="sr-only">
+    <Breadcrumb crumbs={crumbs} visuallyHidden />
+  </div>
+
   <Redesigned_Hero {...project.hero} />
-  
-  <Redesigned_Problems {...project.problems} /> 
-  
+  <Redesigned_Problems {...project.problems} />
   <Redesigned_Strategy {...project.strategy} />
-  
   <Redesigned_Execution {...project.execution} />
-  
-  <Redesigned_Results {...project.results} /> 
-  
+  <Redesigned_Results {...project.results} />
   <Redesigned_Thumbnail {...project.thumbnail} />
 </Layout>

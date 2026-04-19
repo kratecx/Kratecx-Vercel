@@ -2,9 +2,36 @@
 import FAQHero from "../../components/faqs/FAQHero.astro";
 import FAQS from "../../components/faqs/FAQS.astro";
 import Layout from "../../layouts/Layout.astro";
+import FAQSchema from "@/components/seo/FAQSchema.astro";
+
+// Keep this list in sync with FAQS.astro so the rich result reflects what
+// the user actually sees on the page.
+const faqsForSchema = [
+  {
+    question: "What is a typical project duration?",
+    answer:
+      "Most engagements run between six and twelve weeks end to end, including discovery, build, and acceptance. Duration depends on scope, integrations, and approval cycles; a detailed schedule is agreed before work begins.",
+  },
+  {
+    question: "Can you connect to our existing CRM or data systems?",
+    answer:
+      "Yes. We design for integration where required—commonly via REST or vendor APIs—with platforms such as Salesforce, HubSpot, and internal tools. Technical constraints and security requirements are reviewed during discovery.",
+  },
+  {
+    question: "Is ongoing support available after launch?",
+    answer:
+      "Yes. Maintenance and support can be provided under a defined service level, covering updates, monitoring, and incident response according to the arrangement you select.",
+  },
+  {
+    question: "Who owns deliverables and intellectual property?",
+    answer:
+      "Upon completion of the engagement and settlement of fees as contractually specified, ownership of agreed deliverables—including applicable source materials and assets—is assigned to your organization as set out in your statement of work or agreement.",
+  },
+];
 ---
 
-<Layout title="FAQs — Kratecs">
+<Layout>
+  <FAQSchema faqs={faqsForSchema} />
   <FAQHero />
   <FAQS />
 </Layout>

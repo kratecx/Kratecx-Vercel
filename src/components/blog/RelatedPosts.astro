@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentSlug: string;
+  tags: string[];
+  limit?: number;
+}
+const { currentSlug, tags, limit = 3 } = Astro.props as Props;
+
+const all = await getCollection('blog', ({ data }) => !data.draft);
+
+// Score each candidate by how many tags overlap with the current post.
+const scored = all
+  .filter((p) => p.slug !== currentSlug)
+  .map((p) => ({
+    post: p,
+    score: p.data.tags.filter((t) => tags.includes(t)).length,
+  }));
+
+// Sort: highest tag overlap first, then newest.
+scored.sort((a, b) => {
+  if (b.score !== a.score) return b.score - a.score;
+  return +b.post.data.publishedAt - +a.post.data.publishedAt;
+});
+
+const related = scored.slice(0, limit);
+
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+{related.length > 0 && (
+  <section class="relative bg-[#050505] py-16 sm:py-24 mt-8 border-t border-white/5">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6">
+      <div class="mb-10 flex items-baseline justify-between gap-6">
+        <p class="font-mono text-[11px] uppercase tracking-[0.35em] text-orange-400">
+          Keep reading
+        </p>
+        <a
+          href="/blog"
+          class="text-[11px] uppercase tracking-[0.2em] text-zinc-500 hover:text-orange-400 transition-colors"
+        >
+          All posts →
+        </a>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger="80">
+        {related.map(({ post }) => (
+          <a
+            href={`/blog/${post.slug}`}
+            class="group block rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-orange-400/40 hover:bg-white/[0.04] hover:-translate-y-0.5"
+          >
+            <p class="font-mono text-[10px] uppercase tracking-widest text-orange-400">
+              {post.data.category}
+            </p>
+            <h3 class="mt-3 text-lg font-medium leading-snug text-white group-hover:text-orange-400 transition-colors">
+              {post.data.title}
+            </h3>
+            <p class="mt-2 text-sm font-light leading-relaxed text-zinc-400">
+              {post.data.description}
+            </p>
+            <time
+              datetime={post.data.publishedAt.toISOString()}
+              class="mt-5 block font-mono text-[10px] uppercase tracking-widest text-zinc-500"
+            >
+              {formatter.format(post.data.publishedAt)}
+            </time>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

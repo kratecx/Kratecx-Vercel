@@ -31,13 +31,13 @@ const projects = [
   <div id="zone-left" class="absolute left-0 top-0 z-30 hidden h-full w-[12%] cursor-w-resize sm:w-[15%] md:block"></div>
   <div id="zone-right" class="absolute right-0 top-0 z-30 hidden h-full w-[12%] cursor-e-resize sm:w-[15%] md:block"></div>
 
-  <div class="relative z-10 mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 md:mb-20 sm:px-6" data-reveal>
+  <div class="relative z-10 mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 md:mb-20 sm:px-6" data-anim="blur">
     <div class="mb-8 w-full max-w-full px-1 text-center leading-snug">
       <span class="mr-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:mr-4" aria-hidden="true"></span><span class="inline-block max-w-[calc(100%-6rem)] align-middle font-mono text-sm font-bold uppercase tracking-[0.5em] text-orange-400 sm:max-w-none">Case Studies</span><span class="ml-2 inline-block h-0.5 w-10 align-middle bg-orange-400 sm:ml-4" aria-hidden="true"></span>
     </div>
 
     <div class="flex flex-col items-center justify-center">
-      <h2 class="max-w-full px-1 text-balance text-5xl sm:text-6xl font-black uppercase leading-[0.9] md:text-8xl md:leading-[0.85] tracking-tighter text-black">
+      <h2 class="max-w-full px-1 text-balance text-5xl sm:text-6xl font-semibold uppercase leading-[0.9] md:text-8xl md:leading-[0.85] tracking-tighter text-black">
         <span class="text-orange-400">Results </span>in Practice
       </h2>
 
@@ -83,7 +83,7 @@ const projects = [
           />
           <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/50 to-transparent p-4 sm:p-5">
             <p class="mb-2 text-[10px] font-black uppercase tracking-[0.35em] text-[#FB8500]">{project.tag}</p>
-            <h3 class="mb-2 text-2xl font-black uppercase leading-none tracking-tighter text-white text-balance sm:text-3xl">
+            <h3 class="mb-2 text-2xl font-semibold uppercase leading-none tracking-tighter text-white text-balance sm:text-3xl">
               {project.title}
             </h3>
             <p class="mb-4 line-clamp-2 text-sm font-medium leading-relaxed text-white/75 text-balance">
@@ -130,7 +130,7 @@ const projects = [
               <p class="mb-3 text-[10px] font-black uppercase tracking-[0.4em] text-[#FB8500] sm:mb-4 md:text-xs">
                 {project.tag}
               </p>
-              <h3 class="mb-6 text-5xl font-black uppercase leading-none tracking-tighter text-white text-balance sm:mb-8 md:text-8xl">
+              <h3 class="mb-6 text-5xl font-semibold uppercase leading-none tracking-tighter text-white text-balance sm:mb-8 md:text-8xl">
                 {project.title}
               </h3>
 
@@ -161,11 +161,11 @@ const projects = [
     </div>
   </div>
 
-  <div class="mx-auto mt-10 w-full max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16">
+  <div class="mx-auto mt-10 w-full max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16" data-anim="up">
     <div class="rounded-3xl border border-black/10 bg-black/[0.03] p-5 sm:p-6 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:p-8">
       <div class="max-w-2xl">
         <p class="mb-2 text-[10px] font-black uppercase tracking-[.25em] text-orange-500">Still Comparing Options?</p>
-        <h3 class="text-3xl font-black uppercase leading-[0.95] tracking-tight text-black sm:text-4xl lg:text-5xl">See More Real Results</h3>
+        <h3 class="text-3xl font-semibold uppercase leading-[0.95] tracking-tight text-black sm:text-4xl lg:text-5xl">See More Real Results</h3>
         <p class="mt-3 text-sm font-medium leading-relaxed text-gray-600 sm:text-base">
           Review additional case studies to see how each project solved different business goals: speed, trust, conversion, and long-term growth.
         </p>

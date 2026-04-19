@@ -8,10 +8,25 @@ import ServiceDeliverables from "@/components/services/ServiceDeliverables.astro
 import ServiceCaseStudies from "@/components/services/ServiceCaseStudies.astro";
 import ServiceFAQs from "@/components/services/mainpage/ServiceFAQ.astro";
 
+import { SITE, resolveSeo } from "@/data/seo";
+import { serviceSchema, faqSchema } from "@/data/schema";
+
 const p = backendDevelopmentPage;
+const seo = resolveSeo("/services/backend-development");
+const pageUrl = new URL("/services/backend-development", SITE.domain).href;
+
+const schemas = [
+  serviceSchema({
+    name: "Backend Development Services",
+    description: seo.description,
+    url: pageUrl,
+    serviceType: "Backend Development",
+  }),
+  faqSchema([...p.faqs], pageUrl),
+];
 ---
 
-<Layout title={p.layoutTitle}>
+<Layout extraSchemas={schemas}>
   <ServiceHero {...p.hero} mainImage={p.heroImage} />
 
   <ServiceWhatIsIncluded items={[...p.features]} />

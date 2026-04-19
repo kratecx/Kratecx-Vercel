@@ -1,0 +1,86 @@
+---
+/**
+ * GSAP-powered page transition overlay.
+ * Drop once inside <body> of Layout.astro, BEFORE <Header />.
+ *
+ * Lifecycle:
+ *   astro:before-preparation → begin exit animation (overlay slides up from bottom)
+ *   astro:after-swap         → run enter animation (overlay slides out upward)
+ *   astro:page-load          → re-init page animations
+ */
+---
+
+<div id="pg-transition" class="pg-transition" aria-hidden="true"></div>
+
+<style>
+  .pg-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0a0a0a;
+    transform: translateY(100%);
+    pointer-events: none;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pg-transition { display: none; }
+  }
+</style>
+
+<script>
+  import { gsap } from '@/utils/animations';
+  import { initPageAnimations } from '@/utils/animations';
+
+  const OVERLAY_ID = 'pg-transition';
+
+  /** Tween the overlay in from the bottom (covers page). */
+  function exitAnimation(): Promise<void> {
+    return new Promise((resolve) => {
+      const overlay = document.getElementById(OVERLAY_ID);
+      if (!overlay) return resolve();
+      gsap.set(overlay, { y: '100%' });
+      gsap.to(overlay, {
+        y: '0%',
+        duration: 0.4,
+        ease: 'power2.inOut',
+        onComplete: () => resolve(),
+      });
+    });
+  }
+
+  /** Tween the overlay out upward (reveals new page). */
+  function enterAnimation() {
+    const overlay = document.getElementById(OVERLAY_ID);
+    if (!overlay) return;
+    gsap.set(overlay, { y: '0%' });
+    gsap.to(overlay, {
+      y: '-100%',
+      duration: 0.5,
+      ease: 'expo.inOut',
+      delay: 0.1,
+    });
+  }
+
+  // `astro:before-preparation` is the earliest hook — we kick off the
+  // covering animation before Astro starts fetching the next page.
+  document.addEventListener('astro:before-preparation', (event: any) => {
+    // Tell Astro to wait until the overlay is fully in place.
+    if (typeof event.loader === 'function') {
+      const originalLoader = event.loader;
+      event.loader = async () => {
+        await Promise.all([exitAnimation(), originalLoader()]);
+      };
+    }
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    enterAnimation();
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    initPageAnimations();
+  });
+
+  // Initial page load (no transition, just page anim init).
+  initPageAnimations();
+</script>

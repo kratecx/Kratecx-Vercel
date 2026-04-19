@@ -14,11 +14,53 @@ const socialLinks = [
 ---
 
 <section
-  class="relative w-full bg-white px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 md:px-8 md:pb-24 lg:px-10"
+  class="relative w-full overflow-hidden bg-[#050505] px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 md:px-8 md:pb-24 lg:px-10"
 >
+  {/* ────────── Layered background composition (blackish + orange) ────────── */}
+
+  {/* Base dark gradient (diagonal) */}
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,#0a0a0a_0%,#050505_40%,#0d0603_100%)]"
+    aria-hidden="true"
+  ></div>
+
+  {/* Large warm orange glow — top-right */}
+  <div
+    class="pointer-events-none absolute -right-[15%] -top-[20%] h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(249,133,2,0.22),rgba(249,133,2,0.05)_45%,transparent_70%)] blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  {/* Secondary amber glow — bottom-left */}
+  <div
+    class="pointer-events-none absolute -bottom-[20%] -left-[10%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.12),transparent_65%)] blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  {/* Subtle centered spotlight behind the form card */}
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/2 h-[480px] w-[1100px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(249,133,2,0.08),transparent_70%)]"
+    aria-hidden="true"
+  ></div>
+
+  {/* Fine dot grid texture */}
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.035] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"
+    aria-hidden="true"
+  ></div>
+
+  {/* Top + bottom vignette fade */}
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent"
+    aria-hidden="true"
+  ></div>
+
   <div
     data-reveal
-    class="mx-auto flex max-w-6xl w-full min-h-0 flex-col overflow-hidden rounded-2xl border border-white/5 bg-black shadow-[0_50px_100px_rgba(0,0,0,0.5)] sm:rounded-3xl lg:min-h-[min(700px,90svh)] lg:flex-row lg:rounded-[3rem]"
+    class="relative mx-auto flex max-w-6xl w-full min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 shadow-[0_50px_120px_-20px_rgba(0,0,0,0.9),0_0_60px_-20px_rgba(249,133,2,0.15)] backdrop-blur-xl sm:rounded-3xl lg:min-h-[min(700px,90svh)] lg:flex-row lg:rounded-[3rem]"
   >
     <div
       class="relative flex w-full flex-col justify-center border-b border-white/10 bg-[radial-gradient(circle_at_center,_#111_0%,_#050505_100%)] px-6 py-10 sm:px-10 sm:py-14 md:p-14 lg:w-1/2 lg:border-b-0 lg:border-r lg:py-16 xl:p-20"
@@ -92,7 +134,7 @@ const socialLinks = [
       class="flex w-full flex-col justify-center bg-[#080808] px-6 py-10 sm:px-10 sm:py-12 md:p-12 lg:w-1/2 lg:py-14 xl:p-16"
     >
       <div class="mb-8 sm:mb-10 md:mb-12">
-        <h2 class="text-xl font-bold uppercase tracking-tight text-white sm:text-2xl">
+        <h2 class="text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
           Let's Build Together
         </h2>
         <p class="mt-2 text-xs text-white/50 sm:text-sm">

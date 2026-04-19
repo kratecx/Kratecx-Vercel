@@ -1,0 +1,21 @@
+---
+/**
+ * Inject one or more JSON-LD objects into <head>.
+ * Usage:
+ *   <SchemaOrg schema={organizationSchema} />
+ *   <SchemaOrg schema={[orgSchema, websiteSchema]} />
+ */
+interface Props {
+  schema: Record<string, any> | Record<string, any>[];
+}
+const { schema } = Astro.props as Props;
+const entries = Array.isArray(schema) ? schema : [schema];
+---
+
+{entries.map((s) => (
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(s)}
+  />
+))}

@@ -9,9 +9,12 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Process", href: "/process" },
-  { name: "Faqs", href: "/faqs" },
   { name: "Services", href: "/services", dropdown: true },
+ 
+  { name: "Process", href: "/process" },
+  { name: "Blog", href: "/blog" },
+  { name: "Faqs", href: "/faqs" },
+
 ] as const;
 ---
 
@@ -23,7 +26,7 @@ const navLinks = [
     
     <div class="flex-1 min-w-0">
       <a href="/" class="inline-block group">
-        <Image src={logo} alt="Kratecs Logo" width={200} height={56} class="h-9 w-auto sm:h-10" />
+        <Image src={logo} alt="Kratecx — web development agency" width={200} height={56} class="h-9 w-auto sm:h-10" />
       </a>
     </div>
 
@@ -61,22 +64,47 @@ const navLinks = [
 
             {"dropdown" in link && link.dropdown && (
               <div class="nav-services-dropdown pointer-events-none absolute top-full left-1/2 z-[120] -translate-x-1/2 pt-4 opacity-0 translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
-                <div class="nav-services-dropdown-panel relative w-[min(94vw,48rem)] overflow-hidden rounded-xl border border-white/[0.09] bg-[#080808]/98 shadow-[0_28px_90px_-24px_rgba(0,0,0,0.92)] backdrop-blur-xl">
-                  <div class="pointer-events-none absolute inset-y-0 left-0 w-px bg-gradient-to-b from-orange-400/55 via-orange-400/15 to-transparent" aria-hidden="true" />
-                  <div class="relative px-3 py-3 lg:px-4 lg:py-4">
-                    <div class="grid grid-cols-3 gap-2">
+                <div class="nav-services-dropdown-panel relative w-[min(94vw,56rem)] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0a0a0a]/95 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.85)] backdrop-blur-2xl">
+                  {/* subtle top accent line */}
+                  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/40 to-transparent" aria-hidden="true" />
+
+                  {/* Header strip */}
+                  <div class="flex items-center justify-between border-b border-white/[0.05] px-6 py-3">
+                    <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-orange-400/80">
+                      Services
+                    </p>
+                    <a href="/services" class="group/all inline-flex items-center gap-1.5 text-[11px] tracking-wide text-white/50 transition-colors hover:text-orange-400">
+                      View all
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform group-hover/all:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </div>
+
+                  {/* Services grid */}
+                  <div class="p-3 lg:p-4">
+                    <div class="grid grid-cols-3 gap-1.5">
                       {servicesCatalog.map((s) => (
                         <a
                           href={s.href}
                           data-nav-link
-                          class="nav-services-dropdown-link group/drop flex min-h-[2.75rem] min-w-0 items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.015] px-2.5 py-2 text-left transition-colors hover:border-orange-400/22 hover:bg-white/[0.04]"
+                          class="nav-services-dropdown-link group/drop relative flex min-w-0 items-start gap-3 rounded-lg px-3 py-3 text-left transition-all duration-200 hover:bg-white/[0.04]"
                         >
                           <span
-                            class="h-2 w-2 shrink-0 rounded-full bg-orange-400 transition-transform group-hover/drop:scale-110"
+                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/[0.08] bg-white/[0.02] text-orange-400/80 transition-all duration-200 group-hover/drop:border-orange-400/35 group-hover/drop:bg-orange-400/10 group-hover/drop:text-orange-400"
                             aria-hidden="true"
-                          />
-                          <span class="min-w-0 flex-1 text-[10px] font-medium uppercase leading-snug tracking-[0.12em] text-white/65 transition-colors group-hover/drop:text-white line-clamp-2">
-                            {s.title}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                              <path d={s.icon} />
+                            </svg>
+                          </span>
+                          <span class="flex min-w-0 flex-col">
+                            <span class="truncate text-[13px] font-medium leading-tight text-white/85 transition-colors group-hover/drop:text-white">
+                              {s.title}
+                            </span>
+                            <span class="mt-1 line-clamp-2 text-[11px] font-normal leading-snug text-white/40 transition-colors group-hover/drop:text-white/60">
+                              {s.description}
+                            </span>
                           </span>
                         </a>
                       ))}
@@ -95,13 +123,42 @@ const navLinks = [
         href="/contact" 
         class="hidden lg:flex group relative items-center gap-2 py-1.5"
       >
-        <span class="text-[17px] font-bold tracking-[0.05em] text-white transition-all duration-500 group-hover:text-orange-400">
-          Contact
+        <span class="text-[17px] font-semibold tracking-[0.05em] text-white transition-all duration-500 group-hover:text-orange-400">
+          Contact 
         </span>
-        <div class="relative flex items-center justify-center w-5 h-5">
-           <div class="absolute inset-0 border-r-2 border-t-2 border-orange-400 rotate-45 scale-50 translate-x-[-2px] group-hover:translate-x-[2px] transition-transform duration-500 ease-out"></div>
-        </div>
-        <span class="absolute -bottom-1 right-0 w-0 h-[1px] bg-orange-400 transition-all duration-500 group-hover:w-full"></span>
+
+        {/* animated orange arrow chip */}
+        <span class="relative z-10 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-orange-400 text-black shadow-[0_0_16px_rgba(249,133,2,0.45)]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-3.5 w-3.5 transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:translate-x-4 group-hover:-translate-y-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+          {/* second arrow that slides in from bottom-left — creates a continuous loop feel */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute h-3.5 w-3.5 -translate-x-4 translate-y-4 transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:translate-x-0 group-hover:translate-y-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </span>
       </a>
 
       <div id="nav-mobile-root" class="relative lg:hidden">
@@ -151,15 +208,22 @@ const navLinks = [
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                       </summary>
-                      <div class="max-h-[min(50vh,16rem)] overflow-y-auto border-t border-white/[0.05] bg-black/40 px-3 py-2 sm:px-4">
+                      <div class="max-h-[min(50vh,16rem)] overflow-y-auto border-t border-white/[0.05] bg-black/40 px-2 py-2 sm:px-3">
                         {servicesCatalog.map((s) => (
                           <a
                             href={s.href}
                             data-nav-link
                             data-mobile-nav-link
-                            class="block py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/45 transition-colors hover:text-orange-400/90"
+                            class="group/mdrop flex items-center gap-3 rounded-md px-2 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
                           >
-                            {s.title}
+                            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-white/[0.08] bg-white/[0.02] text-orange-400/80 transition-colors group-hover/mdrop:border-orange-400/35 group-hover/mdrop:text-orange-400" aria-hidden="true">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                <path d={s.icon} />
+                              </svg>
+                            </span>
+                            <span class="truncate text-[13px] font-medium text-white/75 transition-colors group-hover/mdrop:text-white">
+                              {s.title}
+                            </span>
                           </a>
                         ))}
                       </div>
