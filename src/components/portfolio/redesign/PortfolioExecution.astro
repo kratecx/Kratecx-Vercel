@@ -34,32 +34,36 @@ interface Props {
   section3TitleTop?: string;
   section3TitleBottom?: string;
   section3Description?: string;
+  section3ImageBack?: string;
+  section3ImageFront?: string;
   parityChecks?: ParityCheck[];
   matrixTitleTop?: string;
   matrixTitleBottom?: string;
+  matrixDraftImage?: string;
+  matrixProductionImage?: string;
   auditMatrix?: MatrixItem[];
 }
 ---
 
-<section class="bg-white text-black py-20 px-6 lg:px-24 font-sans antialiased overflow-hidden selection:bg-orange-100 selection:text-orange-600 relative z-10">
+<section class="bg-white text-black py-16 sm:py-20 px-5 sm:px-6 lg:px-24 font-sans antialiased overflow-hidden selection:bg-orange-100 selection:text-orange-600 relative z-10">
   <div class="max-w-7xl mx-auto" data-reveal>
-    <div class="mb-14 flex flex-col items-center text-center">
-      <div class="flex items-center justify-center gap-4 mb-8">
-        <span class="h-px w-10 bg-orange-400 block"></span>
-        <p class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">
+    <div class="mb-10 sm:mb-14 flex flex-col items-center text-center">
+      <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <span class="h-px w-8 sm:w-10 bg-orange-400 block"></span>
+        <p class="font-mono text-[11px] sm:text-[14px] uppercase tracking-[0.35em] sm:tracking-[0.5em] text-orange-400 font-bold">
           {Astro.props.tagline}
         </p>
-        <span class="h-px w-10 bg-orange-400 block"></span>
+        <span class="h-px w-8 sm:w-10 bg-orange-400 block"></span>
       </div>
-      <h2 class="text-7xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-black">
+      <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.9] lg:leading-[0.85] text-black">
         {Astro.props.heroHeadingTop} <br />
         <span class="text-orange-400 inline-block mt-2">{Astro.props.heroHeadingBottom}</span>
       </h2>
-      <div class="w-60 h-1 bg-orange-400 my-6 rounded-full opacity-50"></div>
-      <p class="text-gray-800 max-w-2xl mx-auto text-lg font-light">{Astro.props.heroDescription}</p>
+      <div class="w-40 sm:w-60 h-1 bg-orange-400 my-5 sm:my-6 rounded-full opacity-50"></div>
+      <p class="text-gray-800 max-w-2xl mx-auto text-base sm:text-lg font-light">{Astro.props.heroDescription}</p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-24 lg:gap-32 items-center">
+    <div class="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-32 items-center">
       {Astro.props.heroImage ? (
         <Image
           src={Astro.props.heroImage}
@@ -67,23 +71,23 @@ interface Props {
           height={1067}
           alt="Audit process visual"
           sizes="(max-width: 1024px) 100vw, 50vw"
-          class="h-auto w-full object-contain grayscale-[0.1] brightness-[1.02]"
+          class="h-auto w-full object-contain grayscale-[0.1] brightness-[1.02] rounded-sm"
         />
       ) : null}
-      <div class="space-y-12 pt-2">
-        <div class="border-b-2 border-black pb-4 mb-10">
-            <h3 class="text-5xl uppercase font-inter font-medium text-black italic">
+      <div class="space-y-8 sm:space-y-12 pt-2">
+        <div class="border-b-2 border-black pb-4 mb-6 sm:mb-10">
+            <h3 class="text-3xl sm:text-4xl lg:text-5xl uppercase font-inter font-medium text-black italic leading-[1.05]">
               {(Astro.props.section2Title || "").split(' ')[0]} 
               <span class="text-orange-400">{(Astro.props.section2Title || "").split(' ').slice(1).join(' ')}</span>
             </h3>
         </div>
         {Astro.props.checkpoints?.map((item) => (
-          <div class="flex items-start gap-6 group">
-            <svg class="shrink-0 w-6 h-6 text-[#FB8500] mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+          <div class="flex items-start gap-4 sm:gap-6 group">
+            <svg class="shrink-0 w-5 h-5 sm:w-6 sm:h-6 text-[#FB8500] mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
             <div class="space-y-2">
-              <h4 class="text-2xl font-medium uppercase tracking-tighter leading-none text-black">{item.title}</h4>
+              <h4 class="text-xl sm:text-2xl font-medium uppercase tracking-tighter leading-none text-black">{item.title}</h4>
               <p class="text-zinc-500 text-sm leading-relaxed max-w-sm">{item.text}</p>
             </div>
           </div>
@@ -95,29 +99,29 @@ interface Props {
 
 
 <!-- Section no 2 -->
-<section class="bg-white text-black py-32 px-6 lg:px-24 font-sans antialiased border-t border-gray-300 overflow-hidden relative">
+<section class="bg-white text-black py-16 sm:py-20 lg:py-32 px-5 sm:px-6 lg:px-24 font-sans antialiased border-t border-gray-300 overflow-hidden relative">
   <div class="max-w-7xl mx-auto relative z-10" data-reveal>
-    <div class="grid lg:grid-cols-2 gap-16 lg:gap-16 items-start">
-      <div class="space-y-12">
+    <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
+      <div class="space-y-8 sm:space-y-12">
         <div>
-          <h2 class="text-7xl italic md:text-6xl font-inter font-medium uppercase leading-[0.85] text-black">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl italic font-inter font-medium uppercase leading-[0.95] lg:leading-[0.85] text-black">
             {Astro.props.section3TitleTop} <br> 
             <span class="text-orange-400 inline-block mt-2">{Astro.props.section3TitleBottom}</span>
           </h2>
           <div class="h-[2px] w-full bg-black rounded-full my-4"></div>
-          <p class="text-zinc-500 text-xl font-light leading-relaxed max-w-lg">
+          <p class="text-zinc-500 text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-lg">
             {Astro.props.section3Description}
           </p>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-5 sm:space-y-6">
           {Astro.props.parityChecks?.map((item) => (
-            <div class="flex items-start gap-6 group">
-              <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 w-8 h-8 text-orange-400 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <div class="flex items-start gap-4 sm:gap-6 group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
               <div class="space-y-2">
-                <h4 class="text-3xl font-semibold uppercase tracking-tighter leading-none text-black">{item.title}</h4>
+                <h4 class="text-xl sm:text-2xl lg:text-3xl font-semibold uppercase tracking-tighter leading-[1.05] lg:leading-none text-black">{item.title}</h4>
                 <p class="text-zinc-400 text-sm leading-relaxed max-w-sm">{item.text}</p>
               </div>
             </div>
@@ -125,18 +129,38 @@ interface Props {
         </div>
       </div>
 
-      <div class="relative w-full aspect-[4/3] flex items-center justify-center py-20 lg:mt-10">
-        <div class="relative z-10 w-[100%] aspect-video rounded-2xl bg-black p-[1px] shadow-[0_100px_180px_-40px_rgba(0,0,0,0.6)] ring-1 ring-white/5 overflow-hidden">
+      <div class="relative w-full aspect-[4/3] flex items-center justify-center pt-8 pb-20 sm:py-14 lg:py-20 lg:mt-10">
+        <div class="relative z-10 w-[100%] aspect-video rounded-2xl bg-black p-[1px] shadow-[0_60px_120px_-40px_rgba(0,0,0,0.45)] lg:shadow-[0_100px_180px_-40px_rgba(0,0,0,0.6)] ring-1 ring-white/5 overflow-hidden">
           <div class="relative w-full h-full bg-black">
-             <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.1] pointer-events-none"></div>
-             <div class="absolute inset-0 border border-white/5 rounded-2xl"></div>
+            {Astro.props.section3ImageBack ? (
+              <Image
+                src={Astro.props.section3ImageBack}
+                width={1600}
+                height={900}
+                alt="Primary interface parity reference"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : null}
+            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.1] pointer-events-none"></div>
+            <div class="absolute inset-0 border border-white/5 rounded-2xl"></div>
           </div>
         </div>
-        <div class="absolute z-20 -bottom-16 -right-8 w-[68%] aspect-video border-[1px] border-zinc-200 rounded-3xl bg-white p-[1px] shadow-[-50px_50px_120px_-30px_rgba(0,0,0,0.25)] ring-1 ring-black/5 overflow-hidden">
+        <div class="absolute z-20 -bottom-10 sm:-bottom-14 lg:-bottom-16 -right-4 sm:-right-6 lg:-right-8 w-[72%] sm:w-[68%] aspect-video border-[1px] border-zinc-200 rounded-2xl sm:rounded-3xl bg-white p-[1px] shadow-[-25px_25px_60px_-20px_rgba(0,0,0,0.2)] lg:shadow-[-50px_50px_120px_-30px_rgba(0,0,0,0.25)] ring-1 ring-black/5 overflow-hidden">
           <div class="relative w-full h-full bg-black">
-             <div class="absolute inset-0 grid grid-cols-8 gap-px opacity-[0.07]">
-                {Array(64).fill(0).map((_, i) => <div key={i} class="border-[0.5px] border-zinc-400"></div>)}
-             </div>
+            {Astro.props.section3ImageFront ? (
+              <Image
+                src={Astro.props.section3ImageFront}
+                width={1200}
+                height={675}
+                alt="Overlapping interface parity reference"
+                sizes="(max-width: 1024px) 68vw, 34vw"
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : null}
+            <div class="absolute inset-0 grid grid-cols-8 gap-px opacity-[0.07] pointer-events-none">
+              {Array(64).fill(0).map(() => <div class="border-[0.5px] border-zinc-400"></div>)}
+            </div>
           </div>
         </div>
       </div>
@@ -146,25 +170,25 @@ interface Props {
 
 
 <!-- Section no 3 -->
-<section class="bg-white text-black py-28 px-6 lg:px-24 font-sans antialiased border-t border-zinc-200">
+<section class="bg-white text-black py-16 sm:py-20 lg:py-28 px-5 sm:px-6 lg:px-24 font-sans antialiased border-t border-zinc-200">
   <div class="max-w-7xl mx-auto" data-reveal>
-    <div class="mb-8">
-          <h2 class="text-7xl italic md:text-6xl font-inter font-medium uppercase leading-[0.85] text-black">
+    <div class="mb-6 sm:mb-8">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl italic font-inter font-medium uppercase leading-[0.95] lg:leading-[0.85] text-black">
             {Astro.props.matrixTitleTop} <br> 
             <span class="text-orange-400 inline-block mt-2">{Astro.props.matrixTitleBottom}</span>
           </h2>
-          <div class="h-[2px] w-[36%] bg-black rounded-full my-4"></div>
+          <div class="h-[2px] w-[60%] sm:w-[45%] lg:w-[36%] bg-black rounded-full my-4"></div>
     </div>
 
 
     <div class="divide-y divide-zinc-300">
       {Astro.props.auditMatrix?.map((item) => (
-        <div class="grid lg:grid-cols-3 gap-12 py-16 items-center group">
-          <div class="space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 py-10 sm:py-12 lg:py-16 items-start lg:items-center group">
+          <div class="space-y-3 sm:space-y-4 order-2 lg:order-1">
              <div class="aspect-video bg-zinc-50 border border-zinc-100 overflow-hidden relative grayscale ">
-                {Astro.props.heroImage ? (
+                {Astro.props.matrixDraftImage ? (
                   <Image
-                    src={Astro.props.heroImage}
+                    src={Astro.props.matrixDraftImage}
                     width={1200}
                     height={675}
                     alt="Draft state"
@@ -175,14 +199,14 @@ interface Props {
                 <div class="absolute inset-0 bg-white/60 pointer-events-none"></div>
                 <div class="absolute top-2 left-2 font-mono text-[8px] text-zinc-400">DRAFT_V1.0</div>
              </div>
-             <p class="text-[10px] font-mono text-zinc-300 uppercase leading-relaxed">{item.before_desc}</p>
+             <p class="text-[10px] font-mono text-zinc-400 lg:text-zinc-300 uppercase leading-relaxed">{item.before_desc}</p>
           </div>
 
-          <div class="space-y-4">
-             <div class="aspect-video bg-black overflow-hidden shadow-2xl ring-1 ring-white/10 relative flex items-center justify-center p-6">
-                {Astro.props.heroImage ? (
+          <div class="space-y-3 sm:space-y-4 order-3 lg:order-2">
+             <div class="aspect-video bg-black overflow-hidden shadow-2xl ring-1 ring-white/10 relative flex items-center justify-center p-4 sm:p-6">
+                {Astro.props.matrixProductionImage ? (
                   <Image
-                    src={Astro.props.heroImage}
+                    src={Astro.props.matrixProductionImage}
                     width={1200}
                     height={675}
                     alt="Production state"
@@ -213,10 +237,10 @@ interface Props {
              <p class="text-[10px] font-mono text-orange-400 uppercase font-black tracking-widest">{item.after_desc}</p>
           </div>
 
-          <div class="lg:pl-10 space-y-4">
+          <div class="order-1 lg:order-3 lg:pl-10 space-y-3 sm:space-y-4">
              <div class="space-y-1">
                 <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Component_{item.id}</span>
-                <h4 class="text-4xl font-medium font-inter uppercase text-black group-hover:text-orange-400 transition-colors duration-300">
+                <h4 class="text-2xl sm:text-3xl lg:text-4xl font-medium font-inter uppercase text-black group-hover:text-orange-400 transition-colors duration-300 leading-tight">
                     {item.label}
                 </h4>
              </div>

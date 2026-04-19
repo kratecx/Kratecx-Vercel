@@ -77,6 +77,8 @@ export const project01 = {
     ],
     matrixTitleTop: "Audit",
     matrixTitleBottom: "Matrix",
+    matrixDraftImage: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1600",
+    matrixProductionImage: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1600",
     auditMatrix: [
       { 
         id: "01", 

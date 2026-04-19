@@ -1,5 +1,6 @@
 /**
  * Portfolio index (grid) — shared by `pages/portfolio/index.astro` and `Footer.astro`.
+ * Titles, images and tech stacks mirror the case studies in `src/data/projects/*`.
  */
 
 export type PortfolioGridProject = {
@@ -26,15 +27,15 @@ export const portfolioCategories: PortfolioCategory[] = [
     projects: [
       {
         id: "01",
-        title: "Finance Consulting Firm",
-        tech: "Next.js // Tailwind",
-        img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200",
+        title: "Vanguard Group",
+        tech: "Astro // Tailwind",
+        img: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1200",
       },
       {
         id: "02",
-        title: "Legal Services Website",
-        tech: "Astro // CMS",
-        img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200",
+        title: "Northbridge Partners",
+        tech: "Next.js // CMS",
+        img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200",
       },
     ],
   },
@@ -46,15 +47,15 @@ export const portfolioCategories: PortfolioCategory[] = [
     projects: [
       {
         id: "03",
-        title: "AI SaaS Platform",
-        tech: "React // API Integration",
-        img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200",
+        title: "Relayr Cloud",
+        tech: "React // Node API",
+        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
       },
       {
         id: "04",
-        title: "Fintech Startup Site",
-        tech: "Next.js // Node",
-        img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200",
+        title: "Corelane AI",
+        tech: "Next.js // Python API",
+        img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200",
       },
     ],
   },
@@ -66,13 +67,13 @@ export const portfolioCategories: PortfolioCategory[] = [
     projects: [
       {
         id: "05",
-        title: "Luxury Clothing Store",
+        title: "North Atelier",
         tech: "Shopify // Custom Theme",
         img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200",
       },
       {
         id: "06",
-        title: "Tech Accessories Store",
+        title: "Laurel Skin",
         tech: "Shopify // Headless",
         img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200",
       },
@@ -86,13 +87,13 @@ export const portfolioCategories: PortfolioCategory[] = [
     projects: [
       {
         id: "07",
-        title: "Analytics Product Landing",
-        tech: "HTML // Tailwind",
+        title: "Meridian Metrics",
+        tech: "Astro // Tailwind",
         img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
       },
       {
         id: "08",
-        title: "Cyber Security Campaign Page",
+        title: "Haldren Cyber",
         tech: "Next.js // Animations",
         img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200",
       },
@@ -106,15 +107,15 @@ export const portfolioCategories: PortfolioCategory[] = [
     projects: [
       {
         id: "09",
-        title: "SaaS Dashboard Redesign",
+        title: "Atlasby Group",
         tech: "React // UI System",
-        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
+        img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200",
       },
       {
         id: "10",
-        title: "Brand Website Revamp",
-        tech: "Vue // CMS",
-        img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200",
+        title: "Hearth & Oak",
+        tech: "Astro // CMS",
+        img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200",
       },
     ],
   },

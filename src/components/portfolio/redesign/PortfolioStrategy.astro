@@ -5,7 +5,8 @@ import { Image } from "astro:assets";
  * Refactored: Internal Y-logic, zero-destructuring.
  */
 import gear_image from "@/assets/Portfolio/gear_image_w_lines2.png";
-import gear_image_2 from "@/assets/Portfolio/gear_image_2.png";
+import gear_image_2 from "@/assets/Portfolio/gear_final2.png";
+// import gear_image_2 from "@/assets/Portfolio/gear_final.png";
 
 interface AuditItem {
   id: string;
@@ -28,30 +29,31 @@ const Y_START = 120; // First item position
 const Y_GAP = 200;   // Distance between items
 ---
 
-<section class="relative w-full min-h-screen bg-[#000000] text-white flex flex-col justify-start overflow-hidden font-sans antialiased">
+<section class="relative w-full lg:min-h-screen bg-[#000000] text-white flex flex-col justify-start overflow-hidden font-sans antialiased">
   
-  <div class="mb-6 flex flex-col items-center text-center pt-12" data-reveal>
-    <div class="flex items-center justify-center gap-4 mb-8">
-      <span class="h-px w-10 bg-orange-400 block"></span>
-      <p class="font-mono text-[14px] uppercase tracking-[0.5em] text-orange-400 font-bold">
+  <div class="mb-6 flex flex-col items-center text-center pt-16 sm:pt-20 lg:pt-12 px-5 sm:px-8" data-reveal>
+    <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+      <span class="h-px w-8 sm:w-10 bg-orange-400 block"></span>
+      <p class="font-mono text-[11px] sm:text-[14px] uppercase tracking-[0.35em] sm:tracking-[0.5em] text-orange-400 font-bold">
         {Astro.props.tagline}
       </p>
-      <span class="h-px w-10 bg-orange-400 block"></span>
+      <span class="h-px w-8 sm:w-10 bg-orange-400 block"></span>
     </div>
 
-    <h2 class="text-7xl md:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-white">
+    <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.9] lg:leading-[0.85] text-white">
       {Astro.props.mainHeadingTop} <br />
       <span class="text-orange-400 inline-block mt-2">{Astro.props.mainHeadingBottom}</span>
     </h2>
 
-    <div class="w-60 h-1 bg-orange-400 my-6 rounded-full opacity-50"></div>
+    <div class="w-40 sm:w-60 h-1 bg-orange-400 my-5 sm:my-6 rounded-full opacity-50"></div>
     
-    <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light px-4">
+    <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg font-light px-2 sm:px-4">
       {Astro.props.mainDescription}
     </p>
   </div>
 
-  <div class="relative ps-12 flex-grow flex items-center justify-start py-20 z-20" data-reveal>
+  {/* Desktop (original SVG) layout */}
+  <div class="relative ps-12 flex-grow hidden lg:flex items-center justify-start py-20 z-20" data-reveal>
     <div class="relative">
         <Image
           src={gear_image}
@@ -67,7 +69,7 @@ const Y_GAP = 200;   // Distance between items
             src={gear_image_2}
             width={440}
             height={440}
-            class="w-[440px] animate-gear-rotate brightness-50 contrast-125"
+            class="w-[440px] animate-gear-rotate brightness-50 contrast-105"
             alt="Rotating gear asset"
           />
         </div>
@@ -75,9 +77,7 @@ const Y_GAP = 200;   // Distance between items
 
     <svg class="absolute left-[300px] w-[1200px] h-[700px] pointer-events-none" viewBox="0 0 1200 700">
       {Astro.props.auditRegistry?.map((node, index) => {
-        // Calculate Y automatically based on index
         const calculatedY = Y_START + (index * Y_GAP);
-        
         return (
           <g key={node.id} class="reveal-content">
             <foreignObject x="410" y={calculatedY - 20} width="600" height="150">
@@ -108,6 +108,47 @@ const Y_GAP = 200;   // Distance between items
         );
       })}
     </svg>
+  </div>
+
+  {/* Mobile / tablet stacked layout */}
+  <div class="relative lg:hidden px-5 sm:px-8 pt-12 pb-20" data-reveal>
+    {/* Decorative rotating gear, subtle */}
+    <div class="pointer-events-none absolute -right-20 -top-6 w-[320px] h-[320px] opacity-25 sm:opacity-30">
+      <Image
+        src={gear_image_2}
+        width={440}
+        height={440}
+        class="w-full h-full animate-gear-rotate brightness-50 contrast-105"
+        alt=""
+      />
+    </div>
+
+    <ol class="relative z-10 max-w-xl mx-auto space-y-8 sm:space-y-10 border-l border-orange-400/25 pl-6 sm:pl-8">
+      {Astro.props.auditRegistry?.map((node) => (
+        <li class="relative reveal-content">
+          <span class="absolute -left-[34px] sm:-left-[42px] top-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black border-2 border-[#fe8a02] flex items-center justify-center shadow-[0_0_30px_rgba(254,138,2,0.2)] ring-1 ring-[#fe8a02]/30">
+            <div class="flex flex-col items-center leading-none">
+              <span class="text-[8px] font-mono text-[#fe8a02] font-bold tracking-tighter">PHASE</span>
+              <span class="text-white font-black text-lg sm:text-xl italic tracking-tighter">
+                {node.id.includes('-') ? node.id.split('-')[1] : node.id}
+              </span>
+            </div>
+          </span>
+
+          <div class="pl-14 sm:pl-16 pt-1 space-y-2">
+            <span class="block text-[#fe8a02] font-mono text-[9px] tracking-[0.35em] font-black uppercase">
+              {node.tag}
+            </span>
+            <h3 class="text-white text-2xl sm:text-3xl font-black italic tracking-tighter uppercase leading-[1.05]">
+              {node.title}
+            </h3>
+            <p class="text-zinc-400 text-[11px] sm:text-xs font-bold tracking-wide uppercase leading-relaxed border-l-2 border-zinc-800 pl-4 mt-3">
+              {node.desc}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
