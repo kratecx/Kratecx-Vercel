@@ -28,6 +28,9 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   articleAuthor?: string;
+  /** Optional og:image dimensions (pixels); forwarded to BaseHead for custom `image` URLs. */
+  ogImageWidth?: number;
+  ogImageHeight?: number;
 }
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -46,6 +49,8 @@ const {
   publishedTime,
   modifiedTime,
   articleAuthor,
+  ogImageWidth,
+  ogImageHeight,
 } = Astro.props as Props;
 
 const pageUrl = canonical ?? new URL(pathname, SITE.domain).href;
@@ -73,6 +78,8 @@ const coreSchemas = [
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
       articleAuthor={articleAuthor}
+      ogImageWidth={ogImageWidth}
+      ogImageHeight={ogImageHeight}
     />
 
     <SchemaOrg schema={coreSchemas} />

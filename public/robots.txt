@@ -1,5 +1,7 @@
 # robots.txt for Kratecx — https://www.kratecx.com
 # Last updated: 2026-04-19
+#
+# Site icon (browser tab / bookmarks): /kratecx_logo.svg — crawlers may fetch it; SVGs are allowed below.
 
 # --- Search engines: full access ---
 User-agent: Googlebot
@@ -68,6 +70,7 @@ Disallow: /
 # --- Default rules for every other crawler ---
 User-agent: *
 Allow: /
+Allow: /kratecx_logo.svg
 Allow: /*.svg
 Allow: /*.css
 Allow: /*.js

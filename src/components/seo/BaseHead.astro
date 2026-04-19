@@ -16,6 +16,9 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   articleAuthor?: string;
+  /** Override og:image width/height meta (pixels); defaults depend on whether a custom `image` is set. */
+  ogImageWidth?: number;
+  ogImageHeight?: number;
 }
 
 const {
@@ -30,10 +33,19 @@ const {
   publishedTime,
   modifiedTime,
   articleAuthor,
+  ogImageWidth: ogImageWidthProp,
+  ogImageHeight: ogImageHeightProp,
 } = Astro.props as Props;
 
 const pageUrl = canonical ?? new URL(Astro.url.pathname, SITE.domain).href;
 const ogImage = new URL(image ?? SITE.ogImage, SITE.domain).href;
+const usesSiteDefaultOg = image === undefined || image === null || image === "";
+const ogImageWidth =
+  ogImageWidthProp ??
+  (usesSiteDefaultOg ? SITE.ogImageWidth : 1200);
+const ogImageHeight =
+  ogImageHeightProp ??
+  (usesSiteDefaultOg ? SITE.ogImageHeight : 630);
 const pageTitle =
   title === SITE.name ? title : `${title} | ${SITE.name}`;
 ---
@@ -66,7 +78,7 @@ const pageTitle =
 <link rel="canonical" href={pageUrl} />
 
 {/* Favicons */}
-<link rel="icon" type="image/svg+xml" href={SITE.favicon} />
+<link rel="icon" type="image/svg+xml" href={SITE.logo} />
 <link rel="apple-touch-icon" href={SITE.logo} />
 <link rel="mask-icon" href={SITE.logo} color={SITE.themeColor} />
 
@@ -89,8 +101,8 @@ const pageTitle =
 <meta property="og:description" content={description} />
 <meta property="og:url" content={pageUrl} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:locale" content={SITE.locale} />
 

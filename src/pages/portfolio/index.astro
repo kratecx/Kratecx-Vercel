@@ -3,12 +3,14 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/portfolio/index/HeroComponent.astro";
 import CaseStudies from "@/components/portfolio/index/CaseStudiesComponent.astro";
 import { portfolioCategories, portfolioFilters } from "@/data/portfolioIndex";
+import ProcessCTA from "@/components/process/ProcessCTA.astro";
 ---
 
 <Layout>
   <div class="relative bg-[#050505]">
     <Hero />
     <CaseStudies categories={portfolioCategories} filters={portfolioFilters} />
+    <ProcessCTA />
   </div>
 </Layout>
 
