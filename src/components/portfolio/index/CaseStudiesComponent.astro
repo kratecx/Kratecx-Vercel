@@ -6,15 +6,15 @@ const { categories, filters } = Astro.props;
 
 <div 
   id="portfolio-sticky-bar"
-  class="relative z-20 w-full border-b border-white/5 bg-black pb-2 backdrop-blur-none transition-all duration-500 ease-in-out sm:bg-black/95 sm:backdrop-blur-2xl sm:supports-[backdrop-filter]:bg-black/80 sm:sticky sm:top-15 sm:z-[1000] sm:pb-1 sm:pt-1"
+  class="relative z-20 w-full border-b border-neutral-200 bg-white/95 pb-2 shadow-sm backdrop-blur transition-all duration-500 ease-in-out supports-[backdrop-filter]:bg-white/85 sm:sticky sm:top-15 sm:z-[1000] sm:pb-1 sm:pt-1"
 >
   <div class="max-w-7xl mx-auto px-3 sm:px-6">
-    <div class="flex flex-wrap justify-center gap-2 py-1 sm:items-center sm:gap-3">
+    <div class="flex items-center gap-2 overflow-x-auto py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:justify-center sm:gap-3 sm:overflow-visible">
       {filters.map((f: { id: string; label: string }) => (
         <a
           href={`#${f.id}`}
           data-section={f.id}
-          class="portfolio-nav-btn flex min-h-[2.5rem] min-w-0 shrink-0 grow-0 basis-[calc((100%-1rem)/3)] max-w-[calc((100%-1rem)/3)] items-center justify-center rounded-full border border-white/10 bg-black px-2 py-2 text-center text-[11px] font-medium capitalize leading-tight tracking-normal text-gray-400 transition-all duration-300 hover:border-orange-400 hover:text-white sm:min-h-0 sm:max-w-none sm:basis-auto sm:shrink-0 sm:grow-0 sm:bg-white/5 sm:px-5 sm:py-2 sm:text-[13px]"
+          class="portfolio-nav-btn inline-flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-neutral-300 bg-white px-4 text-center text-[12px] font-medium tracking-wide text-neutral-600 transition-all duration-300 hover:border-[#FB8500] hover:text-[#FB8500] sm:h-auto sm:px-5 sm:py-2 sm:text-[13px]"
         >
           {f.label}
         </a>
@@ -23,50 +23,52 @@ const { categories, filters } = Astro.props;
   </div>
 </div>
 
-<section id="portfolio-display" class="relative min-h-0 bg-white py-14 sm:py-20 lg:py-32 z-20 overflow-x-hidden">
+<section id="portfolio-display" class="relative z-20 min-h-0 overflow-x-hidden bg-[#fcfcfd] py-14 sm:py-20 lg:py-28">
   <div class="max-w-7xl mx-auto px-4 sm:px-6" data-reveal>
     {categories.map((group: any) => (
       <div id={group.id} class="mb-20 sm:mb-28 lg:mb-40 last:mb-0 scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32">
-<div class="flex flex-col items-center text-center mb-12 sm:mb-16 lg:mb-24 group/header">
+<div class="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-20 group/header">
   <div class="flex w-full max-w-full items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 animate-fade-in px-1">
-    <span class="h-0.5 w-6 shrink-0 bg-orange-400 sm:w-10"></span>
-    <p class="min-w-0 font-mono text-[11px] uppercase tracking-[0.25em] text-orange-400 font-bold sm:text-sm sm:tracking-[0.5em]">
+    <span class="h-px w-8 shrink-0 bg-[#FB8500]/70 sm:w-10"></span>
+    <p class="min-w-0 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#FB8500] sm:text-xs sm:tracking-[0.45em]">
       {group.subheading}
     </p>
-    <span class="h-0.5 w-6 shrink-0 bg-orange-400 sm:w-10"></span>
+    <span class="h-px w-8 shrink-0 bg-[#FB8500]/70 sm:w-10"></span>
   </div>
 
-  <h2 class="text-balance break-words px-2 text-6xl sm:text-7xl md:text-[4.75rem] lg:text-[118px] font-semibold text-[#111] leading-[0.9] sm:leading-[0.85] tracking-tighter uppercase mb-4 sm:mb-6">
-    {group.heading.split(' ').slice(0, -1).join(' ')}{' '}
-    <span class="text-orange-400">Archive</span>
+  <h2 class="mb-4 px-2 text-balance break-words text-4xl font-semibold leading-[1.03] tracking-tight text-[#151515] sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl">
+    {group.heading}
   </h2>
 
-  <p class="max-w-3xl px-2 text-base leading-relaxed font-light text-gray-500 sm:text-lg md:text-2xl">
-    <span class="block text-gray-700">{group.desc}</span>
+  <p class="max-w-3xl px-2 text-sm font-normal leading-relaxed text-neutral-600 sm:text-base md:text-lg">
+    <span class="block">{group.desc}</span>
   </p>
 </div>
 
         <div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 md:gap-10">
           {group.projects.map((post: any) => (
-            <a href={`/portfolio/${post.id}`} class="group relative aspect-[16/11] min-h-[220px] overflow-hidden rounded-2xl bg-gray-100 shadow-sm transition-all duration-700 sm:aspect-[16/10] sm:rounded-3xl md:rounded-[3rem] md:hover:-translate-y-2 md:hover:shadow-2xl">
-              <Image
-                src={post.img}
-                alt={post.title}
-                width={1200}
-                height={800}
-                loading="lazy"
-                decoding="async"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 md:group-hover:scale-110"
-              />
-              <div class="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4">
-                <div class="flex flex-row items-start justify-between gap-3 rounded-2xl border border-white/40 bg-white/75 p-4 backdrop-blur-2xl sm:items-end sm:rounded-[2rem] sm:p-6 md:p-8">
+            <a href={post.liveUrl} data-project-card data-project-title={post.title} data-project-url={post.liveUrl} class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_6px_30px_rgba(16,24,40,0.06)] transition-all duration-500 sm:rounded-3xl md:hover:-translate-y-1 md:hover:shadow-[0_14px_40px_rgba(16,24,40,0.12)]">
+              <div class="relative aspect-[2/1] overflow-hidden border-b border-neutral-200 bg-neutral-100">
+                <Image
+                  src={post.img}
+                  alt={post.title}
+                  width={1200}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  class="h-full w-full object-contain object-top transition-transform duration-500 md:group-hover:scale-[1.01]"
+                />
+              </div>
+              <div class="p-3 sm:p-4">
+                <div class="flex flex-row items-start justify-between gap-3 rounded-2xl border border-neutral-200 bg-white p-4 sm:items-end sm:rounded-[1.5rem] sm:p-5 md:p-6">
                   <div class="min-w-0 flex-1 text-left">
-                    <span class="mb-1 block text-[9px] font-black uppercase tracking-[0.3em] text-[#FB8500] sm:mb-2">ID_{post.id}</span>
-                    <h3 class="text-xl font-semibold uppercase tracking-tighter text-[#111] sm:text-2xl md:text-3xl">{post.title}</h3>
-                    <p class="mt-1.5 text-[9px] font-bold uppercase tracking-widest text-gray-500 sm:mt-2 sm:text-[10px]">// {post.tech}</p>
+                    <span class="mb-1 block text-[10px] font-bold uppercase tracking-[0.26em] text-[#FB8500] sm:mb-2">ID_{post.id}</span>
+                    <h3 class="text-lg font-semibold uppercase tracking-tight text-[#171717] sm:text-xl md:text-2xl">{post.title}</h3>
+                    <p class="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 sm:text-[13px]">{post.description}</p>
+                    <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-500 sm:text-[11px]">// {post.tech}</p>
                   </div>
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#111] text-white sm:h-11 sm:rounded-2xl md:h-12 md:w-12 md:group-hover:bg-[#FB8500] md:transition-colors">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#111827] text-white sm:h-11 sm:rounded-2xl md:h-12 md:w-12 md:group-hover:bg-[#FB8500] md:transition-colors">
                     <svg class="h-4 w-4 md:h-5 md:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                   </div>
                 </div>
@@ -79,18 +81,117 @@ const { categories, filters } = Astro.props;
   </div>
 </section>
 
+<div id="portfolio-project-modal" class="portfolio-modal fixed inset-0 z-[1200] hidden items-center justify-center p-0 sm:p-6" aria-hidden="true">
+  <div data-modal-backdrop class="portfolio-modal-backdrop absolute inset-0"></div>
+  <div class="portfolio-modal-panel relative z-[1] flex h-screen w-screen flex-col overflow-hidden bg-[#090f1c] shadow-[0_30px_120px_rgba(0,0,0,0.55)] sm:h-[92vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-2xl sm:border sm:border-neutral-200">
+    <div class="flex items-center justify-between border-b border-white/10 bg-[#0b1220]/95 px-4 py-3 text-white backdrop-blur sm:px-5 supports-[backdrop-filter]:bg-[#0b1220]/85">
+      <div class="flex min-w-0 items-center gap-3 pr-2">
+        <div class="hidden items-center gap-1.5 sm:flex">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
+        </div>
+        <div class="min-w-0">
+          <p id="portfolio-modal-title" class="truncate text-sm font-semibold tracking-wide sm:text-[15px]">Project Preview</p>
+          <p id="portfolio-modal-url" class="truncate text-[11px] text-white/60 sm:text-xs">Loading site...</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a
+          id="portfolio-modal-external-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex h-9 items-center gap-1.5 rounded-md border border-white/20 bg-white/10 px-3.5 text-xs font-medium text-white transition-all hover:-translate-y-0.5 hover:border-[#FB8500] hover:bg-[#FB8500]/15 hover:text-[#ffd39b] sm:text-sm"
+        >
+          Open in new tab
+          <span aria-hidden="true">↗</span>
+        </a>
+        <button id="portfolio-modal-close" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-lg text-white transition-all hover:rotate-90 hover:border-[#FB8500] hover:bg-[#FB8500]/15 hover:text-[#ffd39b]" aria-label="Close preview">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <div class="relative flex-1 bg-[#0b1018]">
+      <div id="portfolio-modal-loader" class="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_top,rgba(251,133,0,0.08),rgba(11,16,24,0.98)_40%)] text-white">
+        <span class="portfolio-spinner"></span>
+        <p class="text-xs uppercase tracking-[0.2em] text-white/70 sm:text-sm">Loading preview...</p>
+      </div>
+
+      <div id="portfolio-modal-fallback" class="absolute inset-0 z-[3] hidden flex-col items-center justify-center px-6 text-center text-white">
+        <p class="mb-3 text-lg font-semibold">Preview is unavailable in iframe</p>
+        <p class="mb-6 max-w-xl text-sm text-white/70 sm:text-base">This website blocks embedded previews for security. You can open it in a new tab.</p>
+        <a
+          id="portfolio-modal-fallback-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-md bg-[#FB8500] px-5 py-2.5 text-sm font-semibold text-[#111827] transition-transform hover:scale-[1.02]"
+        >
+          Open in new tab
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <iframe
+        id="portfolio-modal-iframe"
+        title="Project live preview"
+        class="h-full w-full bg-white [border-radius:0]"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 <style>
   .portfolio-nav-btn.active {
     border-color: #fb923c !important;
-    color: white !important;
-    background: rgba(251, 146, 60, 0.2);
-    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+    color: #111827 !important;
+    background: rgba(251, 146, 60, 0.15);
+    box-shadow: 0 8px 22px rgba(251, 146, 60, 0.2);
   }
 
   .is-hidden {
     opacity: 0;
     pointer-events: none;
     transform: translateY(-20px);
+  }
+
+  .portfolio-modal.is-open {
+    display: flex;
+  }
+
+  .portfolio-modal-backdrop {
+    background: radial-gradient(circle at 20% 10%, rgba(251, 133, 0, 0.18), rgba(2, 6, 23, 0.84) 48%, rgba(2, 6, 23, 0.92));
+    backdrop-filter: blur(10px);
+  }
+
+  .portfolio-modal-panel {
+    transform: translateY(16px) scale(0.965);
+    opacity: 0;
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease;
+  }
+
+  .portfolio-modal.is-open .portfolio-modal-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .portfolio-spinner {
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 9999px;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-top-color: #fb8500;
+    animation: portfolio-spin 0.8s linear infinite;
+  }
+
+  @keyframes portfolio-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
 
@@ -118,11 +219,9 @@ const { categories, filters } = Astro.props;
       });
     }, observerOptions);
 
-    // Watch all categories passed via props
-    document.querySelectorAll('[id]').forEach(section => {
-      if (['business', 'startup', 'ecommerce', 'landing', 'redesign'].includes(section.id)) {
-        sectionObserver.observe(section);
-      }
+    // Watch all category sections rendered on the page
+    document.querySelectorAll('#portfolio-display > div > [id]').forEach(section => {
+      sectionObserver.observe(section);
     });
 
     // 2. FOOTER AVOIDANCE
@@ -135,5 +234,102 @@ const { categories, filters } = Astro.props;
       }, { threshold: 0.1 });
       footerObserver.observe(footer);
     }
+
+    const body = document.body;
+    const modal = document.getElementById('portfolio-project-modal');
+    const modalBackdrop = modal?.querySelector('[data-modal-backdrop]');
+    const closeBtn = document.getElementById('portfolio-modal-close');
+    const modalTitle = document.getElementById('portfolio-modal-title');
+    const modalUrl = document.getElementById('portfolio-modal-url');
+    const openInNewTabLink = document.getElementById('portfolio-modal-external-link');
+    const fallbackLink = document.getElementById('portfolio-modal-fallback-link');
+    const iframe = document.getElementById('portfolio-modal-iframe');
+    const loader = document.getElementById('portfolio-modal-loader');
+    const fallback = document.getElementById('portfolio-modal-fallback');
+    const cards = document.querySelectorAll('[data-project-card]');
+
+    let iframeLoaded = false;
+    let fallbackTimer: number | undefined;
+
+    const clearTimer = () => {
+      if (fallbackTimer) {
+        window.clearTimeout(fallbackTimer);
+        fallbackTimer = undefined;
+      }
+    };
+
+    const setLoadingState = () => {
+      iframeLoaded = false;
+      loader?.classList.remove('hidden');
+      fallback?.classList.add('hidden');
+      clearTimer();
+      fallbackTimer = window.setTimeout(() => {
+        if (!iframeLoaded) {
+          loader?.classList.add('hidden');
+          fallback?.classList.remove('hidden');
+        }
+      }, 6500);
+    };
+
+    const openModal = (title: string, url: string) => {
+      if (!modal || !(iframe instanceof HTMLIFrameElement)) return;
+      let displayUrl = url;
+      try {
+        const parsed = new URL(url);
+        displayUrl = parsed.hostname.replace(/^www\./, '');
+      } catch {
+        // Keep original URL if parsing fails
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      body.classList.add('overflow-hidden');
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalUrl) modalUrl.textContent = displayUrl;
+      if (openInNewTabLink instanceof HTMLAnchorElement) openInNewTabLink.href = url;
+      if (fallbackLink instanceof HTMLAnchorElement) fallbackLink.href = url;
+      setLoadingState();
+      iframe.src = url;
+    };
+
+    const closeModal = () => {
+      if (!modal || !(iframe instanceof HTMLIFrameElement)) return;
+      modal.classList.remove('is-open');
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      body.classList.remove('overflow-hidden');
+      iframe.src = 'about:blank';
+      clearTimer();
+      loader?.classList.remove('hidden');
+      fallback?.classList.add('hidden');
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = event.currentTarget;
+        if (!(target instanceof HTMLElement)) return;
+        const title = target.dataset.projectTitle ?? 'Project Preview';
+        const url = target.dataset.projectUrl;
+        if (!url) return;
+        openModal(title, url);
+      });
+    });
+
+    if (iframe instanceof HTMLIFrameElement) {
+      iframe.addEventListener('load', () => {
+        iframeLoaded = true;
+        clearTimer();
+        loader?.classList.add('hidden');
+      });
+    }
+
+    closeBtn?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal?.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
   });
 </script>
