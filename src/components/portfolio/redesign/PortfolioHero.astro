@@ -24,7 +24,10 @@ interface Props {
 
 <section class="relative min-h-screen w-full bg-[#050505] flex flex-col lg:flex-row overflow-hidden font-sans">
   
-  <div class="absolute inset-0 lg:top-0 lg:right-0 lg:left-auto w-full lg:w-1/2 h-full z-0 overflow-hidden lg:border-l border-zinc-900/20">
+  <!-- Mobile / tablet: full-bleed; lg+: shorter, vertically centered preview so it isn’t stretched to full viewport height -->
+  <div
+    class="absolute inset-0 z-0 w-full overflow-hidden border-zinc-900/20 lg:inset-auto lg:left-1/2 lg:right-0 lg:top-1/2 lg:w-1/2 lg:-translate-y-1/2 lg:border-l lg:h-[min(72vh,700px)] lg:min-h-[280px] lg:max-h-[78vh]"
+  >
     {Astro.props.heroImage ? (
       <Image
         src={Astro.props.heroImage}
@@ -32,7 +35,7 @@ interface Props {
         height={1333}
         alt={`${Astro.props.title ?? "Project"} architectural visual`}
         sizes="(max-width: 1024px) 100vw, 50vw"
-        class="h-full w-full scale-110 object-cover brightness-[0.5] lg:brightness-[0.7] contrast-110 grayscale-0 seamless-mask lg:scale-100"
+        class="h-full w-full scale-110 object-cover object-center brightness-[0.5] lg:scale-100 lg:brightness-[0.7] contrast-110 grayscale-0 seamless-mask"
       />
     ) : null}
     {/* Mobile-only readability overlay */}
