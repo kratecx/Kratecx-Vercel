@@ -26,7 +26,7 @@ interface Props {
   
   <!-- Mobile / tablet: full-bleed; lg+: shorter, vertically centered preview so it isn’t stretched to full viewport height -->
   <div
-    class="absolute inset-0 z-0 w-full overflow-hidden border-zinc-900/20 lg:inset-auto lg:left-1/2 lg:right-0 lg:top-1/2 lg:w-1/2 lg:-translate-y-1/2 lg:border-l lg:h-[min(72vh,700px)] lg:min-h-[280px] lg:max-h-[78vh]"
+    class="absolute inset-0 z-0 w-full overflow-hidden lg:inset-auto lg:left-1/2 lg:right-0 lg:top-1/2 lg:w-1/2 lg:-translate-y-1/2 lg:h-[min(72vh,700px)] lg:min-h-[280px] lg:max-h-[78vh] lg:rounded-l-xl lg:shadow-[inset_1px_0_0_rgba(255,255,255,0.04)]"
   >
     {Astro.props.heroImage ? (
       <Image
@@ -35,7 +35,7 @@ interface Props {
         height={1333}
         alt={`${Astro.props.title ?? "Project"} architectural visual`}
         sizes="(max-width: 1024px) 100vw, 50vw"
-        class="h-full w-full scale-110 object-cover object-center brightness-[0.5] lg:scale-100 lg:brightness-[0.7] contrast-110 grayscale-0 seamless-mask"
+        class="hero-preview-img h-full w-full scale-110 object-cover object-center brightness-[0.5] lg:scale-100 lg:brightness-[0.7] contrast-110 grayscale-0 seamless-mask"
       />
     ) : null}
     {/* Mobile-only readability overlay */}
@@ -108,12 +108,15 @@ interface Props {
 </section>
 
 <style>
+  /* Fade into text column only — bottom/top mask on a fixed-height box looked like a harsh “border” */
   .seamless-mask {
-    -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%),
-                        linear-gradient(to top, black 80%, transparent 100%);
-    mask-image: linear-gradient(to left, black 70%, transparent 100%),
-                linear-gradient(to top, black 80%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(to left, black 55%, transparent 100%);
+    mask-image: linear-gradient(to left, black 62%, transparent 100%);
+  }
+  @media (min-width: 1024px) {
+    .hero-preview-img.seamless-mask {
+      -webkit-mask-image: linear-gradient(to left, black 68%, transparent 100%);
+      mask-image: linear-gradient(to left, black 72%, transparent 100%);
+    }
   }
 </style>

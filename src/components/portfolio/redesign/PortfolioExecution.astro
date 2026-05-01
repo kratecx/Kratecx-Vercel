@@ -135,8 +135,8 @@ interface Props {
       </div>
 
       <div class="relative w-full aspect-[4/3] flex items-center justify-center pt-8 pb-20 sm:py-14 lg:py-20 lg:mt-10">
-        <div class="relative z-10 w-[100%] aspect-video rounded-2xl bg-black p-[1px] shadow-[0_60px_120px_-40px_rgba(0,0,0,0.45)] lg:shadow-[0_100px_180px_-40px_rgba(0,0,0,0.6)] ring-1 ring-white/5 overflow-hidden">
-          <div class="relative w-full h-full bg-black">
+        <div class="relative z-10 w-[100%] aspect-video overflow-hidden rounded-2xl bg-zinc-950 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.45)] lg:shadow-[0_100px_180px_-40px_rgba(0,0,0,0.55)]">
+          <div class="relative h-full w-full bg-black">
             {Astro.props.section3ImageBack ? (
               <Image
                 src={Astro.props.section3ImageBack}
@@ -147,11 +147,10 @@ interface Props {
                 class="absolute inset-0 h-full w-full object-cover"
               />
             ) : null}
-            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.1] pointer-events-none"></div>
-            <div class="absolute inset-0 border border-white/5 rounded-2xl"></div>
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08]"></div>
           </div>
         </div>
-        <div class="absolute z-20 -bottom-10 sm:-bottom-14 lg:-bottom-16 -right-4 sm:-right-6 lg:-right-8 w-[72%] sm:w-[68%] aspect-video border-[1px] border-zinc-200 rounded-2xl sm:rounded-3xl bg-white p-[1px] shadow-[-25px_25px_60px_-20px_rgba(0,0,0,0.2)] lg:shadow-[-50px_50px_120px_-30px_rgba(0,0,0,0.25)] ring-1 ring-black/5 overflow-hidden">
+        <div class="absolute z-20 -bottom-10 sm:-bottom-14 lg:-bottom-16 -right-4 sm:-right-6 lg:-right-8 w-[72%] sm:w-[68%] overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-[-25px_25px_60px_-20px_rgba(0,0,0,0.22)] sm:rounded-3xl lg:shadow-[-50px_50px_120px_-30px_rgba(0,0,0,0.28)] aspect-video">
           <div class="relative w-full h-full bg-black">
             {Astro.props.section3ImageFront ? (
               <Image
