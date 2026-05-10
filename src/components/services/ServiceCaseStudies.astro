@@ -1,34 +1,24 @@
 ---
-import type { ImageMetadata } from "astro";
+/**
+ * Same portfolio strip as home `Featured.astro` — real projects, matching layout & CTAs.
+ */
 import { Image } from "astro:assets";
-
-type CaseStudy = {
-  tag: string;
-  title: string;
-  desc: string;
-  image: string | ImageMetadata;
-  link: string;
-};
+import { featuredPortfolioProjects as projects } from "@/data/featuredPortfolioProjects";
 
 interface Props {
   title?: string;
   titleAccent?: string;
   eyebrow?: string;
   intro?: string;
-  projects: CaseStudy[];
 }
 
 const {
-  title = "Digital",
-  titleAccent = "Mastery",
-  eyebrow = "Case Studies",
-  intro = "A selection of projects focused on improving performance, building trust, and driving measurable business growth.",
-  projects,
+  title = "Portfolio",
+  titleAccent = "Highlights",
+  eyebrow = "Portfolio",
+  intro =
+    "A selection of live portfolio projects focused on performance, trust, and measurable business growth.",
 } = Astro.props;
-
-if (!projects?.length) {
-  throw new Error("ServiceCaseStudies: `projects` is required and must not be empty.");
-}
 
 const sectionId = "service-case-studies-carousel";
 ---
@@ -36,7 +26,7 @@ const sectionId = "service-case-studies-carousel";
 <section
   class="relative overflow-hidden bg-white py-16 sm:py-20 md:py-24"
   id={sectionId}
-  aria-label="Case studies"
+  aria-label="Portfolio highlights"
 >
   <div
     id="service-case-zone-left"
@@ -97,13 +87,13 @@ const sectionId = "service-case-studies-carousel";
     </div>
   </div>
 
-  <!-- Small screens: same snap row as home Featured -->
+  <!-- Small screens: horizontal snap (matches home Featured) -->
   <div
     id="service-case-mobile-scroll"
     data-reveal
     class="service-case-mobile-strip flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 snap-x snap-mandatory scroll-smooth scroll-pl-4 scroll-pr-4 px-4 md:hidden"
     tabindex="0"
-    aria-label="Case studies — swipe horizontally"
+    aria-label="Portfolio projects — swipe horizontally"
   >
     {
       projects.map((project, i) => (
@@ -111,40 +101,28 @@ const sectionId = "service-case-studies-carousel";
           class="service-case-mobile-card w-[min(19.5rem,calc(100vw-2rem))] shrink-0 snap-start"
           data-slide-index={i}
         >
-          <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-black/5 bg-black shadow-xl sm:aspect-video sm:rounded-[2rem]">
-            {typeof project.image === "string" ? (
-              <img
-                src={project.image}
-                alt={project.title}
-                width={1200}
-                height={675}
-                class="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            ) : (
-              <Image
-                src={project.image as ImageMetadata}
-                alt={project.title}
-                width={1200}
-                height={675}
-                class="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            )}
+          <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-black/5 bg-[#050505] shadow-xl sm:aspect-video sm:rounded-[2rem]">
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={1200}
+              height={675}
+              class="h-full w-full object-contain object-top opacity-95 transition-transform duration-700 group-hover:scale-[1.02]"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
             <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/50 to-transparent p-4 sm:p-5">
               <p class="mb-2 text-[10px] font-black uppercase tracking-[0.35em] text-[#FB8500]">{project.tag}</p>
-              <h3 class="mb-2 text-2xl font-semibold uppercase leading-none tracking-tighter text-balance text-white sm:text-3xl">
+              <h3 class="mb-2 text-2xl font-semibold uppercase leading-[0.95] tracking-tighter text-white sm:text-3xl">
                 {project.title}
               </h3>
-              <p class="mb-4 line-clamp-2 text-sm font-medium leading-relaxed text-balance text-white/75">
+              <p class="mb-4 line-clamp-2 max-w-[36ch] text-sm font-medium leading-relaxed text-white/80">
                 {project.desc}
               </p>
-              <div class="group relative w-full max-w-full overflow-hidden rounded-full bg-gradient-to-r from-black/10 via-orange-400/50 to-black/10 p-px">
-                <div class="absolute -inset-1 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100 bg-orange-400/20" />
+              <div class="relative w-full max-w-full group rounded-full p-px overflow-hidden bg-gradient-to-r from-black/10 via-orange-400/50 to-black/10">
+                <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                 <a
-                  href={project.link}
+                  href={`/portfolio/${project.id}`}
                   class="relative flex w-full max-w-full items-center gap-3 rounded-full bg-[#0a0a0a] px-3 py-2.5 transition-all duration-300 hover:bg-black sm:gap-4 sm:px-4 sm:py-3"
                 >
                   <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] sm:h-10 sm:w-10">
@@ -168,7 +146,7 @@ const sectionId = "service-case-studies-carousel";
                       Project Preview
                     </p>
                     <span class="block text-sm font-bold leading-tight tracking-tight text-white sm:text-base">
-                      View Case Study
+                      View Portfolio
                     </span>
                   </div>
                 </a>
@@ -180,7 +158,7 @@ const sectionId = "service-case-studies-carousel";
     }
   </div>
 
-  <!-- md+: home Featured carousel sizing -->
+  <!-- md+: hover carousel (matches home Featured) -->
   <div class="relative hidden w-full overflow-visible md:block" data-reveal>
     <div
       id="service-apple-track"
@@ -192,45 +170,33 @@ const sectionId = "service-case-studies-carousel";
             class="service-apple-card min-w-[75vw] px-2 transition-all duration-1000 sm:px-4 lg:min-w-[70vw]"
             data-index={i}
           >
-            <div class="group relative aspect-video overflow-hidden rounded-[3rem] border border-black/5 bg-black shadow-2xl">
-              {typeof project.image === "string" ? (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  width={1200}
-                  height={675}
-                  class="h-full w-full object-cover opacity-50 grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105"
-                  loading={i === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                />
-              ) : (
-                <Image
-                  src={project.image as ImageMetadata}
-                  alt={project.title}
-                  width={1200}
-                  height={675}
-                  class="h-full w-full object-cover opacity-50 grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105"
-                  loading={i === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                />
-              )}
+            <div class="group relative aspect-video overflow-hidden rounded-[3rem] border border-black/5 bg-[#050505] shadow-2xl">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={1200}
+                height={675}
+                class="h-full w-full object-contain object-top opacity-95 transition-transform duration-1000 group-hover:scale-[1.02]"
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
 
-              <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/20 to-transparent p-8 md:p-12 lg:p-20">
+              <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/92 via-black/55 to-black/10 p-8 md:p-12 lg:p-20">
                 <p class="mb-3 text-[10px] font-black uppercase tracking-[0.4em] text-[#FB8500] sm:mb-4 md:text-xs">
                   {project.tag}
                 </p>
-                <h3 class="mb-6 text-5xl font-semibold uppercase leading-none tracking-tighter text-balance text-white sm:mb-8 md:text-8xl">
+                <h3 class="mb-5 max-w-[15ch] text-4xl font-semibold uppercase leading-[0.9] tracking-tighter text-white sm:mb-7 sm:text-5xl md:text-7xl">
                   {project.title}
                 </h3>
 
                 <div class="service-apple-reveal translate-y-10 opacity-0 transition-all delay-300 duration-700">
-                  <p class="mb-8 max-w-2xl text-balance text-lg font-medium leading-relaxed text-white/70 sm:mb-12 md:text-2xl">
+                  <p class="mb-8 max-w-2xl text-base font-medium leading-relaxed text-white/80 sm:mb-12 sm:text-lg md:text-xl">
                     {project.desc}
                   </p>
-                  <div class="group relative w-full max-w-md overflow-hidden rounded-full bg-gradient-to-r from-white/10 via-orange-400/50 to-white/10 p-px lg:max-w-lg">
-                    <div class="absolute -inset-1 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100 bg-orange-400/20" />
+                  <div class="relative w-full max-w-md group rounded-full p-px overflow-hidden bg-gradient-to-r from-white/10 via-orange-400/50 to-white/10 lg:max-w-lg">
+                    <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                     <a
-                      href={project.link}
+                      href={`/portfolio/${project.id}`}
                       class="relative flex max-w-full items-center gap-4 rounded-full bg-[#0a0a0a] px-3 py-3 transition-all duration-300 hover:bg-black sm:gap-6 sm:px-4 lg:px-6 lg:py-4"
                     >
                       <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] lg:h-14 lg:w-14">
@@ -254,7 +220,7 @@ const sectionId = "service-case-studies-carousel";
                           Project Preview
                         </p>
                         <span class="text-lg font-bold tracking-tight text-white whitespace-normal sm:whitespace-nowrap lg:text-xl">
-                          View Case Study
+                          View Portfolio
                         </span>
                       </div>
                     </a>
@@ -265,6 +231,36 @@ const sectionId = "service-case-studies-carousel";
           </div>
         ))
       }
+    </div>
+  </div>
+
+  <div class="mx-auto mt-10 w-full max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16" data-reveal>
+    <div class="rounded-3xl border border-black/10 bg-black/[0.03] p-5 sm:p-6 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:p-8">
+      <div class="max-w-2xl">
+        <p class="mb-2 text-[10px] font-black uppercase tracking-[.25em] text-orange-500">Need More Examples?</p>
+        <h3 class="text-3xl font-semibold uppercase leading-[0.95] tracking-tight text-black sm:text-4xl lg:text-5xl">See More Portfolio Work</h3>
+        <p class="mt-3 text-sm font-medium leading-relaxed text-gray-600 sm:text-base">
+          Browse more portfolio projects to see how each build supports speed, trust, conversion, and long-term growth.
+        </p>
+      </div>
+
+      <div class="mt-6 lg:mt-0 lg:shrink-0">
+        <div class="relative w-full max-w-full group rounded-full p-px overflow-hidden bg-gradient-to-r from-black/10 via-orange-400/50 to-black/10 sm:w-auto">
+          <div class="absolute -inset-1 bg-orange-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+          <a
+            href="/portfolio"
+            class="relative flex max-w-full items-center gap-4 rounded-full bg-[#0a0a0a] px-3 py-3 transition-all duration-300 hover:bg-black sm:gap-6 sm:px-4 lg:px-6 lg:py-4"
+          >
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-400 text-white shadow-[0_0_15px_rgba(251,133,0,0.4)] transition-transform duration-700 group-hover:rotate-[360deg] lg:h-14 lg:w-14">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+            <div class="min-w-0 pr-3 text-left sm:pr-6">
+              <p class="mb-0.5 text-[10px] font-black uppercase tracking-[.25em] text-orange-400 lg:text-[11px]">Want More Live Projects?</p>
+              <span class="text-lg font-bold tracking-tight text-white whitespace-normal sm:whitespace-nowrap lg:text-xl">Explore Portfolio</span>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

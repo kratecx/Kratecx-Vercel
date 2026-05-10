@@ -25,7 +25,7 @@ const getNextPortfolios = (index: number) => {
   }));
 };
 
-/** Cover + uploaded gallery shots for execution / matrix sections */
+/** Cover + uploaded gallery shots for execution sections */
 const projectVisuals = (project: (typeof flatProjects)[number]) => {
   const ordered = [
     project.img,
@@ -34,20 +34,12 @@ const projectVisuals = (project: (typeof flatProjects)[number]) => {
   const pick = (i: number) =>
     ordered[Math.min(Math.max(i, 0), ordered.length - 1)];
 
-  /** Delivery Matrix — each row gets a unique pair across [cover … gallery]; indices chosen to avoid repeats within rows */
-  const matrixRowImages = [
-    { draftImage: pick(4), productionImage: pick(5) },
-    { draftImage: pick(6), productionImage: pick(1) },
-    { draftImage: pick(0), productionImage: pick(2) },
-  ] as const;
-
   return {
     executionHero: pick(1),
     sectionBack: pick(2),
     sectionFront: pick(3),
-    matrixDraft: pick(4),
-    matrixProduction: pick(5),
-    matrixRowImages,
+    /** Main + gallery frames for the case-study slider (cap at six) */
+    galleryImages: ordered.slice(0, 6),
   };
 };
 
@@ -126,6 +118,7 @@ export const allProjects = flatProjects.map((project, index) => {
     heroHeadingBottom: "System",
     heroDescription: `UI and content for ${project.title} were assembled for clarity, consistency, and conversion-focused experience.`,
     heroImage: v.executionHero,
+    heroMobileImage: project.mobImage,
     section2Title: "Design Execution",
     checkpoints: [
       { title: "Visual Hierarchy", text: "Section order and spacing tuned for fast content scanning." },
@@ -142,39 +135,10 @@ export const allProjects = flatProjects.map((project, index) => {
       { title: "Content Flow", text: "Logical sequencing from overview to detailed project context." },
       { title: "Card-to-Page Continuity", text: "Portfolio card click-through preserves narrative and identity." },
     ],
-    matrixTitleTop: "Delivery",
-    matrixTitleBottom: "Matrix",
-    matrixDraftImage: v.matrixDraft,
-    matrixProductionImage: v.matrixProduction,
-    auditMatrix: [
-      {
-        id: "01",
-        label: "Action Trigger",
-        before_desc: "Generic project previews caused context loss.",
-        after_desc: "Dedicated portfolio detail page with richer context.",
-        rationale: "Improves clarity and keeps users focused on project narrative.",
-        draftImage: v.matrixRowImages[0].draftImage,
-        productionImage: v.matrixRowImages[0].productionImage,
-      },
-      {
-        id: "02",
-        label: "Data Intake",
-        before_desc: "Scattered content and disconnected references.",
-        after_desc: "Unified sectional layout with contextual storytelling.",
-        rationale: "Reduces friction and increases comprehension on first visit.",
-        draftImage: v.matrixRowImages[1].draftImage,
-        productionImage: v.matrixRowImages[1].productionImage,
-      },
-      {
-        id: "03",
-        label: "Conversion Node",
-        before_desc: "Limited project depth reduced confidence.",
-        after_desc: "Structured case-study style page with visual support.",
-        rationale: "Builds trust and supports better conversion intent.",
-        draftImage: v.matrixRowImages[2].draftImage,
-        productionImage: v.matrixRowImages[2].productionImage,
-      },
-    ],
+    galleryTitleTop: "Project",
+    galleryTitleBottom: "Gallery",
+    caseStudyTitle: project.title,
+    galleryImages: v.galleryImages,
   },
   results: {
     tagline: "The Impact",

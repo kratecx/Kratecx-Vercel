@@ -10,9 +10,19 @@ interface Props {
     label: string;
     value: string;
   }>;
+  eyebrow?: string;
+  title?: string;
+  titleAccent?: string;
+  intro?: string;
 }
 
-const { items = [] } = Astro.props;
+const {
+  items = [],
+  eyebrow = "Capabilities",
+  title = "Technical",
+  titleAccent = "depth",
+  intro = "Practices, systems, and standards we apply so delivery stays predictable and measurable.",
+} = Astro.props;
 ---
 
 <section class="overflow-hidden bg-[#050505] py-14 font-sans text-white sm:py-20 lg:py-24">
@@ -23,20 +33,19 @@ const { items = [] } = Astro.props;
         <p
           class="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-xs sm:tracking-[0.45em] md:text-[14px] md:tracking-[0.5em]"
         >
-          System Verification
+          {eyebrow}
         </p>
         <span class="block h-px w-8 bg-orange-400 sm:w-10"></span>
       </div>
       <h2
         class="text-balance text-4xl font-semibold uppercase leading-[0.88] tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
-        Service
-        <span class="mt-1 block text-orange-400 sm:mt-2 sm:inline sm:mt-0">Ledger</span>
+        {title}
+        <span class="mt-1 block text-orange-400 sm:mt-2 sm:inline sm:mt-0">{titleAccent}</span>
       </h2>
       <div class="my-3 h-1 w-48 max-w-[85vw] rounded-full bg-orange-400 opacity-50 sm:my-4 sm:w-60"></div>
       <p class="mx-auto max-w-2xl px-1 text-sm font-light leading-relaxed text-gray-400 sm:text-base md:text-lg">
-        A precision-engineered lifecycle designed to transition your product from initial concept to
-        market-dominant scale.
+        {intro}
       </p>
     </div>
 

@@ -14,6 +14,7 @@ import service_image_support from "@/assets/home/service_image_support.png"
 const services = [
   {
     slug: "custom-web-apps",
+    href: "/services/custom-web-apps",
     title: "Custom Web Apps",
     description: "Custom-built web applications designed to support your business processes, improve efficiency, and scale as you grow.",
     features: ["Business-Focused", "Scalable Architecture", "High Performance"],
@@ -30,6 +31,8 @@ const services = [
   },
   {
     slug: "frontend-development",
+    /** Closest themed service page (no dedicated “frontend” route yet). */
+    href: "/services/business-websites",
     title: "Frontend Development",
     description: "Clean, modern interfaces that deliver a smooth user experience and reflect your brand professionally.",
     features: ["Responsive Design", "Fast Performance", "User-Friendly UI"],
@@ -38,6 +41,7 @@ const services = [
   },
   {
     slug: "backend-development",
+    href: "/services/backend-development",
     title: "Backend Development",
     description: "Reliable and secure systems that power your website, manage data, and ensure everything runs smoothly.",
     features: ["Secure Systems", "API Integration", "Reliable Performance"],
@@ -46,6 +50,7 @@ const services = [
   },
   {
     slug: "maintenance-support",
+    href: "/services/maintenance-support",
     title: "Maintenance & Support",
     description: "Ongoing support to keep your website secure, updated, and performing at its best over time.",
     features: ["Regular Updates", "Security Monitoring", "Ongoing Support"],
@@ -54,6 +59,7 @@ const services = [
   },
   {
     slug: "speed-optimization",
+    href: "/services/speed-optimization",
     title: "Speed Optimization",
     description: "Improve your website’s speed and performance to reduce drop-offs and enhance user experience.",
     features: ["Faster Load Times", "Better Experience", "Improved Conversions"],
@@ -92,8 +98,9 @@ const services = [
     >
       {services.map((service) => (
         <a
-          href={`/services#${service.slug}`}
+          href={service.href}
           class="service-card group relative flex w-[min(88vw,19.5rem)] shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-neutral-900/30 p-4 max-md:min-h-[260px] md:h-auto md:min-h-[440px] md:w-auto md:max-w-full md:p-8"
+          aria-label={`${service.title} — view service details`}
         >
           
           <div class="absolute inset-0 z-0 pointer-events-none rounded-2xl overflow-hidden">

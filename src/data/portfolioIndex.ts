@@ -87,6 +87,18 @@ import qas4 from "@/assets/Portfolio/qas4.png";
 import qas5 from "@/assets/Portfolio/qas5.png";
 import qas6 from "@/assets/Portfolio/qas6.png";
 
+/* —— Mobile previews (paired with desktop hero on case study pages) —— */
+import mobActivImg from "@/assets/Portfolio/mob_activ.png";
+import antennaMobImg from "@/assets/Portfolio/antenna_mob.png";
+import efMobImg from "@/assets/Portfolio/e&f_mob.png";
+import graysMobImg from "@/assets/Portfolio/grays_mob.png";
+import hamzaMobImg from "@/assets/Portfolio/hamza_mob.png";
+import qasMobImg from "@/assets/Portfolio/qas_mob.png";
+import sysMobImg from "@/assets/Portfolio/system_mob.png";
+import victMobImg from "@/assets/Portfolio/vict_mob.png";
+import chatMobImg from "@/assets/Portfolio/chat_mob.png";
+import craftMobImg from "@/assets/Portfolio/craft_mob.png";
+
 export type PortfolioGridProject = {
   id: string;
   title: string;
@@ -95,6 +107,8 @@ export type PortfolioGridProject = {
   img: ImageMetadata;
   /** Extra screenshots for case-study / detail layouts (excluding cover unless you omit duplicate). */
   gallery?: ImageMetadata[];
+  /** Mobile viewport screenshot shown beside / below desktop hero (`*_mob.png` assets). */
+  mobImage?: ImageMetadata;
   liveUrl: string;
 };
 
@@ -119,6 +133,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "WordPress // Elementor",
         description: "Corporate business website focused on service visibility and consultation-driven conversions.",
         img: activ8StoryImg,
+        mobImage: mobActivImg,
         gallery: [activStory2, activStory3, activStory4, activStory5, activStory6, activStory7],
         liveUrl: "https://activ8story.com/",
       },
@@ -128,6 +143,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "WordPress // Conversion UX",
         description: "Local service website built to drive direct calls, quote requests, and fast trust-building.",
         img: bestAntennaImg,
+        mobImage: antennaMobImg,
         gallery: [antenna1, antenna2, antenna3, antenna4, antenna5, antenna6],
         liveUrl: "https://www.bestantennas.com.au/",
       },
@@ -145,6 +161,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "WordPress // Custom Theme",
         description: "Financial solutions site with a credibility-first layout and clear lead capture touchpoints.",
         img: eAndGFinancialImg,
+        mobImage: efMobImg,
         gallery: [efg1, efg2, efg3, efg4, efg5, efg6],
         liveUrl: "https://egfsolution.com/",
       },
@@ -154,6 +171,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "WordPress // Booking Flow",
         description: "Travel agency homepage designed to spotlight packages and generate booking inquiries.",
         img: graysTravelsImg,
+        mobImage: graysMobImg,
         gallery: [gray1, gray2, gray3, gray4, gray5, gray6],
         liveUrl: "https://graystravels.com/",
       },
@@ -171,6 +189,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "Shopify // E-Commerce",
         description: "Wall paint Shopify store focused on clean product browsing, color-led merchandising, and checkout flow.",
         img: craftColorsImg,
+        mobImage: craftMobImg,
         gallery: [craft1, craft2, craft3, craft4, craft5, craft6],
         liveUrl: "https://www.craft-colors.de/",
       },
@@ -197,6 +216,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "SaaS UI // Product Marketing",
         description: "Platform-focused experience with strong messaging hierarchy and conversion-centered layout.",
         img: system4SolutionsImg,
+        mobImage: sysMobImg,
         gallery: [sys1, sys2, sys3, sys4, sys5, sys6],
         liveUrl: "https://system4solution.com/",
       },
@@ -206,6 +226,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "AI SaaS // Shopify App",
         description: "AI-powered Shopify assistant website built to explain product value and drive trial signups.",
         img: chatifaiImg,
+        mobImage: chatMobImg,
         gallery: [chatify1, chatify2, chatify3, chatify4, chatify5, chatify6],
         liveUrl: "https://chatifai.eu/",
       },
@@ -223,6 +244,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "Landing UX // Retail Campaign",
         description: "Retail-focused landing layout with strong category highlights and clear conversion pathways.",
         img: victoryStoreImg,
+        mobImage: victMobImg,
         gallery: [vic1, vic2, vic3, vic4, vic5, vic6],
         liveUrl: "https://victorystore.pk/",
       },
@@ -232,6 +254,7 @@ export const portfolioCategories: PortfolioCategory[] = [
         tech: "WooCommerce // Catalog UX",
         description: "Corporate gifts store focused on category-first browsing and clear product merchandising.",
         img: qasGiftsImg,
+        mobImage: qasMobImg,
         gallery: [qas1, qas2, qas3, qas4, qas5, qas6],
         liveUrl: "https://qasgifts.ae/",
       },

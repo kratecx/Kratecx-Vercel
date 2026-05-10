@@ -1,20 +1,7 @@
 ---
 // Case studies — md+: hover carousel (original desktop); smaller screens: snap swipe row
 import { Image } from 'astro:assets';
-import { portfolioCategories } from '@/data/portfolioIndex';
-
-const projects = portfolioCategories
-  .flatMap((category) =>
-    category.projects.map((project) => ({
-      id: project.id,
-      tag: category.subheading,
-      title: project.title,
-      desc: project.description,
-      image: project.img,
-      link: project.liveUrl,
-    })),
-  )
-  .slice(0, 3);
+import { featuredPortfolioProjects as projects } from '@/data/featuredPortfolioProjects';
 ---
 
 <section class="relative overflow-hidden bg-white py-16 sm:py-20 md:py-24" id="apple-hover-carousel">

@@ -1,0 +1,75 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import {
+  SERVICE_PAGE_SLUGS,
+  getServicePage,
+} from "@/data/service";
+import { getServiceSectionHeadings } from "@/data/service/serviceSectionHeadings";
+import ServiceHero from "@/components/services/ServiceHero.astro";
+import ServiceWhatIsIncluded from "@/components/services/ServiceWhatIsIncluded.astro";
+import ServiceDeliverables from "@/components/services/ServiceDeliverables.astro";
+import ServiceCaseStudies from "@/components/services/ServiceCaseStudies.astro";
+import ServiceFAQs from "@/components/services/mainpage/ServiceFAQ.astro";
+
+import { SITE, resolveSeo } from "@/data/seo";
+import { serviceSchema, faqSchema } from "@/data/schema";
+
+export function getStaticPaths() {
+  return SERVICE_PAGE_SLUGS.map((slug) => ({ params: { slug } }));
+}
+
+const slug = Astro.params.slug ?? "";
+const p = getServicePage(slug);
+if (!p) {
+  return Astro.redirect("/services");
+}
+
+const pathname = `/services/${slug}`;
+const seo = resolveSeo(pathname);
+const pageUrl = new URL(pathname, SITE.domain).href;
+
+const sectionStrip = getServiceSectionHeadings(slug);
+
+const schemas = [
+  serviceSchema({
+    name: p.jsonLd.serviceName,
+    description: seo.description,
+    url: pageUrl,
+    serviceType: p.jsonLd.serviceType,
+  }),
+  faqSchema([...p.faqs], pageUrl),
+];
+---
+
+<Layout extraSchemas={schemas}>
+  <ServiceHero
+    {...p.hero}
+    title={p.jsonLd.serviceName}
+    subtitle=""
+    mainImage={p.heroImage}
+  />
+
+  <ServiceWhatIsIncluded
+    items={[...p.features]}
+    eyebrow={sectionStrip?.features?.eyebrow}
+    title={sectionStrip?.features?.title}
+    titleAccent={sectionStrip?.features?.titleAccent}
+    intro={sectionStrip?.features?.intro}
+  />
+
+  <ServiceDeliverables
+    deliverables={[...p.deliverables]}
+    mainImage={p.heroImage}
+    eyebrow={sectionStrip?.deliverables?.eyebrow}
+    title={sectionStrip?.deliverables?.title}
+    titleAccent={sectionStrip?.deliverables?.titleAccent}
+    intro={sectionStrip?.deliverables?.intro}
+  />
+
+  <ServiceCaseStudies
+    title={p.sectionTitles.caseStudiesTitle}
+    titleAccent={p.sectionTitles.caseStudiesTitleAccent}
+  />
+
+  <ServiceFAQs faqs={[...p.faqs]} simpleHeading />
+</Layout>

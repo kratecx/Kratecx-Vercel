@@ -24,6 +24,10 @@ const {
   imageAlt = "Technical Infrastructure",
   primaryCTA = { text: "Initiate Deployment", link: "#initiate" }
 } = Astro.props;
+
+/** Eyebrow: show spaces instead of underscores */
+const tagDisplay = tag.replace(/_/g, " ");
+const subtitleLine = subtitle?.trim();
 ---
 
 <section class="relative flex min-h-0 overflow-hidden bg-black pb-12 pt-24 font-sans sm:pb-16 sm:pt-28 md:min-h-[85vh] md:pb-20 lg:min-h-screen lg:pt-16">
@@ -35,16 +39,22 @@ const {
         <div class="inline-flex items-center gap-3 sm:gap-4">
           <div class="h-px w-6 bg-orange-400 sm:w-8"></div>
           <span class="text-[9px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-[10px] sm:tracking-[0.45em] md:tracking-[0.5em]"
-            >{tag}</span
+            >{tagDisplay}</span
           >
         </div>
 
         <h1
-          class="mb-4 text-4xl font-semibold uppercase leading-[0.85] tracking-tighter text-white sm:mb-6 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[110px]"
+          class="mb-4 text-balance text-4xl font-semibold uppercase leading-[0.88] tracking-tighter text-white sm:mb-6 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[100px]"
         >
-          {title}
-          <br />
-          {subtitle && <span class="text-orange-400">{subtitle}</span>}
+          {!subtitleLine ? (
+            <span class="text-white">{title}</span>
+          ) : (
+            <>
+              {title}
+              <br />
+              <span class="text-orange-400">{subtitle}</span>
+            </>
+          )}
         </h1>
 
         <p

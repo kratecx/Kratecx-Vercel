@@ -6,18 +6,25 @@
 import { Image } from "astro:assets";
 
 interface Props {
-  title?: string;
   deliverables: Array<{
-    title: string; // Matches your page data
-    description: string; // Matches your page data
+    title: string;
+    description: string;
   }>;
   mainImage: ImageMetadata;
+  eyebrow?: string;
+  title?: string;
+  titleAccent?: string;
+  intro?: string;
 }
 
-const { 
-  title = "Service Ledger", 
+const {
   deliverables = [],
-  mainImage
+  mainImage,
+  eyebrow = "Outcomes",
+  title = "What you",
+  titleAccent = "receive",
+  intro =
+    "Concrete checkpoints and assets included when we complete this engagement with your team.",
 } = Astro.props;
 ---
 
@@ -33,19 +40,18 @@ const {
         <p
           class="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-xs sm:tracking-[0.45em] md:text-[12px] md:tracking-[0.5em]"
         >
-          System Verification
+          {eyebrow}
         </p>
         <span class="h-px w-8 bg-orange-400 sm:w-10"></span>
       </div>
       <h2
         class="text-balance text-4xl font-semibold uppercase leading-[0.88] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
-        Service <span class="text-orange-400">Ledger</span>
+        {title} <span class="text-orange-400">{titleAccent}</span>
       </h2>
       <div class="my-3 h-1 w-48 max-w-[85vw] rounded-full bg-orange-400 opacity-50 sm:my-4 sm:w-60"></div>
       <p class="mx-auto max-w-2xl px-1 text-sm font-light leading-relaxed text-zinc-500 sm:text-base md:text-lg">
-        A precision-engineered lifecycle designed to transition your product from initial concept to
-        market-dominant scale.
+        {intro}
       </p>
     </div>
 

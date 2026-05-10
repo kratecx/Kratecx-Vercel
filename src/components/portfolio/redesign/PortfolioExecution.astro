@@ -1,9 +1,10 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
+import PortfolioExecutionGallery from "./PortfolioExecutionGallery";
+
 /**
- * SOVEREIGN EXECUTION INTERFACE
- * Fully Dynamic: Fed via Prop-drilling from the 'execution' data object.
+ * Execution case-study layout — hero, checkpoints, parity, and project gallery.
  */
 
 interface Checkpoint {
@@ -16,24 +17,14 @@ interface ParityCheck {
   text: string;
 }
 
-interface MatrixItem {
-  id: string;
-  label: string;
-  before_desc: string;
-  after_desc: string;
-  rationale: string;
-  /** Wireframe / “before” thumbnail for this matrix row — use project screenshots when set. */
-  draftImage?: ImageMetadata | string;
-  /** Dark / production preview for this row — distinct from draft when possible. */
-  productionImage?: ImageMetadata | string;
-}
-
 interface Props {
   tagline?: string;
   heroHeadingTop?: string;
   heroHeadingBottom?: string;
   heroDescription?: string;
   heroImage?: string;
+  /** Mobile screenshot paired with hero (from `mobImage` in portfolio data). */
+  heroMobileImage?: ImageMetadata;
   section2Title?: string;
   checkpoints?: Checkpoint[];
   section3TitleTop?: string;
@@ -42,11 +33,10 @@ interface Props {
   section3ImageBack?: string;
   section3ImageFront?: string;
   parityChecks?: ParityCheck[];
-  matrixTitleTop?: string;
-  matrixTitleBottom?: string;
-  matrixDraftImage?: string;
-  matrixProductionImage?: string;
-  auditMatrix?: MatrixItem[];
+  galleryTitleTop?: string;
+  galleryTitleBottom?: string;
+  caseStudyTitle?: string;
+  galleryImages?: (ImageMetadata | string)[];
 }
 ---
 
@@ -68,16 +58,60 @@ interface Props {
       <p class="text-gray-800 max-w-2xl mx-auto text-base sm:text-lg font-light">{Astro.props.heroDescription}</p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-32 items-center">
-      {Astro.props.heroImage ? (
-        <Image
-          src={Astro.props.heroImage}
-          width={1600}
-          height={1067}
-          alt="Audit process visual"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          class="h-auto w-full object-contain grayscale-[0.1] brightness-[1.02] rounded-sm"
-        />
+    <div class="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-32 lg:items-start">
+      {Astro.props.heroImage || Astro.props.heroMobileImage ? (
+        <div
+          class:list={[
+            "relative isolate mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-none",
+            Astro.props.heroMobileImage && Astro.props.heroImage ? "overflow-visible pb-16 pt-1 sm:pb-20 lg:pb-24 lg:pt-2" : "",
+          ]}
+        >
+          {Astro.props.heroImage ? (
+            <div class="relative z-10 overflow-visible rounded-lg border border-zinc-200/90 p-1 shadow-[0_20px_55px_-28px_rgba(0,0,0,0.28)] sm:rounded-xl sm:p-1.5">
+              <div class="relative overflow-hidden rounded-md sm:rounded-lg">
+                <Image
+                  src={Astro.props.heroImage}
+                  width={1600}
+                  height={1067}
+                  alt={`${Astro.props.caseStudyTitle ?? "Project"} — desktop`}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  class="h-auto w-full object-contain grayscale-[0.06] brightness-[1.02]"
+                />
+              </div>
+
+              {/* Mobile screenshot: desktop frame ke NICHE‑DAHINE corner (ref. Victory layout) */}
+              {Astro.props.heroMobileImage ? (
+                <div class="absolute z-20 w-[min(5.5rem,calc(100%-24%))] max-w-[6rem] right-0 bottom-0 translate-x-[8%] translate-y-[14%] sm:translate-x-[7%] sm:translate-y-[14%] lg:right-0 lg:bottom-0 lg:translate-x-[9%] lg:translate-y-[16%]">
+                  <div class="w-full">
+                    <div class="overflow-hidden rounded-md border border-zinc-200/90 shadow-[0_14px_36px_-12px_rgba(0,0,0,0.48)] sm:rounded-lg ring-1 ring-black/[0.04] [&_img]:max-h-[12.75rem] sm:[&_img]:max-h-[13.25rem] lg:[&_img]:max-h-[13.75rem]">
+                      <Image
+                        inferSize
+                        src={Astro.props.heroMobileImage as ImageMetadata}
+                        alt={`${Astro.props.caseStudyTitle ?? "Project"} — mobile screenshot`}
+                        sizes="(max-width: 1024px) 80px, 100px"
+                        class="block h-auto w-full object-cover object-top"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ) : Astro.props.heroMobileImage ? (
+            <div class="relative z-20 flex justify-center px-6">
+              <div class="w-[min(5.5rem,calc(100vw-8rem))] max-w-[6rem]">
+                <div class="overflow-hidden rounded-md border border-zinc-200/90 shadow-md sm:rounded-lg [&_img]:max-h-[13.75rem]">
+                  <Image
+                    inferSize
+                    src={Astro.props.heroMobileImage as ImageMetadata}
+                    alt={`${Astro.props.caseStudyTitle ?? "Project"} — mobile screenshot`}
+                    sizes="84px"
+                    class="block h-auto w-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
       ) : null}
       <div class="space-y-8 sm:space-y-12 pt-2">
         <div class="border-b-2 border-black pb-4 mb-6 sm:mb-10">
@@ -173,88 +207,36 @@ interface Props {
 </section>
 
 
-<!-- Section no 3 -->
+<!-- Section no 3 — project gallery -->
 <section class="bg-white text-black py-16 sm:py-20 lg:py-28 px-5 sm:px-6 lg:px-24 font-sans antialiased border-t border-zinc-200">
   <div class="max-w-7xl mx-auto" data-reveal>
-    <div class="mb-6 sm:mb-8">
-          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl italic font-kanit font-medium uppercase leading-[0.95] lg:leading-[0.85] text-black">
-            {Astro.props.matrixTitleTop} <br> 
-            <span class="text-orange-400 inline-block mt-2">{Astro.props.matrixTitleBottom}</span>
-          </h2>
-          <div class="h-[2px] w-[60%] sm:w-[45%] lg:w-[36%] bg-black rounded-full my-4"></div>
-    </div>
-
-
-    <div class="divide-y divide-zinc-300">
-      {Astro.props.auditMatrix?.map((item) => (
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 py-10 sm:py-12 lg:py-16 items-start lg:items-center group">
-          <div class="space-y-3 sm:space-y-4 order-2 lg:order-1">
-             <div class="aspect-video bg-zinc-50 border border-zinc-100 overflow-hidden relative grayscale ">
-                {(item.draftImage ?? Astro.props.matrixDraftImage) ? (
-                  <Image
-                    src={item.draftImage ?? Astro.props.matrixDraftImage}
-                    width={1200}
-                    height={675}
-                    alt={`${item.label} — context`}
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    class="h-full w-full object-cover"
-                  />
-                ) : null}
-                <div class="absolute inset-0 bg-white/60 pointer-events-none"></div>
-                <div class="absolute top-2 left-2 font-mono text-[8px] text-zinc-400">DRAFT_V1.0</div>
-             </div>
-             <p class="text-[10px] font-mono text-zinc-400 lg:text-zinc-300 uppercase leading-relaxed">{item.before_desc}</p>
-          </div>
-
-          <div class="space-y-3 sm:space-y-4 order-3 lg:order-2">
-             <div class="aspect-video bg-black overflow-hidden shadow-2xl ring-1 ring-white/10 relative flex items-center justify-center p-4 sm:p-6">
-                {(item.productionImage ?? Astro.props.matrixProductionImage) ? (
-                  <Image
-                    src={item.productionImage ?? Astro.props.matrixProductionImage}
-                    width={1200}
-                    height={675}
-                    alt={`${item.label} — detail`}
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    class="absolute inset-0 h-full w-full object-cover opacity-20 contrast-150"
-                  />
-                ) : null}
-                
-                {item.label === "Action Trigger" && (
-                   <div class="z-10 w-full h-10 bg-orange-400 shadow-[0_0_20px_rgba(251,133,0,0.3)] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                      <div class="w-1/3 h-1 bg-black/20"></div>
-                   </div>
-                )}
-                {item.label === "Data Intake" && (
-                   <div class="z-10 w-full h-10 border border-orange-400/30 bg-white/5 backdrop-blur-md px-4 flex items-center">
-                      <div class="w-full h-[1px] bg-orange-400/40"></div>
-                   </div>
-                )}
-                {item.label === "Conversion Node" && (
-                   <div class="z-10 w-full text-center border-y border-orange-400/20 py-2">
-                      <span class="text-orange-400 font-black uppercase text-[10px] tracking-widest">Live_Sync</span>
-                   </div>
-                )}
-
-                <div class="absolute top-2 left-2 font-mono text-[8px] text-orange-400 font-bold">STABLE_V4.0</div>
-                <div class="absolute top-2 right-2 w-1 h-1 bg-orange-400 rounded-full animate-pulse"></div>
-             </div>
-             <p class="text-[10px] font-mono text-orange-400 uppercase font-black tracking-widest">{item.after_desc}</p>
-          </div>
-
-          <div class="order-1 lg:order-3 lg:pl-10 space-y-3 sm:space-y-4">
-             <div class="space-y-1">
-                <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Component_{item.id}</span>
-                <h4 class="text-2xl sm:text-3xl lg:text-4xl font-medium font-kanit uppercase text-black group-hover:text-orange-400 transition-colors duration-300 leading-tight">
-                    {item.label}
-                </h4>
-             </div>
-             <p class="text-zinc-500 text-sm font-light leading-relaxed italic border-l-2 border-orange-400 pl-4">
-                {item.rationale}
-             </p>
-          </div>
+    <div class="mb-8 sm:mb-10 lg:mb-12 flex flex-col items-center text-center gap-4">
+      <div class="flex flex-col items-center">
+        <div class="mb-6 flex items-center justify-center gap-3 sm:gap-4">
+          <span class="h-px w-8 sm:w-10 bg-orange-400 block shrink-0" aria-hidden />
+          <p class="font-mono text-[11px] uppercase tracking-[0.35em] text-orange-400 font-bold sm:text-[14px] sm:tracking-[0.42em]">
+            Screenshots
+          </p>
+          <span class="h-px w-8 sm:w-10 bg-orange-400 block shrink-0" aria-hidden />
         </div>
-      ))}
+        <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold uppercase tracking-[-0.05em] leading-[0.9] lg:leading-[0.85] text-black">
+          {Astro.props.galleryTitleTop} <br />
+          <span class="text-orange-400 inline-block mt-2">{Astro.props.galleryTitleBottom}</span>
+        </h2>
+        <div class="mx-auto mt-5 sm:mt-6 h-1 w-40 sm:w-60 max-w-full rounded-full bg-orange-400 opacity-60" aria-hidden />
+      </div>
+      <p class="max-w-md text-sm font-light leading-relaxed text-zinc-500 lg:text-base">
+        Slide through project frames or pick a thumbnail. Up to six views per case study.
+      </p>
     </div>
+
+    {Astro.props.galleryImages?.length ? (
+      <PortfolioExecutionGallery
+        client:visible
+        images={Astro.props.galleryImages}
+        projectTitle={Astro.props.caseStudyTitle}
+      />
+    ) : null}
   </div>
 </section>
 

@@ -14,6 +14,8 @@ interface Props {
   title?: string;
   /** Second line, orange-400 (uppercase). */
   titleAccent?: string;
+  /** Striped-down “FAQ” heading (service detail pages). */
+  simpleHeading?: boolean;
   faqs?: FAQItem[];
   ctaHref?: string;
   ctaLabel?: string;
@@ -52,6 +54,7 @@ const {
   tag = "FAQ",
   title = "Common",
   titleAccent = "questions",
+  simpleHeading = false,
   faqs: faqsProp,
   ctaHref = "/contact",
   ctaLabel = "Get in touch",
@@ -77,68 +80,87 @@ const faqIdPrefix = "service-faq";
     class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-20 lg:px-12 lg:py-24 xl:px-24"
   >
     <header class="mb-10 flex flex-col items-center text-center sm:mb-12 md:mb-14">
-      <div class="mb-5 flex items-center justify-center gap-2 sm:mb-6 sm:gap-4">
-        <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true"></span>
-        <p
-          id="service-faq-tag"
-          class="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-orange-400 sm:text-sm sm:tracking-[0.45em] md:text-[14px] md:tracking-[0.5em]"
-        >
-          {tag}
-        </p>
-        <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true"></span>
-      </div>
-
-      <h2
-        id="service-faq-heading"
-        class="text-balance text-5xl font-semibold uppercase leading-[0.88] tracking-[-0.05em] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
-        aria-describedby="service-faq-tag"
-      >
-        {
-          hasAccent ? (
-            <>
-              <span class="text-neutral-950">{title}</span>
-              <br />
-              <span class="text-orange-400">{titleAccent}</span>
-            </>
-          ) : (
-            <span class="text-neutral-950">{title}</span>
-          )
-        }
-      </h2>
-
-      <div
-        class="my-4 h-1 w-48 max-w-[90vw] rounded-full bg-orange-400 opacity-50 sm:my-5 sm:w-64 md:my-6 md:w-80"
-        aria-hidden="true"
-      ></div>
-
-      <p
-        class="mx-auto max-w-2xl px-1 text-sm font-light leading-snug text-neutral-600 sm:text-base md:text-lg"
-      >
-        Direct answers on how we work, what to expect, and how projects are delivered.
-      </p>
-
       {
-        showCta && (
-          <div class="mt-8 sm:mt-10">
-            <a
-              href={ctaHref}
-              class="inline-flex items-center gap-2 rounded-full border-2 border-orange-400 bg-white px-6 py-3 text-sm font-bold   text-orange-400 transition-colors hover:bg-orange-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:px-8 sm:text-base md:tracking-[0.25em]"
+        simpleHeading ? (
+          <>
+            <h2
+              id="service-faq-heading"
+              class="text-balance text-4xl font-semibold uppercase leading-tight tracking-tight text-neutral-950 sm:text-5xl md:text-6xl"
             >
-              {ctaLabel}
-              <svg
-                class="h-4 w-4 shrink-0 sm:h-5 sm:w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
+              FAQ
+            </h2>
+            <div
+              class="mt-4 h-1 w-14 rounded-full bg-orange-400 opacity-70 sm:mt-5 sm:w-16"
+              aria-hidden="true"
+            />
+          </>
+        ) : (
+          <>
+            <div class="mb-5 flex items-center justify-center gap-2 sm:mb-6 sm:gap-4">
+              <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true" />
+              <p
+                id="service-faq-tag"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-orange-400 sm:text-sm sm:tracking-[0.45em] md:text-[14px] md:tracking-[0.5em]"
               >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
+                {tag}
+              </p>
+              <span class="block h-px w-8 bg-orange-400 sm:w-10" aria-hidden="true" />
+            </div>
+
+            <h2
+              id="service-faq-heading"
+              class="text-balance text-5xl font-semibold uppercase leading-[0.88] tracking-[-0.05em] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+              aria-describedby="service-faq-tag"
+            >
+              {
+                hasAccent ? (
+                  <>
+                    <span class="text-neutral-950">{title}</span>
+                    <br />
+                    <span class="text-orange-400">{titleAccent}</span>
+                  </>
+                ) : (
+                  <span class="text-neutral-950">{title}</span>
+                )
+              }
+            </h2>
+
+            <div
+              class="my-4 h-1 w-48 max-w-[90vw] rounded-full bg-orange-400 opacity-50 sm:my-5 sm:w-64 md:my-6 md:w-80"
+              aria-hidden="true"
+            />
+
+            <p
+              class="mx-auto max-w-2xl px-1 text-sm font-light leading-snug text-neutral-600 sm:text-base md:text-lg"
+            >
+              Direct answers on how we work, what to expect, and how projects are delivered.
+            </p>
+
+            {
+              showCta && (
+                <div class="mt-8 sm:mt-10">
+                  <a
+                    href={ctaHref}
+                    class="inline-flex items-center gap-2 rounded-full border-2 border-orange-400 bg-white px-6 py-3 text-sm font-bold   text-orange-400 transition-colors hover:bg-orange-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:px-8 sm:text-base md:tracking-[0.25em]"
+                  >
+                    {ctaLabel}
+                    <svg
+                      class="h-4 w-4 shrink-0 sm:h-5 sm:w-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </div>
+              )
+            }
+          </>
         )
       }
     </header>
